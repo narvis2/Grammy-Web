@@ -1,10 +1,8 @@
 "use client";
 
 import { getHotel } from "@/data/api/service/hotel";
-import { useGetHotel } from "@/data/hooks";
-import { HotelResponse } from "@/data/model/hotel";
 
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState, useEffect } from "react";
 
 const images = ["/images/room1.jpg", "/images/room2.jpg", "/images/room3.jpg"];
 
