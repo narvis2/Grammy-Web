@@ -13,6 +13,7 @@ const Home = () => {
   const requestGetHotel = async () => {
     const response = await getHotel();
     console.log(`⭐️ getHotel() response 👉`, response);
+    console.log(`최성준`);
 
     return response;
   };
