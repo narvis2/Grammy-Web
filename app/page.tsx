@@ -1,47 +1,46 @@
-"use client"
+"use client";
 
-import { getHotel } from "@/data/api/service/hotel"
-import { useGetHotel } from "@/data/hooks"
-import { HotelResponse } from "@/data/model/hotel"
+import { getHotel } from "@/data/api/service/hotel";
+import { useGetHotel } from "@/data/hooks";
+import { HotelResponse } from "@/data/model/hotel";
 
-import React, { useState, useEffect, useMemo } from "react"
+import React, { useState, useEffect, useMemo } from "react";
 
-const images = ["/images/room1.jpg", "/images/room2.jpg", "/images/room3.jpg"]
+const images = ["/images/room1.jpg", "/images/room2.jpg", "/images/room3.jpg"];
 
 const Home = () => {
-  const [currentImageIndex, setCurrentImageIndex] = useState(0)
-  const [showText, setShowText] = useState(false)
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [showText, setShowText] = useState(false);
 
   const requestGetHotel = async () => {
-    const response = await getHotel()
-    console.log(`⭐️ getHotel() response 👉`, response)
-    console.log(`⭐️ ⭐️⭐️⭐️⭐️ 👉`)
-    return response
-  }
+    const response = await getHotel();
+    console.log(`⭐️ getHotel() response 👉`, response);
+    return response;
+  };
 
   useEffect(() => {
-    requestGetHotel()
-  }, [])
+    requestGetHotel();
+  }, []);
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length)
-    }, 3000)
-    return () => clearInterval(interval)
-  }, [])
+      setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
+    }, 3000);
+    return () => clearInterval(interval);
+  }, []);
 
   useEffect(() => {
     const textTimer = setTimeout(() => {
-      setShowText(true)
-    }, 1000)
+      setShowText(true);
+    }, 1000);
 
-    return () => clearTimeout(textTimer)
-  }, [])
+    return () => clearTimeout(textTimer);
+  }, []);
 
   const handleSlideButtonClick = (index: number) => {
-    setCurrentImageIndex(index)
-    setShowText(true)
-  }
+    setCurrentImageIndex(index);
+    setShowText(true);
+  };
 
   return (
     <div className="relative">
@@ -74,7 +73,7 @@ const Home = () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;
