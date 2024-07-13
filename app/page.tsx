@@ -66,7 +66,9 @@ const Home = () => {
       >
         <div className="relative top-1/4">
           <h2 className="text-3xl sm:text-5xl lg:text-8xl font-serif">HOTEL</h2>
-          <h5 className="text-base sm:text-lg lg:text-xl font-serif">000</h5>
+          <h5 className="text-base sm:text-lg lg:text-xl font-serif">
+            포항에서 지친 몸을 쉬어주는 호텔
+          </h5>
         </div>
       </div>
     </div>
