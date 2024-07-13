@@ -1,15 +1,15 @@
-"use client"
+"use client";
 
-import { QueryClient, QueryClientProvider } from "react-query"
-import { ReactQueryDevtools } from "react-query/devtools"
-import Footer from "@/components/Footer"
-import Navbar from "@/components/Navbar"
+import { QueryClient, QueryClientProvider } from "react-query";
+import { ReactQueryDevtools } from "react-query/devtools";
+import Footer from "@/components/Footer";
+import Navbar from "@/components/Navbar";
 
 interface Props {
-  children?: React.ReactNode
+  children?: React.ReactNode;
 }
 
-const queryClient = new QueryClient()
+const queryClient = new QueryClient();
 
 export const NextProviders = ({ children }: Props) => {
   return (
@@ -17,8 +17,8 @@ export const NextProviders = ({ children }: Props) => {
       {children}
       <ReactQueryDevtools />
     </QueryClientProvider>
-  )
-}
+  );
+};
 
 export const NextLayout = ({ children }: Props) => {
   return (
@@ -27,5 +27,5 @@ export const NextLayout = ({ children }: Props) => {
       <div className="min-h-[80vh]">{children}</div>
       <Footer />
     </>
-  )
-}
+  );
+};
