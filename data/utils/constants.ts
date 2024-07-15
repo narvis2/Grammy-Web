@@ -1,3 +1,3 @@
-export const baseUrl = "http://localhost:3000"
+export const baseUrl = "api/v1";
 
-export const staticImageUrl = "https://storage.googleapis.com/grammy_static"
+export const staticImageUrl = "https://storage.googleapis.com/grammy_static/";
