@@ -6,19 +6,21 @@ import { MdPlace } from "react-icons/md";
 import Image from "next/image";
 
 const images = [
-  { src: "/images/room1.jpg", width: 800, height: 600 },
-  { src: "/images/room2.jpg", width: 800, height: 600 },
-  { src: "/images/room3.jpg", width: 800, height: 600 },
+  { src: "/images/room1.jpg", width: 600, height: 600 },
+  { src: "/images/room2.jpg", width: 600, height: 600 },
+  { src: "/images/room3.jpg", width: 600, height: 600 },
 ];
 
 const Home = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
   const [showText, setShowText] = useState(false);
+
   const [selectedOffer, setSelectedOffer] = useState({
     name: "침구류",
     image: "/images/room1.jpg",
     description: "침대를 제공해드리고 있습니다.",
-    width: 800,
+    width: 600,
     height: 600,
   });
 
@@ -27,38 +29,51 @@ const Home = () => {
       name: "침구류",
       image: "/images/room1.jpg",
       description: "침대를 제공해드리고 있습니다.",
-      width: 800,
+      width: 600,
       height: 600,
     },
     {
       name: "어메니티",
       image: "/images/room2.jpg",
       description: "일회용 욕실 어메니티를 제공해드리고 있습니다.",
-      width: 800,
+      width: 600,
       height: 600,
     },
     {
       name: "욕조",
       image: "/images/room3.jpg",
       description: "욕조가 설치되어 있습니다.",
-      width: 800,
+      width: 600,
       height: 600,
     },
     {
       name: "에스프레소 바 카페",
       image: "/images/room1.jpg",
       description: "카페를 즐기실 수 있습니다.",
-      width: 800,
+      width: 600,
       height: 600,
     },
     {
       name: "관광지",
       image: "/images/room2.jpg",
       description: "관광지 주변에 위치하고 있습니다.",
-      width: 800,
+      width: 600,
       height: 600,
     },
   ];
+
+  const handleSlideButtonClick = (index) => {
+    setCurrentImageIndex(index);
+    setShowText(true);
+  };
+
+  const handleTabClick = (offer) => {
+    setShowText(false);
+    setTimeout(() => {
+      setSelectedOffer(offer);
+      setShowText(true);
+    }, 200);
+  };
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -74,19 +89,6 @@ const Home = () => {
     return () => clearTimeout(textTimer);
   }, []);
 
-  const handleSlideButtonClick = (index) => {
-    setCurrentImageIndex(index);
-    setShowText(true);
-  };
-
-  const handleTabClick = (offer) => {
-    setShowText(false);
-    setTimeout(() => {
-      setSelectedOffer(offer);
-      setShowText(true);
-    }, 200);
-  };
-
   return (
     <div className="relative">
       <div className="slideshow-container relative">
@@ -97,6 +99,7 @@ const Home = () => {
           height={images[currentImageIndex].height}
           className="slideshow-image w-full object-cover"
         />
+
         <div
           className={`absolute bottom-20 inset-0 flex flex-col items-center justify-center text-center text-white transition-opacity duration-500 ${
             showText ? "opacity-100" : "opacity-0"
@@ -106,6 +109,7 @@ const Home = () => {
             <h2 className="text-3xl sm:text-5xl lg:text-8xl font-serif mb-2">
               Special Offers
             </h2>
+
             <p className="text-base sm:text-lg lg:text-xl font-serif">
               {selectedOffer.name}
             </p>
@@ -149,6 +153,7 @@ const Home = () => {
               ))}
             </ul>
           </div>
+
           <h5 className="tit">GRAMMY HOTEL</h5>
         </div>
 
@@ -161,7 +166,7 @@ const Home = () => {
         </p>
         <p className="text-center text-xl mt-4">{selectedOffer.description}</p>
 
-        <div className="flex justify-center mt-8">
+        <div className="flex justify-center mt-8 mb-12">
           <Image
             src={selectedOffer.image}
             alt={selectedOffer.name}
