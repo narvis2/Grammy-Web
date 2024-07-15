@@ -4,6 +4,7 @@ import { QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
+import { useGetHotel } from "@/data/hooks";
 
 interface Props {
   children?: React.ReactNode;
@@ -21,6 +22,8 @@ export const NextProviders = ({ children }: Props) => {
 };
 
 export const NextLayout = ({ children }: Props) => {
+  useGetHotel();
+
   return (
     <>
       <Navbar />

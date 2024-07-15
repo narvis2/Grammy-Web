@@ -1,14 +1,14 @@
-import noneAuthInstance from "@/data/api/none/NoneAuthInstance";
 import { axiosErrorHandler, BaseResponse } from "@/data/model/base";
-import { HotelResponse } from "@/data/model/hotel";
+import noneAuthInstance from "../../none/NoneAuthInstance";
+import { BannerResponse } from "@/data/model/banner/types";
 import { Grammy } from "../../endpoint/constants";
 
-export async function getHotel() {
+export async function getBannerList() {
   const response = noneAuthInstance
-    .get<BaseResponse<HotelResponse>>(Grammy.GET_HOTEL)
+    .get<BaseResponse<BannerResponse[]>>(Grammy.BANNER)
     .then((response) => response.data)
     .then((data) => {
-      console.log(`⭐️ '${Grammy.GET_HOTEL} Response 👉`, data);
+      console.log(`⭐️ '${Grammy.BANNER} Response 👉`, data);
       return data;
     })
     .catch(axiosErrorHandler());

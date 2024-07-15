@@ -1,12 +1,35 @@
+import { phoneFormatter } from "@/data/mapper";
+import { BaseResponse } from "@/data/model/base";
+import { HotelResponse } from "@/data/model/hotel";
 import Link from "next/link";
+import { useMemo } from "react";
+import { useQueryClient } from "react-query";
 
 export default function Footer() {
+  const queryClient = useQueryClient();
+
+  const hotel = queryClient.getQueryData(["useGetHotel"]) as
+    | BaseResponse<HotelResponse>
+    | undefined;
+
+  const hotelInfo = useMemo(() => {
+    if (!hotel) return undefined;
+
+    const data = hotel.data;
+    if (hotel.success && !!data) {
+      return data;
+    }
+
+    return undefined;
+  }, [hotel]);
+
   return (
-    <footer className="bg-white py-2">
+    <footer className="bg-[#F5F5F5] py-2">
       <div className="max-w-screen-xl w-full mx-auto p-4 md:flex md:items-center md:justify-between border-b-gray-200 border-b">
         <div className="text-sm text-gray-800 sm:text-center">
-          {" "}
-          <span className="hover:underline text-semibold text-lg">Hotel</span>
+          <span className="hover:underline text-semibold text-lg">
+            {`${hotelInfo?.name} 호텔`}
+          </span>
         </div>
         <ul className="flex flex-wrap gap-4 md:gap-6 items-center text-sm text-gray-800 mt-2 sm:mt-0">
           <li>
@@ -23,14 +46,15 @@ export default function Footer() {
         {/* 왼쪽 영역 - 주소, 사업자 등록번호, 전화번호 */}
         <div className="flex space-x-6 items-center">
           <div>
-            <span className="font-semibold">주소:</span> 포항 123456789
+            <span className="font-semibold">주소:</span>{" "}
+            {hotelInfo?.address ?? "" + hotelInfo?.addressDetail ?? ""}
           </div>
           <div>
             <span className="font-semibold">사업자 등록번호:</span> 123-45-67890
           </div>
           <div>
-            <span className="font-semibold">전화번호:</span> 010-1234-5678 |
-            051-123-4567
+            <span className="font-semibold">전화번호:</span>{" "}
+            {phoneFormatter(hotelInfo?.phoneNumber ?? "")}
           </div>
         </div>
 

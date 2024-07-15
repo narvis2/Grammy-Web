@@ -1,12 +1,13 @@
 "use client";
 
-import { getHotel } from "@/data/api/service/hotel";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination } from "swiper/modules";
+import { useRoomTypeList } from "@/data/hooks";
+import RoomTypeItem from "@/components/room/adapter/item/RoomTypeItem";
 
 const images = [
   { src: "/images/room1.jpg", label: "GRAMMY HOTEL" },
@@ -20,20 +21,18 @@ const Home = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [showText, setShowText] = useState(false);
 
-  const requestGetHotel = async () => {
-    try {
-      const response = await getHotel();
-      console.log(`⭐️ getHotel() response 👉`, response);
-      console.log(`⭐️ ⭐️⭐️⭐️⭐️ 👉`);
-      return response;
-    } catch (error) {
-      console.error("Error fetching hotel data:", error);
-    }
-  };
+  const { data: roomType, isFetching } = useRoomTypeList();
 
-  useEffect(() => {
-    requestGetHotel();
-  }, []);
+  const roomTypeList = useMemo(() => {
+    if (!roomType) return [];
+
+    const list = roomType.data ?? [];
+    if (roomType.success && list.length > 0) {
+      return list;
+    }
+
+    return [];
+  }, [roomType]);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -75,7 +74,7 @@ const Home = () => {
             <p className="text-base sm:text-lg lg:text-xl font-serif mb-4">
               포항에서 지친 몸을 쉬어주는 호텔
             </p>
-            <div className="flex justify-center space-x-2">
+            <div className="flex justify-center space-x-2 mt-6">
               {images.map((image, index) => (
                 <button
                   key={index}
@@ -104,7 +103,7 @@ const Home = () => {
           </div>
         </div>
 
-        <div className="swiper-container">
+        <div className="swiper-container mt-4 ml-10 mr-10">
           <Swiper
             modules={[Navigation, Pagination]}
             spaceBetween={1}
@@ -126,64 +125,22 @@ const Home = () => {
         </div>
       </section>
 
-      <section className="pt-12 pb-20 bg-gray-200">
+      <section className="pt-12 pb-20 bg-gray-200 ">
         <div className="inner-con flex items-center justify-center">
           <div className="text-center font-semibold font-serif text-4xl">
-            <span className="block mb-4">Rooms</span>
+            <span className="block mb-4">객실 유형</span>
             <h5 className="text-sm">그라미 호텔의 특별한 객실을 누려보세요.</h5>
           </div>
         </div>
 
-        <div className="grid grid-cols-2 gap-8 mt-8">
-          <div className="flex flex-col items-center">
-            <img
-              src="/images/room1.jpg"
-              alt="Room 1"
-              className="object-cover h-96"
-            />
-            <div className="mt-4 text-center">
-              <h6 className="text-lg font-semibold">Standard A•B•C</h6>
-              <p className="text-sm text-gray-500">
-                A타입, B타입, C타입으로 나뉩니다.
-              </p>
+        <div className="flex items-start justify-center min-h-screen p-8 mt-8">
+          {roomTypeList.length > 0 && (
+            <div className="container grid grid-cols-1 gap-8  lg:grid-cols-2">
+              {roomTypeList.map((item) => {
+                return <RoomTypeItem roomType={item} />;
+              })}
             </div>
-          </div>
-
-          <div className="flex flex-col items-center">
-            <img
-              src="/images/room1.jpg"
-              alt="Room 1"
-              className="object-cover h-96"
-            />
-            <div className="mt-4 text-center">
-              <h6 className="text-lg font-semibold">Sweet</h6>
-              <p className="text-sm text-gray-500">설명</p>
-            </div>
-          </div>
-
-          <div className="flex flex-col items-center">
-            <img
-              src="/images/room1.jpg"
-              alt="Room 1"
-              className="object-cover h-96"
-            />
-            <div className="mt-4 text-center">
-              <h6 className="text-lg font-semibold">Corner Sweet</h6>
-              <p className="text-sm text-gray-500">설명</p>
-            </div>
-          </div>
-
-          <div className="flex flex-col items-center">
-            <img
-              src="/images/room1.jpg"
-              alt="Room 1"
-              className="object-cover h-96"
-            />
-            <div className="mt-4 text-center">
-              <h6 className="text-lg font-semibold">Royal Sweet A•B</h6>
-              <p className="text-sm text-gray-500">A와 B타입으로 나뉩니다.</p>
-            </div>
-          </div>
+          )}
         </div>
       </section>
     </div>

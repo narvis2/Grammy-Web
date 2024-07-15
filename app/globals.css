@@ -36,14 +36,15 @@
 }
 
 .react-calendar {
-  width: 320px;
+  width: 100%;
   max-width: 100%;
   background: white;
-  border: 1px solid #eeeeee;
+  border: 1px solid #68737d;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   line-height: 1.125em;
   font-size: 12px;
   border-radius: 10px;
+  padding: 20px;
 }
 
 .react-calendar--doubleView {
@@ -83,6 +84,8 @@
   display: flex;
   height: 44px;
   margin-bottom: 1em;
+  background-color: white;
+  border-bottom: 1px solid #68737d;
 }
 
 .react-calendar__navigation__label {
@@ -103,16 +106,18 @@
   font-size: 12px;
   font-weight: 400;
   text-decoration: none !important;
-  color: gray;
+  color: #152348;
+  border-bottom: 1px solid #68737d;
 }
 
 .react-calendar__navigation button:disabled {
-  background-color: #f0f0f0;
+  background-color: white;
 }
 
 .react-calendar__navigation button:enabled:hover,
 .react-calendar__navigation button:enabled:focus {
   background-color: #e6e6e6;
+  border-radius: 50%;
 }
 
 .react-calendar__month-view__weekdays {
@@ -171,16 +176,16 @@
 
 .react-calendar__tile--now {
   text-decoration: underline;
+  background-color: #ffce8477;
 }
 
 .react-calendar__tile--now:hover {
-  color: black !important;
+  color: #c78390 !important;
 }
 
 .react-calendar__tile--now:enabled:hover,
 .react-calendar__tile--now:enabled:focus {
-  background: black;
-  border-radius: 50%;
+  background: #c78390;
   color: #fafafa;
 }
 
@@ -194,29 +199,31 @@
 }
 
 .react-calendar__tile--active {
-  background: black !important;
+  background: #c78390 !important;
   color: white;
-  border-radius: 50%;
 }
 
 .react-calendar__tile--active:active {
-  background: black !important;
+  background: #c78390 !important;
   color: white;
-  border-radius: 50%;
 }
 
+/* 각 날짜의 Size */
 .react-calendar__tile {
   width: 44px;
   height: 44px;
+  box-sizing: border-box; 
 }
 
 .react-calendar__tile--active:enabled:hover,
 .react-calendar__tile--active:enabled:focus {
   background: #1087ff;
+  color: white;
 }
 .react-calendar__tile:disabled {
   background-color: white;
   text-decoration: line-through;
+  color: #e6e6e6;
 }
 
 .react-calendar__tile:disabled:hover {
@@ -226,12 +233,11 @@
 }
 
 .react-calendar--selectRange .react-calendar__tile--hover {
-  background-color: #e6e6e6;
+  background-color: #ffb88c;
 }
 
 .react-calendar__tile:hover {
-  border-radius: 50%;
-  border: 1px solid gray;
+  border: 1px solid #c78390;
   color: black !important;
   background: white !important;
 }

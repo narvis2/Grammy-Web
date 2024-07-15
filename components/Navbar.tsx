@@ -1,25 +1,44 @@
 import Link from "next/link";
 import { FaHotel } from "react-icons/fa6";
 import { RiCalendarFill } from "react-icons/ri";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function Navbar() {
-  const [subMenuContent, setSubMenuContent] = useState(null);
-  let timeoutId = null;
+  const [subMenuContent, setSubMenuContent] = useState<string | null>(null);
+  const [isScrolled, setIsScrolled] = useState(false);
+  let timeoutId: NodeJS.Timeout | null = null;
 
-  const handleMouseEnter = (content) => {
-    clearTimeout(timeoutId);
+  const handleMouseEnter = (content: string) => {
+    if (timeoutId !== null) {
+      clearTimeout(timeoutId);
+    }
+
     setSubMenuContent(content);
   };
 
   const handleMouseLeave = () => {
     timeoutId = setTimeout(() => {
       setSubMenuContent(null);
-    }, 7000);
+    }, 600);
   };
 
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 10);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
   return (
-    <nav className="h-20 z-20 border-b border-gray-200 w-full shadow-sm fixed top-0 bg-white">
+    <nav
+      className={`h-20 z-20 border-b border-gray-200 w-full shadow-sm fixed top-0 ${
+        isScrolled ? "bg-white" : "bg-transparent"
+      }`}
+    >
       <div className="flex justify-between items-center sm:px-10 p-4">
         <div className="flex items-center gap-2">
           <FaHotel className="text-4xl" />
@@ -104,7 +123,11 @@ export default function Navbar() {
       {subMenuContent && (
         <div
           className="absolute left-0 right-0 bg-gray-200 shadow-md border mt-2 w-full opacity-90"
-          onMouseEnter={() => clearTimeout(timeoutId)}
+          onMouseEnter={() => {
+            if (timeoutId !== null) {
+              clearTimeout(timeoutId);
+            }
+          }}
           onMouseLeave={handleMouseLeave}
         >
           {subMenuContent === "prologue" && (
