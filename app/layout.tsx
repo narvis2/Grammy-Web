@@ -16,11 +16,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="ko">
-      <NextProviders>
-        <body className={inter.className}>
+      <body className={inter.className}>
+        <NextProviders>
           <NextLayout>{children}</NextLayout>
-        </body>
-      </NextProviders>
+        </NextProviders>
+      </body>
     </html>
   );
 }

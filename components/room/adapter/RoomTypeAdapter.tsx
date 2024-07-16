@@ -1,21 +1,84 @@
 import { getCommaNumber } from "@/data/mapper";
 import { RoomTypeResponse } from "@/data/model/room";
 import { staticImageUrl } from "@/data/utils/constants";
+import { useState } from "react";
 
 type RoomTypeAdapterProps = {
   roomType: RoomTypeResponse;
-  onItemClick: () => void;
 };
 
-const RoomTypeAdapter = ({ roomType, onItemClick }: RoomTypeAdapterProps) => {
+const RoomTypeAdapter = ({ roomType }: RoomTypeAdapterProps) => {
+  const [mainTypeIndex, setMainTypeIndex] = useState<number>(0);
+
+  const mainImageList = roomType.rooms[0].images.map(
+    (item) => staticImageUrl + item.imageUrl
+  );
+
+  function onSlideImage(isNext: boolean) {
+    const index = isNext
+      ? (mainTypeIndex + 1) % mainImageList.length
+      : (mainTypeIndex - 1 + mainImageList.length) % mainImageList.length;
+    setMainTypeIndex(index);
+  }
+
   return (
     <div className="flex justify-center items-center mt-20">
       <div className="relative bg-clip-border rounded-xl overflow-hidden bg-white text-gray-700 shadow-lg m-0">
         <img
-          src={staticImageUrl + roomType.rooms[0].images[0].imageUrl}
+          src={mainImageList[mainTypeIndex]}
           alt={roomType.roomTypeName}
           className="object-cover h-96"
         />
+        <button
+          type="button"
+          className="absolute top-0 start-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
+          data-carousel-prev
+          onClick={() => onSlideImage(false)}
+        >
+          <span className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
+            <svg
+              className="w-4 h-4 text-white dark:text-gray-800 rtl:rotate-180"
+              aria-hidden="true"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 6 10"
+            >
+              <path
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M5 1 1 5l4 4"
+              />
+            </svg>
+            <span className="sr-only">Previous</span>
+          </span>
+        </button>
+        <button
+          type="button"
+          className="absolute top-0 end-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
+          data-carousel-next
+          onClick={() => onSlideImage(true)}
+        >
+          <span className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
+            <svg
+              className="w-4 h-4 text-white dark:text-gray-800 rtl:rotate-180"
+              aria-hidden="true"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 6 10"
+            >
+              <path
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="m1 9 4-4-4-4"
+              />
+            </svg>
+            <span className="sr-only">Next</span>
+          </span>
+        </button>
       </div>
       <div className="p-6 px-2 sm:pr-6 sm:pl-4">
         <p className="block antialiased font-sans text-sm font-light leading-normal text-inherit mb-4 !font-semibold">

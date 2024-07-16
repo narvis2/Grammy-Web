@@ -12,6 +12,7 @@ const ReservationItem = ({ item }: ReservationItemProps) => {
       <div className="relative bg-clip-border rounded-xl overflow-hidden bg-white text-gray-700 shadow-lg m-0">
         <img
           src={`${staticImageUrl + item.imageUrl}`}
+          loading={"lazy"}
           alt="Sustainable Practices for a Greener Future"
           className="object-cover w-full h-full"
         />

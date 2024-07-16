@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { FaHotel } from "react-icons/fa6";
-import { RiCalendarFill } from "react-icons/ri";
 import { useEffect, useState } from "react";
 
 export default function Navbar() {
@@ -46,7 +45,7 @@ export default function Navbar() {
             그라미 호텔
           </Link>
         </div>
-        <div className="hidden sm:flex space-x-6">
+        <div className="flex-1 hidden sm:flex space-x-6 justify-center items-center">
           <div
             className="relative group"
             onMouseEnter={() => handleMouseEnter("prologue")}
@@ -109,20 +108,19 @@ export default function Navbar() {
               RESERVATION
             </Link>
           </div>
-        </div>
-        <div className="flex items-center gap-2">
-          <RiCalendarFill className="text-4xl" />
           <Link
-            href="/"
-            className="text-lg sm:text-xl font-semibold hover:text-gray-300 transition-colors"
+            href="/notice"
+            className="text-lg sm:text-xl hover:text-gray-300 transition-colors hover:underline"
           >
-            BOOKING NOW
+            NOTICE
           </Link>
         </div>
       </div>
       {subMenuContent && (
         <div
-          className="absolute left-0 right-0 bg-gray-200 shadow-md border mt-2 w-full opacity-90"
+          className={`absolute left-0 right-0 ${
+            isScrolled ? "bg-white" : "bg-transparent"
+          } shadow-md mt-2 w-full opacity-90`}
           onMouseEnter={() => {
             if (timeoutId !== null) {
               clearTimeout(timeoutId);
@@ -132,7 +130,7 @@ export default function Navbar() {
         >
           {subMenuContent === "prologue" && (
             <ul className="flex flex-col gap-0">
-              <li className="border-b">
+              <li>
                 <Link
                   href="/prologue"
                   className="block px-4 py-2 text-lg hover:bg-gray-100"
@@ -152,7 +150,7 @@ export default function Navbar() {
           )}
           {subMenuContent === "rooms" && (
             <ul className="flex flex-col gap-0">
-              <li className="border-b">
+              <li>
                 <Link
                   href="/rooms"
                   className="block px-4 py-2 text-lg hover:bg-gray-100"
@@ -172,7 +170,7 @@ export default function Navbar() {
           )}
           {subMenuContent === "special_offers" && (
             <ul className="flex flex-col gap-0">
-              <li className="border-b">
+              <li>
                 <Link
                   href="/special_offers"
                   className="block px-4 py-2 text-lg hover:bg-gray-100"
@@ -180,7 +178,7 @@ export default function Navbar() {
                   침구류
                 </Link>
               </li>
-              <li className="border-b">
+              <li>
                 <Link
                   href="/special_offers"
                   className="block px-4 py-2 text-lg hover:bg-gray-100"
@@ -200,7 +198,7 @@ export default function Navbar() {
           )}
           {subMenuContent === "reservation" && (
             <ul className="flex flex-col gap-0">
-              <li className="border-b">
+              <li>
                 <Link
                   href="/reservation"
                   className="block px-4 py-2 text-lg hover:bg-gray-100"
@@ -208,7 +206,7 @@ export default function Navbar() {
                   예약안내
                 </Link>
               </li>
-              <li className="border-b">
+              <li>
                 <Link
                   href="/reservation"
                   className="block px-4 py-2 text-lg hover:bg-gray-100"

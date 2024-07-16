@@ -10,7 +10,7 @@ import { RoomTypeImageModel } from "@/data/model/room";
 import React, { useState, useMemo } from "react";
 
 const Room = () => {
-  const [tabIndex, setTabIndex] = useState(0);
+  const [tabIndex, setTabIndex] = useState<number>(0);
 
   const { data: roomType, isFetching } = useRoomTypeList();
 
@@ -43,10 +43,7 @@ const Room = () => {
           }}
         />
         {roomTypeList.length > 0 && (
-          <RoomTypeAdapter
-            roomType={roomTypeList[tabIndex]}
-            onItemClick={() => {}}
-          />
+          <RoomTypeAdapter roomType={roomTypeList[tabIndex]} />
         )}
       </section>
 
