@@ -38,5 +38,3 @@ next-env.d.ts
 .history
 yarn.lock
 package-lock.json
-
-.env
