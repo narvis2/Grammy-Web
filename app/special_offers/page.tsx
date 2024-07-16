@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import { FaShower, FaBed, FaBath, FaCoffee } from "react-icons/fa";
 import { MdPlace } from "react-icons/md";
 import Image from "next/image";
+import { OfferModel } from "@/data/model/offer/types";
 
 const images = [
   { src: "/images/room1.jpg", width: 600, height: 600 },
@@ -11,12 +12,50 @@ const images = [
   { src: "/images/room3.jpg", width: 600, height: 600 },
 ];
 
+const offers: OfferModel[] = [
+  {
+    name: "침구류",
+    image: "/images/room1.jpg",
+    description: "침대를 제공해드리고 있습니다.",
+    width: 600,
+    height: 600,
+  },
+  {
+    name: "어메니티",
+    image: "/images/room2.jpg",
+    description: "일회용 욕실 어메니티를 제공해드리고 있습니다.",
+    width: 600,
+    height: 600,
+  },
+  {
+    name: "욕조",
+    image: "/images/room3.jpg",
+    description: "욕조가 설치되어 있습니다.",
+    width: 600,
+    height: 600,
+  },
+  {
+    name: "에스프레소 바 카페",
+    image: "/images/room1.jpg",
+    description: "카페를 즐기실 수 있습니다.",
+    width: 600,
+    height: 600,
+  },
+  {
+    name: "관광지",
+    image: "/images/room2.jpg",
+    description: "관광지 주변에 위치하고 있습니다.",
+    width: 600,
+    height: 600,
+  },
+];
+
 const Home = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   const [showText, setShowText] = useState(false);
 
-  const [selectedOffer, setSelectedOffer] = useState({
+  const [selectedOffer, setSelectedOffer] = useState<OfferModel>({
     name: "침구류",
     image: "/images/room1.jpg",
     description: "침대를 제공해드리고 있습니다.",
@@ -24,50 +63,12 @@ const Home = () => {
     height: 600,
   });
 
-  const offers = [
-    {
-      name: "침구류",
-      image: "/images/room1.jpg",
-      description: "침대를 제공해드리고 있습니다.",
-      width: 600,
-      height: 600,
-    },
-    {
-      name: "어메니티",
-      image: "/images/room2.jpg",
-      description: "일회용 욕실 어메니티를 제공해드리고 있습니다.",
-      width: 600,
-      height: 600,
-    },
-    {
-      name: "욕조",
-      image: "/images/room3.jpg",
-      description: "욕조가 설치되어 있습니다.",
-      width: 600,
-      height: 600,
-    },
-    {
-      name: "에스프레소 바 카페",
-      image: "/images/room1.jpg",
-      description: "카페를 즐기실 수 있습니다.",
-      width: 600,
-      height: 600,
-    },
-    {
-      name: "관광지",
-      image: "/images/room2.jpg",
-      description: "관광지 주변에 위치하고 있습니다.",
-      width: 600,
-      height: 600,
-    },
-  ];
-
-  const handleSlideButtonClick = (index) => {
+  const handleSlideButtonClick = (index: number) => {
     setCurrentImageIndex(index);
     setShowText(true);
   };
 
-  const handleTabClick = (offer) => {
+  const handleTabClick = (offer: OfferModel) => {
     setShowText(false);
     setTimeout(() => {
       setSelectedOffer(offer);
