@@ -1,10 +1,23 @@
 import Link from "next/link";
 import { FaHotel } from "react-icons/fa6";
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import SubMenu from "./navbar/SubMenu";
+import { RouteName, RoutePath } from "@/data/model/menu/enum";
+import DrawerMenu from "./navbar/DrawerMenu";
+import NavTab from "./navbar/NavTab";
+
+const drawerMenuList = [
+  { title: RouteName.PROLOGUE, path: RoutePath.PROLOGUE },
+  { title: RouteName.ROOMS, path: RoutePath.ROOMS },
+  { title: RouteName.SPECIAL_OFFERS, path: RoutePath.SPECIAL_OFFERS },
+  { title: RouteName.RESERVATION, path: RoutePath.RESERVATION },
+  { title: RouteName.NOTICE, path: RoutePath.NOTICE },
+];
 
 export default function Navbar() {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
   const [subMenuContent, setSubMenuContent] = useState<string | null>(null);
-  const [isScrolled, setIsScrolled] = useState(false);
   let timeoutId: NodeJS.Timeout | null = null;
 
   const handleMouseEnter = (content: string) => {
@@ -21,22 +34,13 @@ export default function Navbar() {
     }, 600);
   };
 
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 10);
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
 
   return (
     <nav
-      className={`h-20 z-20 border-b border-gray-200 w-full shadow-sm fixed top-0 ${
-        isScrolled ? "bg-white" : "bg-transparent"
-      }`}
+      className={`h-20 z-20 border-b border-gray-200 w-full shadow-sm fixed top-0 bg-white`}
     >
       <div className="flex justify-between items-center sm:px-10 p-4">
         <div className="flex items-center gap-2">
@@ -45,42 +49,88 @@ export default function Navbar() {
             그라미 호텔
           </Link>
         </div>
+
+        {/* Hamburger Menu Button (visible only on small screens) */}
+        <div className="sm:hidden">
+          <button
+            onClick={toggleMenu}
+            className="text-gray-500 hover:text-gray-600 focus:outline-none focus:text-gray-600"
+          >
+            <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
+              {isMenuOpen ? (
+                <path
+                  fillRule="evenodd"
+                  clipRule="evenodd"
+                  d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                />
+              ) : (
+                <path
+                  fillRule="evenodd"
+                  clipRule="evenodd"
+                  d="M4 6a1 1 0 0 1 1-1h10a1 1 0 1 1 0 2H5a1 1 0 0 1-1-1zM5 11a1 1 0 1 1 0-2h10a1 1 0 1 1 0 2H5zm10 2H5a1 1 0 1 0 0 2h10a1 1 0 1 0 0-2z"
+                />
+              )}
+            </svg>
+          </button>
+        </div>
+
+        {/* Desktop Menu Links (hidden on small screens) */}
         <div className="flex-1 hidden sm:flex space-x-6 justify-center items-center">
           <div
             className="relative group"
             onMouseEnter={() => handleMouseEnter("prologue")}
             onMouseLeave={handleMouseLeave}
           >
-            <Link
-              href="/prologue"
-              className="text-lg sm:text-xl hover:text-gray-300 transition-colors hover:underline"
-            >
-              PROLOGUE
-            </Link>
+            <NavTab
+              menu={{ title: RouteName.PROLOGUE, path: RoutePath.PROLOGUE }}
+            />
+
+            {/* Submenu for PROLOGUE */}
+            {subMenuContent === "prologue" && (
+              <SubMenu
+                menuList={[
+                  { title: "그라미 호텔", path: RoutePath.PROLOGUE },
+                  { title: "오시는 길", path: RoutePath.PROLOGUE },
+                ]}
+              />
+            )}
           </div>
           <div
             className="relative group"
             onMouseEnter={() => handleMouseEnter("rooms")}
             onMouseLeave={handleMouseLeave}
           >
-            <Link
-              href="/rooms"
-              className="text-lg sm:text-xl hover:text-gray-300 transition-colors hover:underline"
-            >
-              ROOMS
-            </Link>
+            <NavTab menu={{ title: RouteName.ROOMS, path: RoutePath.ROOMS }} />
+            {/* Submenu for ROOMS */}
+            {subMenuContent === "rooms" && (
+              <SubMenu
+                menuList={[
+                  { title: "스탠다드 타입", path: RoutePath.ROOMS },
+                  { title: "로얄 스위트 타입", path: RoutePath.ROOMS },
+                ]}
+              />
+            )}
           </div>
           <div
             className="relative group"
             onMouseEnter={() => handleMouseEnter("special_offers")}
             onMouseLeave={handleMouseLeave}
           >
-            <Link
-              href="/special_offers"
-              className="text-lg sm:text-xl hover:text-gray-300 transition-colors hover:underline"
-            >
-              SPECIAL OFFERS
-            </Link>
+            <NavTab
+              menu={{
+                title: RouteName.SPECIAL_OFFERS,
+                path: RoutePath.SPECIAL_OFFERS,
+              }}
+            />
+            {/* Submenu for SPECIAL OFFERS */}
+            {subMenuContent === "special_offers" && (
+              <SubMenu
+                menuList={[
+                  { title: "침구류", path: RoutePath.SPECIAL_OFFERS },
+                  { title: "어메니티", path: RoutePath.SPECIAL_OFFERS },
+                ]}
+              />
+            )}
           </div>
           <button
             type="button"
@@ -101,131 +151,28 @@ export default function Navbar() {
             onMouseEnter={() => handleMouseEnter("reservation")}
             onMouseLeave={handleMouseLeave}
           >
-            <Link
-              href="/reservation"
-              className="text-lg sm:text-xl hover:text-gray-300 transition-colors hover:underline"
-            >
-              RESERVATION
-            </Link>
+            <NavTab
+              menu={{
+                title: RouteName.RESERVATION,
+                path: RoutePath.RESERVATION,
+              }}
+            />
+            {/* Submenu for RESERVATION */}
+            {subMenuContent === "reservation" && (
+              <SubMenu
+                menuList={[
+                  { title: "예약안내", path: RoutePath.RESERVATION },
+                  { title: "실시간 예약", path: RoutePath.RESERVATION },
+                ]}
+              />
+            )}
           </div>
-          <Link
-            href="/notice"
-            className="text-lg sm:text-xl hover:text-gray-300 transition-colors hover:underline"
-          >
-            NOTICE
-          </Link>
+          <NavTab menu={{ title: RouteName.NOTICE, path: RoutePath.NOTICE }} />
         </div>
       </div>
-      {subMenuContent && (
-        <div
-          className={`absolute left-0 right-0 ${
-            isScrolled ? "bg-white" : "bg-transparent"
-          } shadow-md mt-2 w-full opacity-90`}
-          onMouseEnter={() => {
-            if (timeoutId !== null) {
-              clearTimeout(timeoutId);
-            }
-          }}
-          onMouseLeave={handleMouseLeave}
-        >
-          {subMenuContent === "prologue" && (
-            <ul className="flex flex-col gap-0">
-              <li>
-                <Link
-                  href="/prologue"
-                  className="block px-4 py-2 text-lg hover:bg-gray-100"
-                >
-                  그라미 호텔
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/prologue"
-                  className="block px-4 py-2 text-lg hover:bg-gray-100"
-                >
-                  오시는 길
-                </Link>
-              </li>
-            </ul>
-          )}
-          {subMenuContent === "rooms" && (
-            <ul className="flex flex-col gap-0">
-              <li>
-                <Link
-                  href="/rooms"
-                  className="block px-4 py-2 text-lg hover:bg-gray-100"
-                >
-                  스탠다드 타입
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/rooms"
-                  className="block px-4 py-2 text-lg hover:bg-gray-100"
-                >
-                  로얄 스위트 타입
-                </Link>
-              </li>
-            </ul>
-          )}
-          {subMenuContent === "special_offers" && (
-            <ul className="flex flex-col gap-0">
-              <li>
-                <Link
-                  href="/special_offers"
-                  className="block px-4 py-2 text-lg hover:bg-gray-100"
-                >
-                  침구류
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/special_offers"
-                  className="block px-4 py-2 text-lg hover:bg-gray-100"
-                >
-                  어메니티
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/special_offers"
-                  className="block px-4 py-2 text-lg hover:bg-gray-100"
-                >
-                  에스프레소 바 카페
-                </Link>
-              </li>
-            </ul>
-          )}
-          {subMenuContent === "reservation" && (
-            <ul className="flex flex-col gap-0">
-              <li>
-                <Link
-                  href="/reservation"
-                  className="block px-4 py-2 text-lg hover:bg-gray-100"
-                >
-                  예약안내
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/reservation"
-                  className="block px-4 py-2 text-lg hover:bg-gray-100"
-                >
-                  실시간 예약
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/reservation"
-                  className="block px-4 py-2 text-lg hover:bg-gray-100"
-                >
-                  공지사항
-                </Link>
-              </li>
-            </ul>
-          )}
-        </div>
-      )}
+
+      {/* Mobile Menu (visible only when isMenuOpen is true) */}
+      {isMenuOpen && <DrawerMenu menuList={drawerMenuList} />}
     </nav>
   );
 }
