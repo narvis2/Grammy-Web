@@ -5,6 +5,7 @@ import { ReactQueryDevtools } from "react-query/devtools";
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
 import { useGetHotel } from "@/data/hooks";
+import Script from "next/script";
 
 interface Props {
   children?: React.ReactNode;
@@ -29,6 +30,10 @@ export const NextLayout = ({ children }: Props) => {
       <Navbar />
       <div className="min-h-[80vh]">{children}</div>
       <Footer />
+      <Script
+        type="text/javascript"
+        src={`https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=${process.env.NEXT_PUBLIC_NAVER_ID}`}
+      />
     </>
   );
 };

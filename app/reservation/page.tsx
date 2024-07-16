@@ -14,6 +14,7 @@ import {
   formatStayPeriod,
   getCalendarMaxYear,
 } from "@/data/mapper/room";
+import { RiCalendarCheckFill } from "react-icons/ri";
 
 const Reservation = () => {
   const [tabIndex, setTabIndex] = useState(0);
@@ -125,7 +126,8 @@ const Reservation = () => {
       )}
 
       {startValue !== null && (
-        <div className="inline-block p-2 pl-4 uppercase text-sm rounded-xl bg-white text-#e6e6e6 border border-[#777777] ms-20 mt-10 mb-5">
+        <div className="inline-flex items-center p-2 pl-4 uppercase text-sm rounded-xl bg-white text-#e6e6e6 border border-[#777777] ms-20 mt-10 mb-5 gap-2">
+          <RiCalendarCheckFill className="text-sm" />
           {formatStayPeriod(startValue)}
         </div>
       )}

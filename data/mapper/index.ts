@@ -1,3 +1,6 @@
+import dayjs from "dayjs";
+import { HotelResponse } from "../model/hotel";
+
 export function getCommaNumber(number: number) {
   let [integerPart, decimalPart] = number.toString().split(".");
   integerPart = integerPart.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -29,4 +32,14 @@ export function phoneFormatter(num?: string) {
 export function checkPhoneNumber(number: string) {
   const regExp = new RegExp(/^[0-9|-]*$/);
   return regExp.test(number) === true;
+}
+
+export function getFullAddress(hotelInfo: HotelResponse | undefined) {
+  if (!hotelInfo) return "";
+
+  return `${hotelInfo.address} ${hotelInfo.addressDetail}`;
+}
+
+export function stringToDateFormat(date: string, pattern?: string) {
+  return dayjs(date).format(pattern ?? "YYYY.MM.DD");
 }

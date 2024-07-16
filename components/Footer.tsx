@@ -1,27 +1,9 @@
+import useHotelInfo from "@/data/hooks/hotel/useHotelInfo";
 import { phoneFormatter } from "@/data/mapper";
-import { BaseResponse } from "@/data/model/base";
-import { HotelResponse } from "@/data/model/hotel";
 import Link from "next/link";
-import { useMemo } from "react";
-import { useQueryClient } from "react-query";
 
 export default function Footer() {
-  const queryClient = useQueryClient();
-
-  const hotel = queryClient.getQueryData(["useGetHotel"]) as
-    | BaseResponse<HotelResponse>
-    | undefined;
-
-  const hotelInfo = useMemo(() => {
-    if (!hotel) return undefined;
-
-    const data = hotel.data;
-    if (hotel.success && !!data) {
-      return data;
-    }
-
-    return undefined;
-  }, [hotel]);
+  const { hotelInfo } = useHotelInfo();
 
   return (
     <footer className="bg-[#F5F5F5] py-2">
