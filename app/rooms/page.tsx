@@ -4,6 +4,7 @@ import RoomTypeItem from "@/components/room/adapter/item/RoomTypeItem";
 import RoomImageAdapter from "@/components/room/adapter/RoomImageAdapter";
 import RoomTypeAdapter from "@/components/room/adapter/RoomTypeAdapter";
 import RoomTabV1 from "@/components/room/tab/RoomTabV1";
+import RoomTabV2 from "@/components/room/tab/RoomTabV2";
 import { useRoomTypeList } from "@/data/hooks";
 import { roomTypeToRoomTypeImageList } from "@/data/mapper/room";
 import { RoomTypeImageModel } from "@/data/model/room";
@@ -35,8 +36,8 @@ const Room = () => {
         <RoomImageAdapter roomTypeImages={roomTypeImages} />
       )}
       <section className="mt-4">
-        <RoomTabV1
-          tabIndex={tabIndex}
+        <RoomTabV2
+          tabPosition={tabIndex}
           roomTypeList={roomTypeList}
           onTabClick={(index) => {
             setTabIndex(index);

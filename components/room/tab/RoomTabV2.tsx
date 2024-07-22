@@ -8,8 +8,11 @@ type RoomTabProps = {
 
 const RoomTabV2 = ({ roomTypeList, tabPosition, onTabClick }: RoomTabProps) => {
   return (
-    <div className="flex flex-row justify-start items-center pl-20 border-b border-gray-200">
-      <a href="sub2_room1.html?menu=2&amp;sub=1" className="mr-16">
+    <div className="flex flex-col lg:flex-row justify-center lg:justify-start items-center lg:pl-20 border-b border-gray-200">
+      <a
+        href="sub2_room1.html?menu=2&amp;sub=1"
+        className="mr-0 lg:mr-16 sm:border-b sm:border-gray-200"
+      >
         객실 유형
       </a>
       <div className="text-sm font-medium text-center text-[#939393]">
