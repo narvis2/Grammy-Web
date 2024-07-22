@@ -11,7 +11,7 @@ const ReservationItem = ({ item }: ReservationItemProps) => {
     <div className="relative flex-col bg-clip-border rounded-xl bg-transparent text-gray-700 shadow-none grid gap-2 item sm:grid-cols-2">
       <div className="relative bg-clip-border rounded-xl overflow-hidden bg-white text-gray-700 shadow-lg m-0">
         <img
-          src={`${staticImageUrl + item.imageUrl}`}
+          src={`${staticImageUrl + item.imageUrl[0]}`}
           loading={"lazy"}
           alt="Sustainable Practices for a Greener Future"
           className="object-cover w-full h-full"
@@ -32,11 +32,14 @@ const ReservationItem = ({ item }: ReservationItemProps) => {
         </p>
         <div>
           <p className="block antialiased font-sans text-base font-light leading-relaxed text-blue-gray-900 mb-0.5 !font-semibold">
+            {`총 인원 : ${item.guestCount} 명`}
+          </p>
+          <p className="block antialiased font-sans text-base font-light leading-relaxed text-blue-gray-900 mb-0.5 !font-semibold">
             {`가격 : ${getCommaNumber(item.totalPrice)} ￦`}
           </p>
         </div>
-        {/* <div className="mt-4">
-          {room.beds.map((item, index) => {
+        <div className="mt-4">
+          {item.beds.map((item, index) => {
             return (
               <p
                 key={item.type}
@@ -46,7 +49,7 @@ const ReservationItem = ({ item }: ReservationItemProps) => {
               </p>
             );
           })}
-        </div> */}
+        </div>
       </div>
     </div>
   );

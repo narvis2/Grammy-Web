@@ -49,5 +49,7 @@ export type RoomAvailableReservationResponse = {
   roomType: string;
   roomNumber: number;
   totalPrice: number;
-  imageUrl: string;
+  imageUrl: string[];
+  guestCount: number;
+  beds: RoomBedResponse[];
 };
