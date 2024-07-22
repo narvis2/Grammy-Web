@@ -11,7 +11,7 @@ const RoomTabV1 = ({ tabIndex, roomTypeList, onTabClick }: RoomTabV1Props) => {
     <div className="inner-con inner-1760 flex items-center justify-between ml-10 mr-10">
       <div className="tap-menu view-tap flex items-center">
         <a href="/rooms" className="mr-4">
-          ROOMS
+          객실 유형
         </a>
         <a className="mr-4"> |</a>
         <ul className="flex items-center space-x-4">

@@ -22,8 +22,8 @@ const RoomTypeAdapter = ({ roomType }: RoomTypeAdapterProps) => {
   }
 
   return (
-    <div className="flex justify-center items-center mt-20">
-      <div className="relative bg-clip-border rounded-xl overflow-hidden bg-white text-gray-700 shadow-lg m-0">
+    <div className="flex flex-col sm:flex-row justify-start lg:justify-center lg:items-center mt-10 lg:mt-20 px-10 sm:px-0">
+      <div className="relative bg-clip-border rounded-xl overflow-hidden bg-white text-gray-700 shadow-lg">
         <img
           src={mainImageList[mainTypeIndex]}
           alt={roomType.roomTypeName}
