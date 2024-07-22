@@ -18,7 +18,7 @@ const WayToComeContainer = ({ hotelInfo }: WayToComeContainerProps) => {
 
       <div
         id="map"
-        style={{ height: "400px", borderRadius: 10 }}
+        style={{ minHeight: "300px", maxHeight: "400px", borderRadius: 10 }}
         className="w-full lg:w-1/2 mb-4 lg:mb-4"
       ></div>
 
