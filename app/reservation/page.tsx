@@ -75,7 +75,7 @@ const Reservation = () => {
 
   return (
     <div className={`pt-20 w-full`}>
-      <div className="mx-20 mt-10 mb-10">
+      <div className="mx-10 lg:mx-20 mt-10 mb-10">
         <Calendar
           locale="ko"
           minDetail="month" // 상단 네비게이션에서 '월' 단위만 보이게 설정

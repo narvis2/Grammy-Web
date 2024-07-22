@@ -252,6 +252,22 @@
   @apply bg-white rounded-full px-2 py-1 text-xs font-semibold border border-gray-300 shadow hover:shadow-lg hover:font-bold;
 }
 
+.swiper-button-prev,
+.swiper-button-next {
+  background-color: #fff;
+  opacity: 0.6;
+  height: 50px;
+  width: 50px;
+  border-radius: 50px;
+  color: black !important;
+}
+
+.swiper-button-prev:after,
+.swiper-button-next:after {
+  font-size: 1.1rem !important;
+  font-weight: 600 !important;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
