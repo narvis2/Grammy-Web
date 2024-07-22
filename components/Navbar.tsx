@@ -1,10 +1,11 @@
 import Link from "next/link";
 import { FaHotel } from "react-icons/fa6";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import SubMenu from "./navbar/SubMenu";
 import { RouteName, RoutePath } from "@/data/model/menu/enum";
 import DrawerMenu from "./navbar/DrawerMenu";
 import NavTab from "./navbar/NavTab";
+import useRoomTypeInfo from "@/data/hooks/roomType/useRoomTypeInfo";
 
 const drawerMenuList = [
   { title: RouteName.PROLOGUE, path: RoutePath.PROLOGUE },
@@ -19,6 +20,8 @@ export default function Navbar() {
 
   const [subMenuContent, setSubMenuContent] = useState<string | null>(null);
   let timeoutId: NodeJS.Timeout | null = null;
+
+  const { roomTypeList } = useRoomTypeInfo();
 
   const handleMouseEnter = (content: string) => {
     if (timeoutId !== null) {
@@ -38,13 +41,33 @@ export default function Navbar() {
     setIsMenuOpen(!isMenuOpen);
   };
 
+  useEffect(() => {
+    const handleScroll = () => {
+      isMenuOpen && setIsMenuOpen(false);
+    };
+    const handleClickOutside = (event: MouseEvent) => {
+      const target = event.target as HTMLElement;
+      if (!target.closest("nav")) {
+        isMenuOpen && setIsMenuOpen(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    document.addEventListener("click", handleClickOutside);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      document.removeEventListener("click", handleClickOutside);
+    };
+  }, [isMenuOpen]);
+
   return (
     <nav
       className={`h-20 z-20 border-b border-gray-200 w-full shadow-sm fixed top-0 bg-white`}
     >
       <div className="flex justify-between items-center sm:px-10 p-4">
         <div className="flex items-center gap-2">
-          <FaHotel className="text-4xl" />
+          <FaHotel className="text-3xl" />
           <Link href="/" className="text-lg sm:text-xl font-semibold">
             그라미 호텔
           </Link>
@@ -102,14 +125,7 @@ export default function Navbar() {
           >
             <NavTab menu={{ title: RouteName.ROOMS, path: RoutePath.ROOMS }} />
             {/* Submenu for ROOMS */}
-            {subMenuContent === "rooms" && (
-              <SubMenu
-                menuList={[
-                  { title: "스탠다드 타입", path: RoutePath.ROOMS },
-                  { title: "로얄 스위트 타입", path: RoutePath.ROOMS },
-                ]}
-              />
-            )}
+            {subMenuContent === "rooms" && <SubMenu menuList={roomTypeList} />}
           </div>
           <div
             className="relative group"

@@ -1,10 +1,10 @@
 "use client";
 
-import { QueryClient, QueryClientProvider } from "react-query";
+import { QueryClient, QueryClientProvider, useQueries } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
-import { useGetHotel } from "@/data/hooks";
+import { useGetHotel, useRoomTypeList } from "@/data/hooks";
 import Script from "next/script";
 
 interface Props {
@@ -24,6 +24,7 @@ export const NextProviders = ({ children }: Props) => {
 
 export const NextLayout = ({ children }: Props) => {
   useGetHotel();
+  useRoomTypeList();
 
   return (
     <>
