@@ -15,6 +15,8 @@ import { getBannerList } from "../api/service/banner";
 import { BannerResponse } from "../model/banner/types";
 import { NoticeResponse } from "../model/notice/types";
 import { getNoticeList } from "../api/service/notice";
+import { BedType } from "../model/bed/enum";
+import { getBedTypeList } from "../api/service/bed";
 
 export const useGetHotel = (customOptions?: T_Query<HotelResponse>) =>
   useQuery(["useGetHotel"], () => getHotel(), customOptions);
@@ -38,3 +40,6 @@ export const useRoomAvailableReservationList = (
     (params) => getRoomAvailableReservationList(params),
     customOption
   );
+
+export const useBedTypeList = (customOptions?: T_Query<BedType[]>) =>
+  useQuery(["useBedTypeList"], () => getBedTypeList(), customOptions);

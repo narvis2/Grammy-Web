@@ -1,10 +1,13 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
-import { FaShower, FaBed, FaBath, FaCoffee } from "react-icons/fa";
-import { MdPlace } from "react-icons/md";
+import React, { useState, useEffect, useMemo } from "react";
 import Image from "next/image";
 import { OfferModel } from "@/data/model/offer/types";
+import { OFFER_TYPE } from "@/data/model/offer/enum";
+import OfferIcon from "@/components/offers/OfferIcon";
+import { useBedTypeList } from "@/data/hooks";
+import { BedModel } from "@/data/model/bed/types";
+import OfferBedAdapter from "@/components/offers/adapter/OfferBedAdapter";
 
 const images = [
   { src: "/images/room1.jpg", width: 600, height: 600 },
@@ -14,64 +17,73 @@ const images = [
 
 const offers: OfferModel[] = [
   {
-    name: "침구류",
+    type: OFFER_TYPE.BED,
     image: "/images/room1.jpg",
-    description: "침대를 제공해드리고 있습니다.",
-    width: 600,
-    height: 600,
+    description: "총 4가지 유형의 침대를 제공해드리고 있습니다.",
   },
   {
-    name: "어메니티",
+    type: OFFER_TYPE.AMENITIES,
     image: "/images/room2.jpg",
     description: "일회용 욕실 어메니티를 제공해드리고 있습니다.",
-    width: 600,
-    height: 600,
   },
   {
-    name: "욕조",
+    type: OFFER_TYPE.BATH,
     image: "/images/room3.jpg",
     description: "욕조가 설치되어 있습니다.",
-    width: 600,
-    height: 600,
   },
   {
-    name: "에스프레소 바 카페",
+    type: OFFER_TYPE.ESPRESSO_CAFE,
     image: "/images/room1.jpg",
     description: "카페를 즐기실 수 있습니다.",
-    width: 600,
-    height: 600,
   },
   {
-    name: "관광지",
+    type: OFFER_TYPE.TOURIST,
     image: "/images/room2.jpg",
     description: "관광지 주변에 위치하고 있습니다.",
-    width: 600,
-    height: 600,
   },
 ];
 
-const Home = () => {
+const SpecialOffers = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   const [showText, setShowText] = useState(false);
 
-  const [selectedOffer, setSelectedOffer] = useState<OfferModel>({
-    name: "침구류",
-    image: "/images/room1.jpg",
-    description: "침대를 제공해드리고 있습니다.",
-    width: 600,
-    height: 600,
-  });
+  const [selectedOffer, setSelectedOffer] = useState<OFFER_TYPE>(
+    OFFER_TYPE.BED
+  );
+
+  const { data: bedType } = useBedTypeList();
+
+  const bedModelList = useMemo<BedModel[]>(() => {
+    if (!bedType || !bedType.success) return [];
+
+    const list = bedType.data;
+    if (typeof list !== "undefined" && list.length > 0) {
+      return list.map<BedModel>((item) => {
+        return {
+          bedType: item,
+          img: "/images/room1.jpg",
+          description: "",
+        };
+      });
+    }
+
+    return [];
+  }, [bedType]);
+
+  const offersInfo = useMemo(() => {
+    return offers.find((item) => item.type === selectedOffer);
+  }, [selectedOffer]);
 
   const handleSlideButtonClick = (index: number) => {
     setCurrentImageIndex(index);
     setShowText(true);
   };
 
-  const handleTabClick = (offer: OfferModel) => {
+  const handleTabClick = (offerType: OFFER_TYPE) => {
     setShowText(false);
     setTimeout(() => {
-      setSelectedOffer(offer);
+      setSelectedOffer(offerType);
       setShowText(true);
     }, 200);
   };
@@ -112,7 +124,7 @@ const Home = () => {
             </h2>
 
             <p className="text-base sm:text-lg lg:text-xl font-serif">
-              {selectedOffer.name}
+              {selectedOffer}
             </p>
 
             <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
@@ -140,15 +152,15 @@ const Home = () => {
             <ul className="flex items-center space-x-4">
               {offers.map((offer, index) => (
                 <li
-                  key={index}
-                  className={selectedOffer.name === offer.name ? "current" : ""}
+                  key={offer.type}
+                  className={selectedOffer === offer.type ? "current" : ""}
                 >
                   <a
                     href="#"
                     className="hover:text-blue-700 gap-2"
-                    onClick={() => handleTabClick(offer)}
+                    onClick={() => handleTabClick(offer.type)}
                   >
-                    {offer.name}
+                    {offer.type}
                   </a>
                 </li>
               ))}
@@ -158,27 +170,37 @@ const Home = () => {
           <h5 className="tit">GRAMMY HOTEL</h5>
         </div>
 
-        <p className="flex justify-center mt-8 text-4xl">
-          {selectedOffer.name === "침구류" && <FaBed />}
-          {selectedOffer.name === "어메니티" && <FaShower />}
-          {selectedOffer.name === "욕조" && <FaBath />}
-          {selectedOffer.name === "에스프레소 바 카페" && <FaCoffee />}
-          {selectedOffer.name === "관광지" && <MdPlace />}
-        </p>
-        <p className="text-center text-xl mt-4">{selectedOffer.description}</p>
+        <OfferIcon selectedOffer={selectedOffer} />
 
-        <div className="flex justify-center mt-8 mb-12">
-          <Image
-            src={selectedOffer.image}
-            alt={selectedOffer.name}
-            width={selectedOffer.width}
-            height={selectedOffer.height}
-            className={`object-cover h-96 ${showText ? "fade-in" : "fade-out"}`}
-          />
-        </div>
+        {!!offersInfo &&
+          (selectedOffer === OFFER_TYPE.BED ? (
+            <OfferBedAdapter
+              showText={showText}
+              bedModelList={bedModelList}
+              offers={offersInfo}
+            />
+          ) : (
+            <>
+              <p className="text-center text-xl mt-4">
+                {offersInfo.description}
+              </p>
+
+              <div className="flex justify-center mt-8 mb-12">
+                <Image
+                  src={offersInfo.image}
+                  alt={offersInfo.type}
+                  width={400}
+                  height={400}
+                  className={`object-cover h-96 ${
+                    showText ? "fade-in" : "fade-out"
+                  }`}
+                />
+              </div>
+            </>
+          ))}
       </section>
     </div>
   );
 };
 
-export default Home;
+export default SpecialOffers;
