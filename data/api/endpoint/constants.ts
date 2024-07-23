@@ -4,4 +4,5 @@ export const Grammy = {
   BANNER: "/banner/hotel/1",
   NOTICE: "/notice/hotel/1",
   AVAILABLE_RESERVATION: "/room/reservations",
+  BED: "/bed",
 };
