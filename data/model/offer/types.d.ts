@@ -1,7 +1,7 @@
+import { OFFER_TYPE } from "./enum";
+
 export type OfferModel = {
-  name: string;
+  type: OFFER_TYPE;
   image: string;
   description: string;
-  width: number;
-  height: number;
 };
