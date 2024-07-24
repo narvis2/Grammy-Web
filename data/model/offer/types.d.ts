@@ -5,3 +5,8 @@ export type OfferModel = {
   image: string;
   description: string;
 };
+
+export type OfferServiceModel = {
+  title: string;
+  description?: string;
+};
