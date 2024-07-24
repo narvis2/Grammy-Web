@@ -4,7 +4,6 @@ import React, { useState, useEffect, useMemo } from "react";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
-import { useRoomTypeList } from "@/data/hooks";
 import useMap from "@/data/hooks/map/useMap";
 import useHotelInfo from "@/data/hooks/hotel/useHotelInfo";
 import CarouselContainer from "@/components/home/carousel/CarouselContainer";
@@ -14,6 +13,8 @@ import HomeImageBgContainer from "@/components/home/bg/HomeImageBgContainer";
 import { useQueryClient } from "react-query";
 import { BaseResponse } from "@/data/model/base";
 import { RoomTypeResponse } from "@/data/model/room";
+import { useOfferStore } from "@/data/store/useOfferStore";
+import { CarouselImageModel } from "@/data/model/image/types";
 
 const images = [
   { src: "/images/room1.jpg", label: "GRAMMY HOTEL" },
@@ -31,6 +32,7 @@ const Home = () => {
 
   const { hotelInfo } = useHotelInfo();
   const naverMap = useMap(hotelInfo);
+  const { offers } = useOfferStore();
 
   const roomType = queryClient.getQueryData(["useRoomTypeList"]) as
     | BaseResponse<RoomTypeResponse[]>
@@ -46,6 +48,15 @@ const Home = () => {
 
     return [];
   }, [roomType]);
+
+  const offersImage = useMemo<CarouselImageModel[]>(() => {
+    return offers.map((item) => {
+      return {
+        src: item.image,
+        label: item.type,
+      };
+    });
+  }, [offers]);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -77,7 +88,7 @@ const Home = () => {
         onIndicatorClick={handleSlideButtonClick}
       />
       {/* Offers */}
-      <CarouselContainer images={images} />
+      <CarouselContainer images={offersImage} />
       {/* RoomType */}
       <RoomTypeContainer roomTypeList={roomTypeList} />
       {/* 오시는 길 */}

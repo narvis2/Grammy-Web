@@ -1,11 +1,13 @@
 import Link from "next/link";
 import { FaHotel } from "react-icons/fa6";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import SubMenu from "./navbar/SubMenu";
 import { RouteName, RoutePath } from "@/data/model/menu/enum";
 import DrawerMenu from "./navbar/DrawerMenu";
 import NavTab from "./navbar/NavTab";
 import useRoomTypeInfo from "@/data/hooks/roomType/useRoomTypeInfo";
+import { useOfferStore } from "@/data/store/useOfferStore";
+import { MenuModel } from "@/data/model/menu/types";
 
 const drawerMenuList = [
   { title: RouteName.PROLOGUE, path: RoutePath.PROLOGUE },
@@ -21,7 +23,18 @@ export default function Navbar() {
   const [subMenuContent, setSubMenuContent] = useState<string | null>(null);
   let timeoutId: NodeJS.Timeout | null = null;
 
+  const { offers } = useOfferStore();
+
   const { roomTypeList } = useRoomTypeInfo();
+
+  const offerMenuList = useMemo<MenuModel[]>(() => {
+    return offers.map((item) => {
+      return {
+        title: item.type,
+        path: RoutePath.SPECIAL_OFFERS,
+      };
+    });
+  }, [offers]);
 
   const handleMouseEnter = (content: string) => {
     if (timeoutId !== null) {
@@ -140,12 +153,7 @@ export default function Navbar() {
             />
             {/* Submenu for SPECIAL OFFERS */}
             {subMenuContent === "special_offers" && (
-              <SubMenu
-                menuList={[
-                  { title: "침구류", path: RoutePath.SPECIAL_OFFERS },
-                  { title: "어메니티", path: RoutePath.SPECIAL_OFFERS },
-                ]}
-              />
+              <SubMenu menuList={offerMenuList} />
             )}
           </div>
           <button
