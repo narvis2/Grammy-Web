@@ -12,7 +12,7 @@ import React, { useState, useMemo, useEffect } from "react";
 
 const Room = () => {
   const params = useSearchParams();
-  const [currentTab, setCurrentTab] = useState<string | undefined>(undefined);
+  const [currentTab, setCurrentTab] = useState<string>("STANDARD-A");
 
   const { data: roomType, isFetching } = useRoomTypeList();
 
