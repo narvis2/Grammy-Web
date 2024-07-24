@@ -1,5 +1,5 @@
 import { BaseResponse } from "@/data/model/base";
-import { RouteName } from "@/data/model/menu/enum";
+import { RoutePath } from "@/data/model/menu/enum";
 import { MenuModel } from "@/data/model/menu/types";
 import { RoomTypeResponse } from "@/data/model/room";
 import { useMemo } from "react";
@@ -19,7 +19,7 @@ function useRoomTypeInfo() {
       return list.map<MenuModel>((item) => {
         return {
           title: item.roomTypeName,
-          path: RouteName.ROOMS,
+          path: RoutePath.ROOMS,
         };
       });
     }

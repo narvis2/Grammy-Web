@@ -1,40 +1,44 @@
-import { RoomTypeResponse } from "@/data/model/room";
-
-type RoomTabProps = {
-  roomTypeList: RoomTypeResponse[];
-  tabPosition: number;
-  onTabClick: (index: number) => void;
+type TabLayoutProps = {
+  title: string;
+  tabList: string[];
+  currentTab: string;
+  onTabClick: (type: string) => void;
 };
 
-const RoomTabV2 = ({ roomTypeList, tabPosition, onTabClick }: RoomTabProps) => {
+const TabLayout = ({
+  title,
+  tabList,
+  currentTab,
+  onTabClick,
+}: TabLayoutProps) => {
   return (
     <div className="flex flex-col lg:flex-row justify-center lg:justify-start items-center lg:pl-20 border-b border-gray-200">
       <a
         href="sub2_room1.html?menu=2&amp;sub=1"
-        className="mr-0 lg:mr-16 sm:border-b sm:border-gray-200"
+        className="mr-0 lg:mr-8 sm:border-r sm:pr-8 sm:border-gray-200"
       >
-        객실 유형
+        {title}
       </a>
       <div className="text-sm font-medium text-center text-[#939393]">
         <ul className="flex flex-wrap -mb-px justify-center">
-          {roomTypeList.map((item, index) => {
-            const isFocused = tabPosition === index;
+          {tabList.map((item) => {
+            const isFocused = currentTab === item;
             return (
-              <li className="mr-2">
+              <li className="mr-2" key={item}>
                 {!isFocused ? (
                   <div
                     className="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-[#d76076] hover:border-[#d76076]"
-                    onClick={() => onTabClick(index)}
+                    onClick={() => onTabClick(item)}
                   >
-                    {item.roomTypeName}
+                    {item}
                   </div>
                 ) : (
                   <div
                     className="inline-block p-4 text-[#c78390] border-b-2 border-[#c78390] rounded-t-lg active "
                     aria-current="page"
-                    onClick={() => onTabClick(index)}
+                    onClick={() => onTabClick(item)}
                   >
-                    {item.roomTypeName}
+                    {item}
                   </div>
                 )}
               </li>
@@ -46,4 +50,4 @@ const RoomTabV2 = ({ roomTypeList, tabPosition, onTabClick }: RoomTabProps) => {
   );
 };
 
-export default RoomTabV2;
+export default TabLayout;

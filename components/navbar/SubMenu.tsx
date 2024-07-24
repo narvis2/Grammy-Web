@@ -13,7 +13,7 @@ const SubMenu = ({ menuList }: SubMenuProps) => {
         return (
           <Link
             key={item.title}
-            href={item.path}
+            href={item.path + `?type=${item.title}`}
             className="block px-4 py-2 text-lg hover:bg-gray-100"
           >
             {item.title}

@@ -9,7 +9,7 @@ interface OfferState {
 
 interface OfferInfoActions {}
 
-const defaultOfferState = [
+const defaultOfferState: OfferModel[] = [
   {
     type: OFFER_TYPE.BED,
     image: "/images/room1.jpg",
@@ -37,7 +37,7 @@ const defaultOfferState = [
   },
 ];
 
-const defaultOfferServiceState = [
+const defaultOfferServiceState: OfferServiceModel[] = [
   { title: "주차가능" },
   { title: "야외테라스 객실" },
   { title: "스타일러" },
