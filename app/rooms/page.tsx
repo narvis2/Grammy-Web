@@ -3,7 +3,6 @@
 import RoomTypeItem from "@/components/room/adapter/item/RoomTypeItem";
 import RoomImageAdapter from "@/components/room/adapter/RoomImageAdapter";
 import RoomTypeAdapter from "@/components/room/adapter/RoomTypeAdapter";
-import RoomTabV1 from "@/components/room/tab/RoomTabV1";
 import RoomTabV2 from "@/components/room/tab/RoomTabV2";
 import { useRoomTypeList } from "@/data/hooks";
 import { roomTypeToRoomTypeImageList } from "@/data/mapper/room";
