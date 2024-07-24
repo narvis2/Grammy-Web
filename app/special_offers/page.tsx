@@ -9,14 +9,18 @@ import { BedModel } from "@/data/model/bed/types";
 import OfferBedAdapter from "@/components/offers/adapter/OfferBedAdapter";
 import OfferServiceAdapter from "@/components/offers/adapter/OfferServiceAdapter";
 import { useOfferStore } from "@/data/store/useOfferStore";
+import { useSearchParams } from "next/navigation";
+import TabLayout from "@/components/common/tab/TabLayout";
 
 const images = [
-  { src: "/images/room1.jpg", width: 600, height: 600 },
-  { src: "/images/room2.jpg", width: 600, height: 600 },
-  { src: "/images/room3.jpg", width: 600, height: 600 },
+  { src: "/images/room1.jpg" },
+  { src: "/images/room2.jpg" },
+  { src: "/images/room3.jpg" },
 ];
 
 const SpecialOffers = () => {
+  const params = useSearchParams();
+
   const { offers, offerService: serviceList } = useOfferStore();
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
@@ -44,6 +48,10 @@ const SpecialOffers = () => {
 
     return [];
   }, [bedType]);
+
+  const tabList = useMemo(() => {
+    return offers.map((item) => item.type);
+  }, [offers]);
 
   const offersInfo = useMemo(() => {
     return offers.find((item) => item.type === selectedOffer);
@@ -76,14 +84,21 @@ const SpecialOffers = () => {
     return () => clearTimeout(textTimer);
   }, []);
 
+  useEffect(() => {
+    const type = params.get("type");
+    if (type) {
+      setSelectedOffer(type as OFFER_TYPE);
+    }
+  }, [params]);
+
   return (
     <div className="relative">
       <div className="slideshow-container relative">
         <Image
           src={images[currentImageIndex].src}
           alt="Slideshow"
-          width={images[currentImageIndex].width}
-          height={images[currentImageIndex].height}
+          width={600}
+          height={600}
           className="slideshow-image w-full object-cover"
         />
 
@@ -116,33 +131,15 @@ const SpecialOffers = () => {
         </div>
       </div>
 
-      <section className="mt-8">
-        <div className="inner-con inner-1760 flex items-center justify-between">
-          <div className="tap-menu view-tap flex items-center">
-            <a href="/special_offers" className="mr-4">
-              SPECIAL OFFERS
-            </a>
-            <a className="mr-4"> |</a>
-            <ul className="flex items-center space-x-4">
-              {offers.map((offer, index) => (
-                <li
-                  key={offer.type}
-                  className={selectedOffer === offer.type ? "current" : ""}
-                >
-                  <a
-                    href="#"
-                    className="hover:text-blue-700 gap-2"
-                    onClick={() => handleTabClick(offer.type)}
-                  >
-                    {offer.type}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <h5 className="tit">GRAMMY HOTEL</h5>
-        </div>
+      <section className="mt-4">
+        <TabLayout
+          title="SPECIAL OFFERS"
+          tabList={tabList}
+          currentTab={selectedOffer}
+          onTabClick={(type) => {
+            handleTabClick(type as OFFER_TYPE);
+          }}
+        />
 
         {!!offersInfo && <OfferIcon offers={offersInfo} />}
 

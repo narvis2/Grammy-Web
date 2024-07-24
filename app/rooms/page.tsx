@@ -1,16 +1,18 @@
 "use client";
 
+import TabLayout from "@/components/common/tab/TabLayout";
 import RoomTypeItem from "@/components/room/adapter/item/RoomTypeItem";
 import RoomImageAdapter from "@/components/room/adapter/RoomImageAdapter";
 import RoomTypeAdapter from "@/components/room/adapter/RoomTypeAdapter";
-import RoomTabV2 from "@/components/room/tab/RoomTabV2";
 import { useRoomTypeList } from "@/data/hooks";
 import { roomTypeToRoomTypeImageList } from "@/data/mapper/room";
-import { RoomTypeImageModel } from "@/data/model/room";
-import React, { useState, useMemo } from "react";
+import { RoomTypeImageModel, RoomTypeResponse } from "@/data/model/room";
+import { useSearchParams } from "next/navigation";
+import React, { useState, useMemo, useEffect } from "react";
 
 const Room = () => {
-  const [tabIndex, setTabIndex] = useState<number>(0);
+  const params = useSearchParams();
+  const [currentTab, setCurrentTab] = useState<string | undefined>(undefined);
 
   const { data: roomType, isFetching } = useRoomTypeList();
 
@@ -25,27 +27,44 @@ const Room = () => {
     return [];
   }, [roomType]);
 
+  const tabList = useMemo<string[]>(() => {
+    return roomTypeList.map((item) => item.roomTypeName);
+  }, [roomTypeList]);
+
   const roomTypeImages = useMemo<RoomTypeImageModel[]>(() => {
     return roomTypeToRoomTypeImageList(roomTypeList);
   }, [roomTypeList]);
+
+  const roomTypeInfo = useMemo<RoomTypeResponse | undefined>(() => {
+    if (!currentTab || roomTypeList.length === 0) return undefined;
+    return roomTypeList.find((item) => item.roomTypeName === currentTab);
+  }, [currentTab, roomTypeList]);
+
+  useEffect(() => {
+    const type = params.get("type");
+    if (type) {
+      setCurrentTab(type);
+    }
+  }, [params]);
 
   return (
     <div className="relative">
       {roomTypeImages.length > 0 && (
         <RoomImageAdapter roomTypeImages={roomTypeImages} />
       )}
-      <section className="mt-4">
-        <RoomTabV2
-          tabPosition={tabIndex}
-          roomTypeList={roomTypeList}
-          onTabClick={(index) => {
-            setTabIndex(index);
-          }}
-        />
-        {roomTypeList.length > 0 && (
-          <RoomTypeAdapter roomType={roomTypeList[tabIndex]} />
-        )}
-      </section>
+      {!!currentTab && (
+        <section className="mt-4">
+          <TabLayout
+            title="객실 유형"
+            currentTab={currentTab}
+            tabList={tabList}
+            onTabClick={(type) => {
+              setCurrentTab(type);
+            }}
+          />
+          {!!roomTypeInfo && <RoomTypeAdapter roomType={roomTypeInfo} />}
+        </section>
+      )}
 
       <section className="pt-12 pb-20 bg-gray-200 mt-28">
         <div className="inner-con flex items-center justify-center">
