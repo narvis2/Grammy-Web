@@ -1,5 +1,6 @@
 "use client";
 
+import ProductAdapter from "@/components/common/product/ProductAdapter";
 import TabLayout from "@/components/common/tab/TabLayout";
 import RoomTypeItem from "@/components/room/adapter/item/RoomTypeItem";
 import RoomImageAdapter from "@/components/room/adapter/RoomImageAdapter";
@@ -62,7 +63,7 @@ const Room = () => {
               setCurrentTab(type);
             }}
           />
-          {!!roomTypeInfo && <RoomTypeAdapter roomType={roomTypeInfo} />}
+          {!!roomTypeInfo && <ProductAdapter roomTypeInfo={roomTypeInfo} />}
         </section>
       )}
 
