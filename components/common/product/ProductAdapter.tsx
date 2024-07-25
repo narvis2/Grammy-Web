@@ -3,7 +3,7 @@ import ChipAdapter from "../ChipAdapter";
 import ConvenienceItem from "../ConvenienceItem";
 import ProductImageAdapter from "./ProductImageAdapter";
 import { getCommaNumber } from "@/data/mapper";
-import { staticImageUrl } from "@/data/utils/constants";
+import { roomTypeDescriptions, staticImageUrl } from "@/data/utils/constants";
 
 type ProductAdapterProps = {
   roomTypeInfo: RoomTypeResponse;
@@ -17,8 +17,10 @@ const ProductAdapter = ({ roomTypeInfo }: ProductAdapterProps) => {
 
   const roomNumberList = roomTypeInfo.rooms.map((item) => `${item.number}호`);
 
+  const description = roomTypeDescriptions.get(roomType);
+
   return (
-    <div className="flex justify-center items-center p-10">
+    <div className="flex justify-center items-center py-10 px-5">
       <div className="container grid grid-cols-1 gap-6 lg:grid-cols-2">
         <ProductImageAdapter imageList={mainImageList} />
 
@@ -62,18 +64,12 @@ const ProductAdapter = ({ roomTypeInfo }: ProductAdapterProps) => {
             ))}
           </div>
 
-          <p className="mt-8 text-base text-gray-600 font-serif">
-            STANDARD-A는 자연의 아름다움을 만끽할 수 있는 마운틴 뷰를 자랑하는
-            최상의 특별한 객실입니다.
-            <br />
-            저희 객실은 편안함을 최우선으로 고려하여 설계되었으며, 최고급 더블
-            베드와 부드러운 오리털 이불로 편안한 휴식을 제공합니다.
-            <br />
-            산의 경치를 바라보며 하루의 피로를 잊고, 아늑한 분위기 속에서 특별한
-            경험을 누려보세요.
-            <br />
-            STANDAR-A에서 여러분의 소중한 순간을 만들어 드리겠습니다.
-          </p>
+          {!!description && (
+            <p
+              className="mt-8 text-base text-gray-600 font-serif"
+              dangerouslySetInnerHTML={{ __html: description }}
+            />
+          )}
         </section>
       </div>
     </div>
