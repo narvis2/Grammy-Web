@@ -18,12 +18,12 @@ const ProductAdapter = ({ roomTypeInfo }: ProductAdapterProps) => {
   const roomNumberList = roomTypeInfo.rooms.map((item) => `${item.number}호`);
 
   return (
-    <div className="flex justify-center items-center">
-      <div className="container grid grid-cols-2 gap-6 mt-10">
+    <div className="flex justify-center items-center p-10">
+      <div className="container grid grid-cols-1 gap-6 lg:grid-cols-2">
         <ProductImageAdapter imageList={mainImageList} />
 
         <section>
-          <h2 className="text-3xl font-medium uppercase mb-2">{roomType}</h2>
+          <h2 className="text-3xl font-serif uppercase mb-2">{roomType}</h2>
           <div className="flex items-center">
             <ChipAdapter chipList={roomNumberList} />
           </div>

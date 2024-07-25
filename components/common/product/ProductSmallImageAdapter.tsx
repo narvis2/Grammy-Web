@@ -15,7 +15,7 @@ const ProductSmallImageAdapter = ({
             key={item}
             src={item}
             alt={`product${index}`}
-            className={`w-full h-24 object-cover cursor-pointer border rounded-[5px] ${
+            className={`w-full h-20 lg:h-24 object-cover cursor-pointer border rounded-[5px] ${
               index === 0 ? "border-primary" : ""
             }`}
             onClick={() => onClickImage(index)}

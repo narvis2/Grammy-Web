@@ -12,7 +12,7 @@ const ProductLargeImageAdapter = ({
       <img
         src={imageUrl}
         alt="product"
-        className="w-full border rounded-[10px] h-96"
+        className="object-cover w-full h-full border rounded-[10px]"
       />
       <button
         type="button"
