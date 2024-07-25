@@ -1,6 +1,9 @@
 import { getCommaNumber } from "@/data/mapper";
 import { RoomTypeResponse } from "@/data/model/room";
-import { staticImageUrl } from "@/data/utils/constants";
+import {
+  roomTypeSubDescriptions,
+  staticImageUrl,
+} from "@/data/utils/constants";
 import { useState } from "react";
 
 type RoomTypeAdapterProps = {
@@ -20,6 +23,8 @@ const RoomTypeAdapter = ({ roomType }: RoomTypeAdapterProps) => {
       : (mainTypeIndex - 1 + mainImageList.length) % mainImageList.length;
     setMainTypeIndex(index);
   }
+
+  const description = roomTypeSubDescriptions.get(roomType.roomTypeName);
 
   return (
     <div className="flex flex-col sm:flex-row justify-start lg:justify-center lg:items-center mt-10 lg:mt-20 px-10 sm:px-0">
@@ -85,7 +90,7 @@ const RoomTypeAdapter = ({ roomType }: RoomTypeAdapterProps) => {
           {roomType.roomTypeName}
         </p>
         <p className="block antialiased font-sans text-base leading-relaxed text-inherit mb-8 font-normal !text-gray-500">
-          {`편안한 분위기를 느낄 수 있는 객실입니다.`}
+          {description ?? ""}
         </p>
         <div>
           <p className="block antialiased font-sans text-base font-light leading-relaxed text-blue-gray-900 mb-0.5 !font-semibold">

@@ -8,7 +8,7 @@ type CarouselAdapterProps = {
 
 const CarouselAdapter = ({ images }: CarouselAdapterProps) => {
   return (
-    <div className="swiper-container mt-8 ml-10 mr-10">
+    <div className="swiper-container mt-8 ml-5 mr-5">
       <Swiper
         modules={[Navigation, Pagination, Autoplay]}
         rewind={true}
