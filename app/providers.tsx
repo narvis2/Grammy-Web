@@ -1,11 +1,12 @@
 "use client";
 
-import { QueryClient, QueryClientProvider, useQueries } from "react-query";
+import { QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
 import { useGetHotel, useRoomTypeList } from "@/data/hooks";
 import Script from "next/script";
+import { Toaster } from "react-hot-toast";
 
 interface Props {
   children?: React.ReactNode;
@@ -35,6 +36,8 @@ export const NextLayout = ({ children }: Props) => {
         type="text/javascript"
         src={`https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=${process.env.NEXT_PUBLIC_NAVER_ID}`}
       />
+      <Script src="https://cdn.iamport.kr/v1/iamport.js" />
+      <Toaster position={"top-center"} />
     </>
   );
 };

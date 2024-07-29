@@ -8,6 +8,7 @@ import NavTab from "./navbar/NavTab";
 import useRoomTypeInfo from "@/data/hooks/roomType/useRoomTypeInfo";
 import { useOfferStore } from "@/data/store/useOfferStore";
 import { MenuModel } from "@/data/model/menu/types";
+import { usePathname } from "next/navigation";
 
 const drawerMenuList = [
   { title: RouteName.PROLOGUE, path: RoutePath.PROLOGUE },
@@ -18,6 +19,8 @@ const drawerMenuList = [
 ];
 
 export default function Navbar() {
+  const pathname = usePathname();
+
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const [subMenuContent, setSubMenuContent] = useState<string | null>(null);
@@ -73,6 +76,10 @@ export default function Navbar() {
       document.removeEventListener("click", handleClickOutside);
     };
   }, [isMenuOpen]);
+
+  if (pathname === RoutePath.LOGIN) {
+    return null;
+  }
 
   return (
     <nav

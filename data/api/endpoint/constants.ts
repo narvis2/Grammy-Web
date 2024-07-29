@@ -5,4 +5,5 @@ export const Grammy = {
   NOTICE: "/notice/hotel/1",
   AVAILABLE_RESERVATION: "/room/reservations",
   BED: "/bed",
+  SIGN_IN: "/sign/sign-in",
 };

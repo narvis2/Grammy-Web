@@ -43,3 +43,8 @@ export function getFullAddress(hotelInfo: HotelResponse | undefined) {
 export function stringToDateFormat(date: string, pattern?: string) {
   return dayjs(date).format(pattern ?? "YYYY.MM.DD");
 }
+
+export function isEmailValid(email_address: string): boolean {
+  const email_regex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/i;
+  return email_regex.test(email_address);
+}
