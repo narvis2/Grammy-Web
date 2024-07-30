@@ -1,6 +1,12 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import {
+  useCallback,
+  useEffect,
+  useLayoutEffect,
+  useMemo,
+  useState,
+} from "react";
 
 import Calendar from "react-calendar";
 import dayjs from "dayjs";
@@ -45,6 +51,15 @@ const Reservation = () => {
       onError(error, variables, context) {},
     });
 
+  const onReservationClick = useCallback(() => {
+    if (!auth) {
+      router.push("/login");
+      return;
+    }
+
+    router.push("/reservation/prepare");
+  }, [auth, router]);
+
   const resultList = useMemo(() => {
     if (reservationList.length === 0 || roomTypeList.length === 0) return [];
 
@@ -53,7 +68,7 @@ const Reservation = () => {
     );
   }, [reservationList, tabIndex, roomTypeList]);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const now = new Date();
     onStartChange([now, dayjs(now).add(1, "day").toDate()]);
 
@@ -143,18 +158,7 @@ const Reservation = () => {
         <div className="inline-flex items-center p-2 pl-4 uppercase text-sm rounded-xl bg-white text-#e6e6e6 border border-[#777777] ms-20 mt-10 mb-5 gap-2">
           <RiCalendarCheckFill className="text-sm" />
           {formatStayPeriod(startValue)}
-          <button
-            onClick={() => {
-              if (!auth) {
-                router.push("/login");
-                return;
-              }
-
-              requestPayment();
-            }}
-          >
-            결제하기
-          </button>
+          <button onClick={() => onReservationClick()}>결제하기</button>
         </div>
       )}
       <ReservationAdapter reservationList={resultList} />
