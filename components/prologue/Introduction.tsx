@@ -16,7 +16,7 @@ const parallaxData = [
   },
 ];
 
-const Introduction: React.FC = () => {
+const Introduction = () => {
   const [visibility, setVisibility] = useState<{ [key: string]: boolean }>({
     intro: false,
     mountainView: false,
@@ -245,7 +245,6 @@ const Introduction: React.FC = () => {
                 변하는 바다의 풍경을 감상하면서 시각적인 즐거움과 완벽한 힐링의
                 순간을 만끽해 보세요.
               </p>
-              0
             </div>
           </Plx>
         </div>
