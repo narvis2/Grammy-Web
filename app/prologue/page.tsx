@@ -8,6 +8,7 @@ import { usePrologueStore } from "@/data/store/usePrologueStore";
 import { PROLOGUE_TYPE } from "@/data/model/prologue/enum";
 import Image from "next/image";
 import Introduction from "@/components/prologue/Introduction";
+import TableView from "@/components/prologue/TableView";
 
 const images = [
   { src: "/images/room1.jpg" },
@@ -109,6 +110,7 @@ const Prologue = () => {
 
         <div className="mt-8">
           {selectedPrologue === PROLOGUE_TYPE.INTRODUCTION && <Introduction />}
+          {selectedPrologue === PROLOGUE_TYPE.TABLE_VIEW && <TableView />}
         </div>
       </section>
     </div>
