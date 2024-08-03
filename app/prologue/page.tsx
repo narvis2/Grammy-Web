@@ -111,6 +111,9 @@ const Prologue = () => {
         <div className="mt-8">
           {selectedPrologue === PROLOGUE_TYPE.INTRODUCTION && <Introduction />}
           {selectedPrologue === PROLOGUE_TYPE.TABLE_VIEW && <TableView />}
+          {selectedPrologue === PROLOGUE_TYPE.HOW_TO_COME && (
+            <WayToComeContainer hotelInfo={hotelInfo} />
+          )}
         </div>
       </section>
     </div>
