@@ -1,12 +1,6 @@
 "use client";
 
-import {
-  useCallback,
-  useEffect,
-  useLayoutEffect,
-  useMemo,
-  useState,
-} from "react";
+import { useCallback, useLayoutEffect, useMemo, useState } from "react";
 
 import Calendar from "react-calendar";
 import dayjs from "dayjs";
@@ -21,14 +15,17 @@ import {
   getCalendarMaxYear,
 } from "@/data/mapper/room";
 import { RiCalendarCheckFill } from "react-icons/ri";
-import usePayment from "@/data/hooks/pay/usePayment";
 import { useRouter } from "next/navigation";
-import { useAuthModelState } from "@/data/store/useAuthStore";
+import { useAccessToken, useRefreshToken } from "@/data/store/useAuthStore";
+import { useSetReservationPrepare } from "@/data/store/useReservationStore";
 
 const Reservation = () => {
   const router = useRouter();
 
-  const auth = useAuthModelState();
+  const accessToken = useAccessToken();
+  const refreshToken = useRefreshToken();
+
+  const setReservationPrepare = useSetReservationPrepare();
 
   const [tabIndex, setTabIndex] = useState(0);
   const [startValue, onStartChange] = useState<any>(null);
@@ -37,8 +34,6 @@ const Reservation = () => {
     RoomAvailableReservationResponse[]
   >([]);
   const [roomTypeList, setRoomTypeList] = useState<string[]>([]);
-
-  const { requestPayment } = usePayment();
 
   const { mutateAsync: requestReservationList } =
     useRoomAvailableReservationList({
@@ -51,14 +46,26 @@ const Reservation = () => {
       onError(error, variables, context) {},
     });
 
-  const onReservationClick = useCallback(() => {
-    if (!auth) {
-      router.push("/login");
-      return;
-    }
+  const onReservationClick = useCallback(
+    (item: RoomAvailableReservationResponse) => {
+      if (!accessToken || !refreshToken) {
+        router.push("/login");
+        return;
+      }
 
-    router.push("/reservation/prepare");
-  }, [auth, router]);
+      const startDate = startValue[0] as Date;
+      const endDate = startValue[1] as Date;
+
+      setReservationPrepare({
+        checkInDate: startDate,
+        checkOutDate: endDate,
+        totalPrice: item.totalPrice,
+        guestNumber: item.guestCount,
+      });
+      router.push(`/reservation/${item.id}`);
+    },
+    [accessToken, refreshToken, router, startValue]
+  );
 
   const resultList = useMemo(() => {
     if (reservationList.length === 0 || roomTypeList.length === 0) return [];
@@ -131,8 +138,6 @@ const Reservation = () => {
               return;
             }
 
-            console.log(`🧪 value 👉`, value);
-
             onStartChange(value);
 
             await requestReservationList({
@@ -158,10 +163,14 @@ const Reservation = () => {
         <div className="inline-flex items-center p-2 pl-4 uppercase text-sm rounded-xl bg-white text-#e6e6e6 border border-[#777777] ms-20 mt-10 mb-5 gap-2">
           <RiCalendarCheckFill className="text-sm" />
           {formatStayPeriod(startValue)}
-          <button onClick={() => onReservationClick()}>결제하기</button>
         </div>
       )}
-      <ReservationAdapter reservationList={resultList} />
+      <ReservationAdapter
+        reservationList={resultList}
+        onReservationClick={(item) => {
+          onReservationClick(item);
+        }}
+      />
     </div>
   );
 };

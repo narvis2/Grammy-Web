@@ -8,9 +8,10 @@ import { useState } from "react";
 
 type ReservationItemProps = {
   item: RoomAvailableReservationResponse;
+  onItemClick: (item: RoomAvailableReservationResponse) => void;
 };
 
-const ReservationItem = ({ item }: ReservationItemProps) => {
+const ReservationItem = ({ item, onItemClick }: ReservationItemProps) => {
   const imageList = item.imageUrl.map((item) => staticImageUrl + item);
 
   const [currentImgIndex, setCurrentImageIndex] = useState<number>(0);
@@ -35,7 +36,7 @@ const ReservationItem = ({ item }: ReservationItemProps) => {
         />
         <button
           type="button"
-          className="absolute top-0 start-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
+          className="absolute top-0 start-0 z-10 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
           data-carousel-prev
           onClick={() => onSlideImage(false)}
         >
@@ -60,7 +61,7 @@ const ReservationItem = ({ item }: ReservationItemProps) => {
         </button>
         <button
           type="button"
-          className="absolute top-0 end-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
+          className="absolute top-0 end-0 z-10 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
           data-carousel-next
           onClick={() => onSlideImage(true)}
         >
@@ -84,39 +85,49 @@ const ReservationItem = ({ item }: ReservationItemProps) => {
           </span>
         </button>
       </div>
-      <div className="p-6 px-2 sm:pr-6 sm:pl-6">
-        <p className="block antialiased font-sans text-sm font-light leading-normal text-inherit mb-4 !font-semibold">
-          {item.roomType}
-        </p>
-        <a
-          href="#"
-          className="block antialiased tracking-normal font-sans text-xl font-semibold leading-snug text-blue-gray-900 mb-2 normal-case transition-colors hover:text-gray-700"
+      <div className="justify-between items-center">
+        <div className="p-6 px-2 sm:pr-6 sm:pl-6">
+          <p className="block antialiased font-sans text-sm font-light leading-normal text-inherit mb-4 !font-semibold">
+            {item.roomType}
+          </p>
+          <a
+            href="#"
+            className="block antialiased tracking-normal font-sans text-xl font-semibold leading-snug text-blue-gray-900 mb-2 normal-case transition-colors hover:text-gray-700"
+          >
+            {`${item.roomNumber}호`}
+          </a>
+          <p className="block antialiased font-sans text-base leading-relaxed text-inherit mb-8 font-normal !text-gray-500">
+            {description ?? ""}
+          </p>
+          <div>
+            <p className="block antialiased font-sans text-base font-light leading-relaxed text-blue-gray-900 mb-0.5 !font-semibold">
+              {`총 인원 : ${item.guestCount} 명`}
+            </p>
+            <p className="block antialiased font-sans text-base font-light leading-relaxed text-blue-gray-900 mb-0.5 !font-semibold">
+              {`가격 : ${getCommaNumber(item.totalPrice)} ￦`}
+            </p>
+          </div>
+          <div className="mt-4">
+            {item.beds.map((item, index) => {
+              return (
+                <p
+                  key={item.type}
+                  className="block antialiased font-sans text-sm leading-normal text-gray-700 font-normal"
+                >
+                  {`${item.type} 침대 ${item.count}개`}
+                </p>
+              );
+            })}
+          </div>
+        </div>
+
+        <button
+          type="submit"
+          className="text-white inline-flex items-center bg-[#d76076] font-medium rounded-lg text-sm px-5 py-2.5 text-center w-3/5 justify-center"
+          onClick={() => onItemClick(item)}
         >
-          {`${item.roomNumber}호`}
-        </a>
-        <p className="block antialiased font-sans text-base leading-relaxed text-inherit mb-8 font-normal !text-gray-500">
-          {description ?? ""}
-        </p>
-        <div>
-          <p className="block antialiased font-sans text-base font-light leading-relaxed text-blue-gray-900 mb-0.5 !font-semibold">
-            {`총 인원 : ${item.guestCount} 명`}
-          </p>
-          <p className="block antialiased font-sans text-base font-light leading-relaxed text-blue-gray-900 mb-0.5 !font-semibold">
-            {`가격 : ${getCommaNumber(item.totalPrice)} ￦`}
-          </p>
-        </div>
-        <div className="mt-4">
-          {item.beds.map((item, index) => {
-            return (
-              <p
-                key={item.type}
-                className="block antialiased font-sans text-sm leading-normal text-gray-700 font-normal"
-              >
-                {`${item.type} 침대 ${item.count}개`}
-              </p>
-            );
-          })}
-        </div>
+          예약 및 결제
+        </button>
       </div>
     </div>
   );

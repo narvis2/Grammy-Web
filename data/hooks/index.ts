@@ -4,11 +4,13 @@ import { HotelResponse } from "../model/hotel";
 import { getHotel } from "../api/service/hotel";
 import {
   getRoomAvailableReservationList,
+  getRoomDetails,
   getRoomTypeList,
 } from "../api/service/room";
 import {
   RoomAvailableReservationRequest,
   RoomAvailableReservationResponse,
+  RoomResponse,
   RoomTypeResponse,
 } from "../model/room";
 import { getBannerList } from "../api/service/banner";
@@ -19,6 +21,12 @@ import { BedType } from "../model/bed/enum";
 import { getBedTypeList } from "../api/service/bed";
 import { SignInRequest, SignInResponse } from "../model/sign/types";
 import { requestSignIn } from "../api/service/sign";
+import { ReservationCreateRequest } from "../model/reservation/types";
+import {
+  requestReservation,
+  requestReservationPrepare,
+} from "../api/service/reservation";
+import { PaymentRequest } from "../model/pay/types";
 
 export const useGetHotel = (customOptions?: T_Query<HotelResponse>) =>
   useQuery(["useGetHotel"], () => getHotel(), {
@@ -65,3 +73,24 @@ export const useBedTypeList = (customOptions?: T_Query<BedType[]>) =>
 export const useRequestSignIn = (
   customOption?: T_Mutation<SignInResponse, SignInRequest>
 ) => useMutation((params) => requestSignIn(params), customOption);
+
+export const useRequestReservationPrepare = (
+  customOption?: T_Mutation<number, ReservationCreateRequest>
+) => useMutation((params) => requestReservationPrepare(params), customOption);
+
+export const useRoomDetails = (
+  roomId: string,
+  customOptions?: T_Query<RoomResponse>
+) =>
+  useQuery(["useRoomDetails", roomId], () => getRoomDetails(roomId), {
+    notifyOnChangeProps: ["data", "error"], // 렌더링 반복의 주범. 나열된 속성 중 하나라도 변경되는 경우에만 구성 요소가 다시 렌더링
+    refetchOnMount: false, // 마운트 시 데이터가 오래된 경우 다시 가져옴
+    refetchOnWindowFocus: false, // 윈도우가 다시 포커스되었을 때 데이터를 호출할 것인지 여부
+    refetchIntervalInBackground: false, // 탭/창이 백그라운드에 있는 동안 가져오지 않게
+    refetchOnReconnect: false, // 다시 연결할 때 쿼리를 다시 가져오지 않음
+    ...customOptions,
+  });
+
+export const useRequestReservation = (
+  customOption?: T_Mutation<any, PaymentRequest>
+) => useMutation((params) => requestReservation(params), customOption);
