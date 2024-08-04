@@ -98,7 +98,7 @@ const Prologue = () => {
         </div>
       </div>
 
-      <section className="mt-4">
+      <section>
         <TabLayout
           title="PROLOGUE"
           tabList={tabList}
