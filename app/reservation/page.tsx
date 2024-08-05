@@ -1,7 +1,6 @@
 "use client";
 
 import { useCallback, useLayoutEffect, useMemo, useState } from "react";
-
 import Calendar from "react-calendar";
 import dayjs from "dayjs";
 import { useRoomAvailableReservationList } from "@/data/hooks";
@@ -18,6 +17,7 @@ import { RiCalendarCheckFill } from "react-icons/ri";
 import { useRouter } from "next/navigation";
 import { useAccessToken, useRefreshToken } from "@/data/store/useAuthStore";
 import { useSetReservationPrepare } from "@/data/store/useReservationStore";
+import { useShowCommonModal } from "@/data/store/useCommonModalStore";
 
 const Reservation = () => {
   const router = useRouter();
@@ -25,6 +25,7 @@ const Reservation = () => {
   const accessToken = useAccessToken();
   const refreshToken = useRefreshToken();
 
+  const showCommonModal = useShowCommonModal();
   const setReservationPrepare = useSetReservationPrepare();
 
   const [tabIndex, setTabIndex] = useState(0);
@@ -48,13 +49,21 @@ const Reservation = () => {
 
   const onReservationClick = useCallback(
     (item: RoomAvailableReservationResponse) => {
-      if (!accessToken || !refreshToken) {
-        router.push("/login");
+      if (!startValue || !isArray(startValue)) {
+        showCommonModal({
+          title: "알림",
+          contents: "체크인 및 체크아웃 날짜 범위를 선택해 주세요.",
+        });
         return;
       }
 
       const startDate = startValue[0] as Date;
       const endDate = startValue[1] as Date;
+
+      if (!accessToken || !refreshToken) {
+        router.push("/login");
+        return;
+      }
 
       setReservationPrepare({
         checkInDate: startDate,

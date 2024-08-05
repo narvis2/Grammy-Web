@@ -22,6 +22,7 @@ const nextConfig = {
   },
   trailingSlash: false,
   images:  {
+    domains: ["storage.googleapis.com", "*"],
     formats: ['image/avif', 'image/webp'],
   },
 };

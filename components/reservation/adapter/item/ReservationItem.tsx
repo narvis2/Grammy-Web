@@ -4,6 +4,7 @@ import {
   roomTypeSubDescriptions,
   staticImageUrl,
 } from "@/data/utils/constants";
+import Image from "next/image";
 import { useState } from "react";
 
 type ReservationItemProps = {
@@ -28,11 +29,15 @@ const ReservationItem = ({ item, onItemClick }: ReservationItemProps) => {
   return (
     <div className="relative flex-col bg-clip-border rounded-xl bg-transparent text-gray-700 shadow-none grid gap-2 item sm:grid-cols-2">
       <div className="relative bg-clip-border rounded-xl overflow-hidden bg-white text-gray-700 shadow-lg m-0">
-        <img
+        <Image
           src={imageList[currentImgIndex]}
-          loading={"lazy"}
           alt="Sustainable Practices for a Greener Future"
-          className="object-cover w-full h-full"
+          width={0}
+          height={0}
+          sizes="100vw"
+          style={{ objectFit: "cover" }}
+          className="w-full h-full"
+          loading="lazy"
         />
         <button
           type="button"
