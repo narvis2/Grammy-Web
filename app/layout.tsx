@@ -22,12 +22,11 @@ export default function RootLayout({
       <body className={inter.className}>
         <NextProviders>
           <NextLayout>
-            <>
-              {children}
-              {modal}
-            </>
+            {children}
+            {modal}
           </NextLayout>
         </NextProviders>
+        <div id="common"></div>
       </body>
     </html>
   );

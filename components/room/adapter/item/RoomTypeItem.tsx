@@ -4,6 +4,7 @@ import {
   roomTypeSubDescriptions,
   staticImageUrl,
 } from "@/data/utils/constants";
+import Image from "next/image";
 import { useState } from "react";
 
 type RoomTypeItemProps = {
@@ -28,11 +29,18 @@ const RoomTypeItem = ({ roomType }: RoomTypeItemProps) => {
   return (
     <div className="relative flex-col bg-clip-border rounded-xl bg-transparent text-gray-700 shadow-none grid gap-2 item sm:grid-cols-2">
       <div className="relative bg-clip-border rounded-xl overflow-hidden bg-white text-gray-700 shadow-lg m-0">
-        <img
-          src={`${imageList.length > 0 ? imageList[currentImgIndex] : ``}`}
-          alt="Sustainable Practices for a Greener Future"
-          className="object-cover w-full h-full"
-        />
+        {imageList.length > 0 && (
+          <Image
+            src={imageList[currentImgIndex]}
+            alt="Sustainable Practices for a Greener Future"
+            width={0}
+            height={0}
+            sizes="100vw"
+            style={{ objectFit: "cover" }}
+            className="w-full h-full"
+            loading="lazy"
+          />
+        )}
         <button
           type="button"
           className="absolute top-0 start-0 z-10 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"

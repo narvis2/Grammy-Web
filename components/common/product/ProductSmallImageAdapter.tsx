@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 type ProductSmallImageAdapterProps = {
   imgList: string[];
   onClickImage: (index: number) => void;
@@ -11,15 +13,21 @@ const ProductSmallImageAdapter = ({
     <div className="grid grid-cols-4 gap-4 mt-4">
       {imgList.map((item, index) => {
         return (
-          <img
+          <div
             key={item}
-            src={item}
-            alt={`product${index}`}
-            className={`w-full h-20 lg:h-24 object-cover cursor-pointer border rounded-[5px] ${
+            className={`relative w-full h-20 lg:h-24 cursor-pointer border rounded-[5px] ${
               index === 0 ? "border-primary" : ""
             }`}
             onClick={() => onClickImage(index)}
-          />
+          >
+            <Image
+              src={item}
+              alt={`product${index}`}
+              layout="fill"
+              objectFit="cover"
+              className="rounded-[5px]"
+            />
+          </div>
         );
       })}
     </div>
