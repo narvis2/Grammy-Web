@@ -1,6 +1,7 @@
 import {
   RoomAvailableReservationRequest,
   RoomAvailableReservationResponse,
+  RoomResponse,
   RoomTypeResponse,
 } from "@/data/model/room";
 import noneAuthInstance from "../../none/NoneAuthInstance";
@@ -39,6 +40,21 @@ export async function getRoomAvailableReservationList(
     .then((response) => response.data)
     .then((data) => {
       console.log(`⭐️ '${Grammy.AVAILABLE_RESERVATION} Response 👉`, data);
+      return data;
+    })
+    .catch(axiosErrorHandler());
+
+  return response;
+}
+
+export async function getRoomDetails(roomId: string) {
+  const url = `${Grammy.ROOM_DETAILS}/${roomId}`;
+
+  const response = await noneAuthInstance
+    .get<BaseResponse<RoomResponse>>(url)
+    .then((response) => response.data)
+    .then((data) => {
+      console.log(`⭐️ '${Grammy.ROOM_DETAILS} Response 👉`, data);
       return data;
     })
     .catch(axiosErrorHandler());

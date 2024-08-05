@@ -5,6 +5,7 @@ export const RoutePath = {
   SPECIAL_OFFERS: "/special_offers",
   RESERVATION: "/reservation",
   NOTICE: "/notice",
+  LOGIN: "/login",
   TEST: "/test",
 };
 
@@ -15,5 +16,6 @@ export const RouteName = {
   SPECIAL_OFFERS: "SPECIAL OFFERS",
   RESERVATION: "RESERVATION",
   NOTICE: "NOTICE",
+  LOGIN: "LOGIN",
   TEST: "TEST",
 };

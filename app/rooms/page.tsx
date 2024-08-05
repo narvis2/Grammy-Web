@@ -4,7 +4,6 @@ import ProductAdapter from "@/components/common/product/ProductAdapter";
 import TabLayout from "@/components/common/tab/TabLayout";
 import RoomTypeItem from "@/components/room/adapter/item/RoomTypeItem";
 import RoomImageAdapter from "@/components/room/adapter/RoomImageAdapter";
-import RoomTypeAdapter from "@/components/room/adapter/RoomTypeAdapter";
 import { useRoomTypeList } from "@/data/hooks";
 import { roomTypeToRoomTypeImageList } from "@/data/mapper/room";
 import { RoomTypeImageModel, RoomTypeResponse } from "@/data/model/room";
@@ -79,7 +78,7 @@ const Room = () => {
           {roomTypeList.length > 0 && (
             <div className="container grid grid-cols-1 gap-8  lg:grid-cols-2">
               {roomTypeList.map((item) => {
-                return <RoomTypeItem roomType={item} />;
+                return <RoomTypeItem key={item.roomTypeName} roomType={item} />;
               })}
             </div>
           )}

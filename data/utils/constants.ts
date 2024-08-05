@@ -1,6 +1,14 @@
-export const baseUrl = "api/v1";
+export const isDev = false;
 
-export const staticImageUrl = "https://storage.googleapis.com/grammy_static/";
+export const baseUrl = isDev
+  ? "http://localhost:8080/"
+  : "https://grammy-hotel-api-server.fly.dev/";
+
+export const endpoint = "api/v1";
+
+export const staticImageUrl = isDev
+  ? "http://localhost:8080/image/"
+  : "https://storage.googleapis.com/grammy_static/";
 
 export const roomTypeDescriptions = new Map([
   [

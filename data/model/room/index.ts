@@ -45,7 +45,7 @@ export type RoomAvailableReservationRequest = {
 };
 
 export type RoomAvailableReservationResponse = {
-  roomId: number;
+  id: number;
   roomType: string;
   roomNumber: number;
   totalPrice: number;

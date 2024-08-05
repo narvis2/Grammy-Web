@@ -1,8 +1,8 @@
-import { baseUrl } from "@/data/utils/constants";
+import { endpoint } from "@/data/utils/constants";
 import axios, { AxiosRequestConfig } from "axios";
 
 const noneAuthInstance = axios.create({
-  baseURL: baseUrl,
+  baseURL: endpoint,
   withCredentials: true,
 });
 

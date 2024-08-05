@@ -1,6 +1,11 @@
+import { CheckDateInfoModel } from "@/data/model/reservation/types";
 import { RoomTypeResponse } from "@/data/model/room";
 import { staticImageUrl } from "@/data/utils/constants";
+
 import dayjs from "dayjs";
+import "dayjs/locale/ko";
+
+dayjs.locale("ko");
 
 export const roomTypeToRoomTypeImageList = (
   roomTypeList: RoomTypeResponse[]
@@ -55,4 +60,20 @@ export const formatStayPeriod = (values: any): string => {
   )}`;
 
   return `${nights}박 ${nights + 1}일 (${periodString})`;
+};
+
+export const formatCheckInCheckOut = (
+  checkInDate: Date,
+  checkOutDate: Date
+): CheckDateInfoModel => {
+  const checkIn = dayjs(checkInDate);
+  const checkOut = dayjs(checkOutDate);
+
+  const checkInString = checkIn.format("YYYY.MM.DD (ddd) 15:00");
+  const checkOutString = checkOut.format("YYYY.MM.DD (ddd) 11:00");
+
+  return <CheckDateInfoModel>{
+    checkIn: checkInString,
+    checkOut: checkOutString,
+  };
 };
