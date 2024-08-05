@@ -97,8 +97,7 @@ const ReservationPrepareModal = ({ roomId }: ReservationPrepareModalProps) => {
       return;
     }
     const request: ReservationCreateRequest = {
-      // amount: prepare.totalPrice,
-      amount: 1,
+      amount: prepare.totalPrice,
       checkDate: {
         checkInDateTime: dayjs(prepareInfo.checkInDate).format("YYYY-MM-DD"),
         duration: calculateDateDifference(
