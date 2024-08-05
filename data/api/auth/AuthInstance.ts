@@ -1,11 +1,11 @@
 import { BaseResponse } from "@/data/model/base";
 import { RefreshTokenResponse } from "@/data/model/sign/types";
 import { useAuthStore } from "@/data/store/useAuthStore";
-import { baseUrl } from "@/data/utils/constants";
+import { baseUrl, endpoint } from "@/data/utils/constants";
 import axios, { AxiosError, AxiosRequestConfig } from "axios";
 
 const authInstance = axios.create({
-  baseURL: "http://localhost:8080/api/v1",
+  baseURL: `${baseUrl}${endpoint}`,
   withCredentials: true,
 });
 

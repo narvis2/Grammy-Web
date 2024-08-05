@@ -14,6 +14,7 @@ import LoginHeader from "./header/LoginHeader";
 import { useAuthModelState } from "@/data/store/useAuthStore";
 import toast from "react-hot-toast";
 import SocialLoginButton from "./button/SocialLoginButton";
+import { baseUrl } from "@/data/utils/constants";
 
 const LoginScreen = () => {
   const router = useRouter();
@@ -72,13 +73,11 @@ const LoginScreen = () => {
     await requestSignIn({ email: email, password: pw });
   };
 
-  const onGoogleLogin = () => {
+  const onSNSLogin = (type: "NAVER" | "GOOGLE") => {
     window.location.href =
-      "http://localhost:8080/oauth2/authorization/google?scope=https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile";
-  };
-
-  const onNaverLogin = () => {
-    window.location.href = "http://localhost:8080/oauth2/authorization/naver";
+      type === "GOOGLE"
+        ? `${baseUrl}oauth2/authorization/google?scope=https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile`
+        : `${baseUrl}oauth2/authorization/naver`;
   };
 
   const isValidate = useMemo(() => {
@@ -198,9 +197,12 @@ const LoginScreen = () => {
 
           <SocialLoginButton
             type="GOOGLE"
-            onLoginClick={() => onGoogleLogin()}
+            onLoginClick={(type) => onSNSLogin(type)}
           />
-          <SocialLoginButton type="NAVER" onLoginClick={() => onNaverLogin()} />
+          <SocialLoginButton
+            type="NAVER"
+            onLoginClick={(type) => onSNSLogin(type)}
+          />
         </div>
       </div>
     </div>

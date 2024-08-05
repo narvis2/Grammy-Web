@@ -3,7 +3,7 @@ import { SiNaver } from "react-icons/si";
 
 type SocialLoginButtonProps = {
   type: "NAVER" | "GOOGLE";
-  onLoginClick: () => void;
+  onLoginClick: (type: "NAVER" | "GOOGLE") => void;
 };
 
 const SocialLoginButton = ({ type, onLoginClick }: SocialLoginButtonProps) => {
@@ -89,7 +89,7 @@ const SocialLoginButton = ({ type, onLoginClick }: SocialLoginButtonProps) => {
         } border border-gray-300 rounded-lg shadow-md px-6 py-2 text-sm font-medium ${
           isGoogle ? "text-gray-800" : "text-white"
         } focus:outline-none focus:ring-2 focus:ring-offset-2`}
-        onClick={() => onLoginClick()}
+        onClick={() => onLoginClick(type)}
       >
         <Icon />
       </button>
