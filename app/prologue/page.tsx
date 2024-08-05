@@ -1,12 +1,49 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import TabLayout from "@/components/common/tab/TabLayout";
+import WayToComeContainer from "@/components/home/way/WayToComeContainer";
+import useHotelInfo from "@/data/hooks/hotel/useHotelInfo";
+import React, { useState, useEffect, useMemo } from "react";
+import { usePrologueStore } from "@/data/store/usePrologueStore";
+import { PROLOGUE_TYPE } from "@/data/model/prologue/enum";
+import Image from "next/image";
+import Introduction from "@/components/prologue/Introduction";
+import TableView from "@/components/prologue/TableView";
 
-const images = ["/images/room1.jpg", "/images/room2.jpg", "/images/room3.jpg"];
+const images = [
+  { src: "/images/room1.jpg" },
+  { src: "/images/room2.jpg" },
+  { src: "/images/room3.jpg" },
+];
 
-const Home = () => {
+const Prologue = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [showText, setShowText] = useState(false);
+
+  const { prologues } = usePrologueStore();
+
+  const [selectedPrologue, setSelectedPrologue] = useState<PROLOGUE_TYPE>(
+    PROLOGUE_TYPE.INTRODUCTION
+  );
+
+  const tabList = useMemo(() => {
+    return prologues.map((item) => item.type);
+  }, [prologues]);
+
+  const handleSlideButtonClick = (index: number) => {
+    setCurrentImageIndex(index);
+    setShowText(true);
+  };
+
+  const handleTabClick = (prologueType: PROLOGUE_TYPE) => {
+    setShowText(false);
+    setTimeout(() => {
+      setSelectedPrologue(prologueType);
+      setShowText(true);
+    }, 200);
+  };
+
+  const { hotelInfo } = useHotelInfo();
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -23,17 +60,14 @@ const Home = () => {
     return () => clearTimeout(textTimer);
   }, []);
 
-  const handleSlideButtonClick = (index: number) => {
-    setCurrentImageIndex(index);
-    setShowText(true);
-  };
-
   return (
     <div className="relative">
       <div className="slideshow-container relative">
-        <img
-          src={images[currentImageIndex]}
+        <Image
+          src={images[currentImageIndex].src}
           alt="Slideshow"
+          width={600}
+          height={600}
           className="slideshow-image w-full object-cover"
         />
         <div
@@ -64,98 +98,26 @@ const Home = () => {
         </div>
       </div>
 
-      <section className="mt-8">
-        <div className="inner-con inner-1760 flex items-center justify-between">
-          <div className="tap-menu view-tap flex items-center">
-            <a href="/prologue" className="hover:text-blue-700 mr-4">
-              PROLOGUE
-            </a>
-            <ul className="flex items-center space-x-4">
-              <li className="current">
-                <a href="" className="text-rose-500 hover:text-blue-700">
-                  호텔
-                </a>
-              </li>
-              <li>
-                <a href="" className="hover:text-blue-700">
-                  오시는길
-                </a>
-              </li>
-            </ul>
-          </div>
-          <h5 className="tit">호텔</h5>
-        </div>
-
-        <p className="text-center text-xl mt-4">
-          그라미 호텔에 오신 것을 환영합니다
-        </p>
-        <p className="text-center text-sm">GRAMMY HOTEL</p>
-
-        <div className="flex justify-center mt-8">
-          <img
-            src="/images/room1.jpg"
-            alt="Room 1"
-            className="object-cover h-96"
-          />
-        </div>
-        <p className="text-center text-lg mt-4">
-          포항을 한 몸에 느낄 수 있는 최적의 장소입니다.
-          <br />
-          <br />
-          포항을 방문 혹은 여행을 하면서 쌓인 피로를 그라미 호텔에서
-          <br />
-          편안하게 재충전하면 거닐었던 포항의 풍경을 다시 떠올려 보세요.
-          <br />
-          <br />
-          둘러보고 싶은 모든 장소가 바로 근처에 있는
-          <br />
-          마음을 편히 해주는 숙소에 머물러 보세요.
-          <br />
-          <br />
-        </p>
-
-        <p className="text-center text-lg">
-          또한 '그라미 호텔'은
-          <br />
-          포항 관광에 최적화된 장소로 인근 관광하기에 접근 및 교통이 편리합니다.
-        </p>
-      </section>
       <section>
-        <p className="text-center text-8xl mt-4 font-serif">
-          Pohang Tour and Perfect Rest
-        </p>
+        <TabLayout
+          title="PROLOGUE"
+          tabList={tabList}
+          currentTab={selectedPrologue}
+          onTabClick={(type) => {
+            handleTabClick(type as PROLOGUE_TYPE);
+          }}
+        />
 
-        <div className="flex justify-center space-x-4 mt-14">
-          <div className="flex flex-col items-center">
-            <img
-              src="/images/room1.jpg"
-              alt="Room 1"
-              className="object-cover h-80"
-            />
-            <p className="text-sm mt-2">테스트1</p>
-          </div>
-
-          <div className="flex flex-col items-center">
-            <img
-              src="/images/room1.jpg"
-              alt="Room 1"
-              className="object-cover h-80"
-            />
-            <p className="text-sm mt-2">테스트2</p>
-          </div>
-
-          <div className="flex flex-col items-center">
-            <img
-              src="/images/room1.jpg"
-              alt="Room 1"
-              className="object-cover h-80"
-            />
-            <p className="text-sm mt-2">테스트3</p>
-          </div>
+        <div className="mt-8">
+          {selectedPrologue === PROLOGUE_TYPE.INTRODUCTION && <Introduction />}
+          {selectedPrologue === PROLOGUE_TYPE.TABLE_VIEW && <TableView />}
+          {selectedPrologue === PROLOGUE_TYPE.HOW_TO_COME && (
+            <WayToComeContainer hotelInfo={hotelInfo} />
+          )}
         </div>
       </section>
     </div>
   );
 };
 
-export default Home;
+export default Prologue;
