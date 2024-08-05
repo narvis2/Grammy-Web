@@ -3,8 +3,7 @@
 import TabLayout from "@/components/common/tab/TabLayout";
 import WayToComeContainer from "@/components/home/way/WayToComeContainer";
 import useHotelInfo from "@/data/hooks/hotel/useHotelInfo";
-import React, { useState, useEffect, useMemo } from "react";
-import { usePrologueStore } from "@/data/store/usePrologueStore";
+import React, { useState, useEffect } from "react";
 import { PROLOGUE_TYPE } from "@/data/model/prologue/enum";
 import Image from "next/image";
 import Introduction from "@/components/prologue/Introduction";
@@ -16,19 +15,19 @@ const images = [
   { src: "/images/room3.jpg" },
 ];
 
+const tabList = [
+  PROLOGUE_TYPE.INTRODUCTION,
+  PROLOGUE_TYPE.TABLE_VIEW,
+  PROLOGUE_TYPE.HOW_TO_COME,
+];
+
 const Prologue = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [showText, setShowText] = useState(false);
 
-  const { prologues } = usePrologueStore();
-
   const [selectedPrologue, setSelectedPrologue] = useState<PROLOGUE_TYPE>(
     PROLOGUE_TYPE.INTRODUCTION
   );
-
-  const tabList = useMemo(() => {
-    return prologues.map((item) => item.type);
-  }, [prologues]);
 
   const handleSlideButtonClick = (index: number) => {
     setCurrentImageIndex(index);
