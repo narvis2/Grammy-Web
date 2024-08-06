@@ -1,7 +1,6 @@
 "use client";
 
 import useHotelInfo from "@/data/hooks/hotel/useHotelInfo";
-import useMap from "@/data/hooks/map/useMap";
 import { BaseResponse } from "@/data/model/base";
 import { CarouselImageModel } from "@/data/model/image/types";
 import { RoomTypeResponse } from "@/data/model/room";
@@ -38,7 +37,6 @@ const HomeScreen = ({
   const [showText, setShowText] = useState(false);
 
   const { hotelInfo } = useHotelInfo();
-  const naverMap = useMap(hotelInfo);
   const { offers } = useOfferStore();
 
   const roomType = queryClient.getQueryData(["useRoomTypeList"]) as
