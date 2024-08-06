@@ -2,6 +2,7 @@
 import EmptyAdapter from "@/components/empty/EmptyAdapter";
 import NoticeAdapter from "@/components/notice/NoticeAdapter";
 import { useNoticeList } from "@/data/hooks";
+import { RoutePath } from "@/data/model/menu/enum";
 import { useRouter } from "next/navigation";
 import { useMemo } from "react";
 
@@ -20,6 +21,10 @@ const Notice = () => {
     return [];
   }, [notice]);
 
+  const onNavigateNoticeDetails = (noticeId: number) => {
+    router.push(`${RoutePath.NOTICE}/${noticeId}`);
+  };
+
   return (
     <section className="py-20 mt-10">
       <div className={`${noticeList.length > 0 ? `mb-14` : `mb-0`}`}>
@@ -31,7 +36,10 @@ const Notice = () => {
       </div>
 
       {noticeList.length > 0 ? (
-        <NoticeAdapter noticeList={noticeList} />
+        <NoticeAdapter
+          noticeList={noticeList}
+          onItemClick={(notice) => onNavigateNoticeDetails(notice.id)}
+        />
       ) : (
         <EmptyAdapter
           message="등록된 공지사항이 없습니다."

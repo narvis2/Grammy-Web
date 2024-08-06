@@ -16,7 +16,7 @@ import {
 import { getBannerList } from "../api/service/banner";
 import { BannerResponse } from "../model/banner/types";
 import { NoticeResponse } from "../model/notice/types";
-import { getNoticeList } from "../api/service/notice";
+import { getNoticeDetail, getNoticeList } from "../api/service/notice";
 import { BedType } from "../model/bed/enum";
 import { getBedTypeList } from "../api/service/bed";
 import { SignInRequest, SignInResponse } from "../model/sign/types";
@@ -54,7 +54,28 @@ export const useBannerList = (customOptions?: T_Query<BannerResponse[]>) =>
   useQuery(["useBannerList"], () => getBannerList(), customOptions);
 
 export const useNoticeList = (customOptions?: T_Query<NoticeResponse[]>) =>
-  useQuery(["useNoticeList"], () => getNoticeList(), customOptions);
+  useQuery(["useNoticeList"], () => getNoticeList(), {
+    notifyOnChangeProps: ["data", "error"], // 렌더링 반복의 주범. 나열된 속성 중 하나라도 변경되는 경우에만 구성 요소가 다시 렌더링
+    refetchOnMount: false, // 마운트 시 데이터가 오래된 경우 다시 가져옴
+    refetchOnWindowFocus: false, // 윈도우가 다시 포커스되었을 때 데이터를 호출할 것인지 여부
+    refetchIntervalInBackground: false, // 탭/창이 백그라운드에 있는 동안 가져오지 않게
+    refetchOnReconnect: false, // 다시 연결할 때 쿼리를 다시 가져오지 않음
+    keepPreviousData: true, // 쿼리 키(ex.페이지 번호)가 변경되어서 새로운 데이터를 요청하는 동안에도 마지막 data값을 유지
+    ...customOptions,
+  });
+
+export const useNoticeDetails = (
+  noticeId: string,
+  customOptions?: T_Query<NoticeResponse>
+) =>
+  useQuery(["useNoticeDetails", noticeId], () => getNoticeDetail(noticeId), {
+    notifyOnChangeProps: ["data", "error"], // 렌더링 반복의 주범. 나열된 속성 중 하나라도 변경되는 경우에만 구성 요소가 다시 렌더링
+    refetchOnMount: false, // 마운트 시 데이터가 오래된 경우 다시 가져옴
+    refetchOnWindowFocus: false, // 윈도우가 다시 포커스되었을 때 데이터를 호출할 것인지 여부
+    refetchIntervalInBackground: false, // 탭/창이 백그라운드에 있는 동안 가져오지 않게
+    refetchOnReconnect: false, // 다시 연결할 때 쿼리를 다시 가져오지 않음
+    ...customOptions,
+  });
 
 export const useRoomAvailableReservationList = (
   customOption?: T_Mutation<

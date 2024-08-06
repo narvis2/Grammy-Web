@@ -15,3 +15,18 @@ export async function getNoticeList() {
 
   return response;
 }
+
+export async function getNoticeDetail(noticeId: string) {
+  const url = `${Grammy.NOTICE_DETAILS}/${noticeId}`;
+
+  const response = await noneAuthInstance
+    .get<BaseResponse<NoticeResponse>>(url)
+    .then((response) => response.data)
+    .then((data) => {
+      console.log(`⭐️ '${Grammy.NOTICE_DETAILS} Response 👉`, data);
+      return data;
+    })
+    .catch(axiosErrorHandler());
+
+  return response;
+}
