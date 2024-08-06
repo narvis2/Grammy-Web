@@ -38,7 +38,7 @@ const RoomTypeItem = ({ roomType }: RoomTypeItemProps) => {
             sizes="100vw"
             style={{ objectFit: "cover" }}
             className="w-full h-full"
-            loading="lazy"
+            priority
           />
         )}
         <button

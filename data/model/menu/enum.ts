@@ -6,7 +6,6 @@ export const RoutePath = {
   RESERVATION: "/reservation",
   NOTICE: "/notice",
   LOGIN: "/login",
-  TEST: "/test",
 };
 
 export const RouteName = {
@@ -17,5 +16,4 @@ export const RouteName = {
   RESERVATION: "RESERVATION",
   NOTICE: "NOTICE",
   LOGIN: "LOGIN",
-  TEST: "TEST",
 };

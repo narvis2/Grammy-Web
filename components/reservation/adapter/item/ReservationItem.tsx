@@ -37,7 +37,7 @@ const ReservationItem = ({ item, onItemClick }: ReservationItemProps) => {
           sizes="100vw"
           style={{ objectFit: "cover" }}
           className="w-full h-full"
-          loading="lazy"
+          priority
         />
         <button
           type="button"

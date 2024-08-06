@@ -4,6 +4,7 @@ export const Grammy = {
   ROOM_DETAILS: "/room",
   BANNER: "/banner/hotel/1",
   NOTICE: "/notice/hotel/1",
+  NOTICE_DETAILS: "/notice",
   AVAILABLE_RESERVATION: "/room/reservations",
   BED: "/bed",
   SIGN_IN: "/sign/sign-in",
