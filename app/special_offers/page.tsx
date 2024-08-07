@@ -11,6 +11,7 @@ import OfferServiceAdapter from "@/components/offers/adapter/OfferServiceAdapter
 import { useOfferStore } from "@/data/store/useOfferStore";
 import { useSearchParams } from "next/navigation";
 import TabLayout from "@/components/common/tab/TabLayout";
+import { RoutePath } from "@/data/model/menu/enum";
 
 const images = [
   { src: "/images/room1.jpg" },
@@ -134,6 +135,7 @@ const SpecialOffers = () => {
       <section className="mt-4">
         <TabLayout
           title="SPECIAL OFFERS"
+          href={RoutePath.SPECIAL_OFFERS}
           tabList={tabList}
           currentTab={selectedOffer}
           onTabClick={(type) => {

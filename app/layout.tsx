@@ -12,15 +12,22 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
+  modal,
 }: {
   children: React.ReactNode;
+  modal: React.ReactNode;
 }) {
   return (
     <html lang="ko">
       <body className={inter.className}>
         <NextProviders>
-          <NextLayout>{children}</NextLayout>
+          <NextLayout>
+            {children}
+            {modal}
+          </NextLayout>
         </NextProviders>
+        <div id="common"></div>
+        <div id="loading"></div>
       </body>
     </html>
   );

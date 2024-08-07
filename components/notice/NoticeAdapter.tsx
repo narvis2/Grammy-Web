@@ -3,9 +3,10 @@ import NoticeItem from "./NoticeItem";
 
 type NoticeAdapterProps = {
   noticeList: NoticeResponse[];
+  onItemClick: (notice: NoticeResponse) => void;
 };
 
-const NoticeAdapter = ({ noticeList }: NoticeAdapterProps) => {
+const NoticeAdapter = ({ noticeList, onItemClick }: NoticeAdapterProps) => {
   return (
     <div id="board-list">
       <div className="container mx-auto">
@@ -20,7 +21,11 @@ const NoticeAdapter = ({ noticeList }: NoticeAdapterProps) => {
           <tbody>
             {noticeList.map((item) => {
               return (
-                <NoticeItem key={item.noticeId.toString()} notice={item} />
+                <NoticeItem
+                  key={item.id.toString()}
+                  notice={item}
+                  onItemClick={onItemClick}
+                />
               );
             })}
           </tbody>

@@ -60,7 +60,10 @@ const ProductAdapter = ({ roomTypeInfo }: ProductAdapterProps) => {
                 <ConvenienceItem title="테라스" />
               ))}
             {roomTypeInfo.rooms[0].beds.map((item) => (
-              <ConvenienceItem title={`${item.type} 침대 ${item.count}개`} />
+              <ConvenienceItem
+                key={item.type}
+                title={`${item.type} 침대 ${item.count}개`}
+              />
             ))}
           </div>
 

@@ -1,7 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
-
+import { useCallback, useLayoutEffect, useMemo, useState } from "react";
 import Calendar from "react-calendar";
 import dayjs from "dayjs";
 import { useRoomAvailableReservationList } from "@/data/hooks";
@@ -15,8 +14,20 @@ import {
   getCalendarMaxYear,
 } from "@/data/mapper/room";
 import { RiCalendarCheckFill } from "react-icons/ri";
+import { useRouter } from "next/navigation";
+import { useAccessToken, useRefreshToken } from "@/data/store/useAuthStore";
+import { useSetReservationPrepare } from "@/data/store/useReservationStore";
+import { useShowCommonModal } from "@/data/store/useCommonModalStore";
 
 const Reservation = () => {
+  const router = useRouter();
+
+  const accessToken = useAccessToken();
+  const refreshToken = useRefreshToken();
+
+  const showCommonModal = useShowCommonModal();
+  const setReservationPrepare = useSetReservationPrepare();
+
   const [tabIndex, setTabIndex] = useState(0);
   const [startValue, onStartChange] = useState<any>(null);
 
@@ -36,6 +47,35 @@ const Reservation = () => {
       onError(error, variables, context) {},
     });
 
+  const onReservationClick = useCallback(
+    (item: RoomAvailableReservationResponse) => {
+      if (!startValue || !isArray(startValue)) {
+        showCommonModal({
+          title: "알림",
+          contents: "체크인 및 체크아웃 날짜 범위를 선택해 주세요.",
+        });
+        return;
+      }
+
+      const startDate = startValue[0] as Date;
+      const endDate = startValue[1] as Date;
+
+      if (!accessToken || !refreshToken) {
+        router.push("/login");
+        return;
+      }
+
+      setReservationPrepare({
+        checkInDate: startDate,
+        checkOutDate: endDate,
+        totalPrice: item.totalPrice,
+        guestNumber: item.guestCount,
+      });
+      router.push(`/reservation/${item.id}`);
+    },
+    [accessToken, refreshToken, router, startValue]
+  );
+
   const resultList = useMemo(() => {
     if (reservationList.length === 0 || roomTypeList.length === 0) return [];
 
@@ -44,10 +84,13 @@ const Reservation = () => {
     );
   }, [reservationList, tabIndex, roomTypeList]);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
+    const now = new Date();
+    onStartChange([now, dayjs(now).add(1, "day").toDate()]);
+
     requestReservationList(
       {
-        checkInDateTime: dayjs(new Date()).format("YYYY-MM-DD"),
+        checkInDateTime: dayjs(now).format("YYYY-MM-DD"),
         duration: 1,
       },
       {
@@ -131,7 +174,12 @@ const Reservation = () => {
           {formatStayPeriod(startValue)}
         </div>
       )}
-      <ReservationAdapter reservationList={resultList} />
+      <ReservationAdapter
+        reservationList={resultList}
+        onReservationClick={(item) => {
+          onReservationClick(item);
+        }}
+      />
     </div>
   );
 };

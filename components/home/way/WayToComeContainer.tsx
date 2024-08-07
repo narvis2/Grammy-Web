@@ -1,12 +1,15 @@
 import { getFullAddress, phoneFormatter } from "@/data/mapper";
 import { HotelResponse } from "@/data/model/hotel";
 import WayToComeHeader from "./WayToComeHeader";
+import useMap from "@/data/hooks/map/useMap";
 
 type WayToComeContainerProps = {
   hotelInfo?: HotelResponse;
 };
 
 const WayToComeContainer = ({ hotelInfo }: WayToComeContainerProps) => {
+  const naverMap = useMap(hotelInfo);
+
   return (
     <section
       className={`pt-12 pb-20 px-10 bg-[#FcFcFc] flex flex-col justify-center items-center`}
