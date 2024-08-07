@@ -27,6 +27,7 @@ export default function RootLayout({
           </NextLayout>
         </NextProviders>
         <div id="common"></div>
+        <div id="loading"></div>
       </body>
     </html>
   );

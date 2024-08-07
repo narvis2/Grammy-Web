@@ -2,11 +2,13 @@ type TabLayoutProps = {
   title: string;
   tabList: string[];
   currentTab: string;
+  href?: string;
   onTabClick: (type: string) => void;
 };
 
 const TabLayout = ({
   title,
+  href,
   tabList,
   currentTab,
   onTabClick,
@@ -14,7 +16,7 @@ const TabLayout = ({
   return (
     <div className="flex flex-col lg:flex-row justify-center lg:justify-start items-center lg:pl-20 border-b border-gray-200">
       <a
-        href="sub2_room1.html?menu=2&amp;sub=1"
+        href={href}
         className="mr-0 lg:mr-8 sm:border-r sm:pr-8 sm:border-gray-200"
       >
         {title}

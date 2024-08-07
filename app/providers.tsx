@@ -8,6 +8,7 @@ import { useGetHotel, useRoomTypeList } from "@/data/hooks";
 import Script from "next/script";
 import { Toaster } from "react-hot-toast";
 import CommonModal from "@/components/common/modal/CommonModal";
+import LoadingModal from "@/components/common/modal/LoadingModal";
 
 interface Props {
   children?: React.ReactNode;
@@ -40,6 +41,7 @@ export const NextLayout = ({ children }: Props) => {
       <Script src="https://cdn.iamport.kr/v1/iamport.js" />
       <Toaster position={"top-center"} />
       <CommonModal />
+      <LoadingModal />
     </>
   );
 };
