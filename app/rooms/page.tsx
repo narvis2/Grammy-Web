@@ -6,6 +6,7 @@ import RoomTypeItem from "@/components/room/adapter/item/RoomTypeItem";
 import RoomImageAdapter from "@/components/room/adapter/RoomImageAdapter";
 import { useRoomTypeList } from "@/data/hooks";
 import { roomTypeToRoomTypeImageList } from "@/data/mapper/room";
+import { RoutePath } from "@/data/model/menu/enum";
 import { RoomTypeImageModel, RoomTypeResponse } from "@/data/model/room";
 import { useSearchParams } from "next/navigation";
 import React, { useState, useMemo, useEffect } from "react";
@@ -56,6 +57,7 @@ const Room = () => {
         <section className="mt-4">
           <TabLayout
             title="객실 유형"
+            href={RoutePath.ROOMS}
             currentTab={currentTab}
             tabList={tabList}
             onTabClick={(type) => {
