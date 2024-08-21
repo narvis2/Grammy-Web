@@ -8,6 +8,7 @@ import { PROLOGUE_TYPE } from "@/data/model/prologue/enum";
 import Image from "next/image";
 import Introduction from "@/components/prologue/Introduction";
 import TableView from "@/components/prologue/TableView";
+import OtherInfo from "@/components/prologue/OtherInfo";
 
 const images = [
   { src: "/images/room1.jpg" },
@@ -19,6 +20,7 @@ const tabList = [
   PROLOGUE_TYPE.INTRODUCTION,
   PROLOGUE_TYPE.TABLE_VIEW,
   PROLOGUE_TYPE.HOW_TO_COME,
+  PROLOGUE_TYPE.OTHER_INFO,
 ];
 
 const Prologue = () => {
@@ -113,6 +115,7 @@ const Prologue = () => {
           {selectedPrologue === PROLOGUE_TYPE.HOW_TO_COME && (
             <WayToComeContainer hotelInfo={hotelInfo} />
           )}
+          {selectedPrologue === PROLOGUE_TYPE.OTHER_INFO && <OtherInfo />}
         </div>
       </section>
     </div>
