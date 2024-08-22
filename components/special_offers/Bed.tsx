@@ -20,7 +20,7 @@ const Bed = () => {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="w-full">
               <Image
-                src="/images/bed1.jpeg"
+                src="/images/bed1.jpg"
                 alt="bed1"
                 width={500}
                 height={500}
@@ -29,7 +29,7 @@ const Bed = () => {
             </div>
             <div className="w-full">
               <Image
-                src="/images/bed2.jpeg"
+                src="/images/bed2.jpg"
                 alt="bed2"
                 width={500}
                 height={500}
@@ -38,7 +38,7 @@ const Bed = () => {
             </div>
             <div className="w-full">
               <Image
-                src="/images/bed3.jpeg"
+                src="/images/bed3.jpg"
                 alt="bed3"
                 width={500}
                 height={500}
