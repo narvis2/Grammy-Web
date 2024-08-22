@@ -92,7 +92,7 @@ const Introduction = () => {
   return (
     <div>
       <Plx parallaxData={parallaxData.fadeIn}>
-        <section className="h-[300px] flex justify-center items-center bg-cover bg-center relative bg-[url('/images/room1.jpg')]">
+        <section className="h-[300px] flex justify-center items-center bg-cover bg-center relative bg-[url('/images/Introduction1.jpg')]">
           <div className="bg-black bg-opacity-60 p-5 rounded-lg max-w-[90%] text-center">
             <h2 className="text-white font-bold text-shadow-md mb-5 text-[clamp(1.5rem,4vw,2.5rem)]">
               자연이 선사하는 아름다운 풍경
@@ -113,7 +113,7 @@ const Introduction = () => {
           <Plx parallaxData={parallaxData.fadeIn}>
             <div className="p-5 border border-gray-300 rounded-lg shadow-md min-h-[400px] max-h-[600px]">
               <Image
-                src="/images/room1.jpg"
+                src="/images/mountain.jpg"
                 alt="Mountain View"
                 layout="responsive"
                 width={600}
@@ -145,7 +145,7 @@ const Introduction = () => {
           <Plx parallaxData={parallaxData.fadeIn}>
             <div className="p-5 border border-gray-300 rounded-lg shadow-md min-h-[400px] max-h-[600px]">
               <Image
-                src="/images/room2.jpg"
+                src="/images/ocean.jpg"
                 alt="Ocean View"
                 layout="responsive"
                 width={600}
@@ -178,13 +178,13 @@ const Introduction = () => {
       </section>
 
       <Plx parallaxData={parallaxData.fadeIn}>
-        <section className="mt-10 h-[300px] flex justify-center items-center bg-cover bg-center relative bg-[url('/images/room1.jpg')]">
+        <section className="mt-10 h-[300px] flex justify-center items-center bg-cover bg-center relative bg-[url('/images/Introduction2.jpg')]">
           <div className="bg-black bg-opacity-60 p-5 rounded-lg max-w-[80%] text-center">
             <h2 className="text-white font-bold text-shadow-md mb-5 text-[clamp(1.5rem,4vw,2.5rem)]">
               다양한 객실 시설
             </h2>
             <p className="text-white text-[clamp(1rem,2.5vw,1.5rem)]">
-              총 44개의 객실을 6가지 유형으로 나뉘어, 객실마다 차별화된 시설을
+              총 43개의 객실을 6가지 유형으로 나뉘어, 객실마다 차별화된 시설을
               배치하여 여행자님의 취향과 일행의 수에 맞추어
               <br /> 아름다운 전망과 편안하고 독특한 시설을 부담 없는 가격으로
               누리실 수 있습니다.
@@ -198,7 +198,7 @@ const Introduction = () => {
           <Plx parallaxData={parallaxData.fadeIn}>
             <div className="p-5 border border-gray-300 rounded-lg shadow-md min-h-[400px] max-h-[600px]">
               <Image
-                src="/images/room1.jpg"
+                src="/images/terrace.jpg"
                 alt="Terrace"
                 layout="responsive"
                 width={600}
@@ -230,7 +230,7 @@ const Introduction = () => {
           <Plx parallaxData={parallaxData.fadeIn}>
             <div className="p-5 border border-gray-300 rounded-lg shadow-md min-h-[400px] max-h-[600px]">
               <Image
-                src="/images/room2.jpg"
+                src="/images/oceanbath.jpg"
                 alt="Ocean Bathtub"
                 layout="responsive"
                 width={600}
@@ -262,21 +262,21 @@ const Introduction = () => {
           <Plx parallaxData={parallaxData.fadeIn}>
             <div className="p-5 border border-gray-300 rounded-lg shadow-md min-h-[400px] max-h-[600px]">
               <Image
-                src="/images/room3.jpg"
+                src="/images/inview.jpg"
                 alt="Separate View Space"
                 layout="responsive"
                 width={600}
                 height={400}
                 className="rounded-lg shadow-sm"
               />
-              <h3 className="mt-2 text-center text-xl">계단형 전망 공간</h3>
+              <h3 className="mt-2 text-center text-xl">실내 전망 공간</h3>
               <p
                 ref={refs.separateViewSpace}
                 className={`text-base leading-relaxed overflow-hidden transition-max-height duration-500 ${
                   expanded.separateViewSpace ? "max-h-full" : "max-h-[4.5em]"
                 }`}
               >
-                수면공간과 별도로 구분지어 오로지 바다를 구경하기 위하 바다의
+                수면공간과 별도로 구분지어 오로지 바다를 구경하기 위한 바다의
                 경치를 더욱 넓고 편안하게 감상할 수 있는 독립적인 공간입니다.
                 개별 테라스와 다르게 조용하고 아늑하게 바다의 아름다운 풍경을
                 만끽할 수 있습니다.
@@ -295,7 +295,7 @@ const Introduction = () => {
       </section>
 
       <Plx parallaxData={parallaxData.fadeIn}>
-        <section className="mt-10 h-[300px] flex justify-center items-center bg-cover bg-center relative bg-[url('/images/room1.jpg')]">
+        <section className="mt-10 h-[300px] flex justify-center items-center bg-cover bg-center relative bg-[url('/images/Introduction3.jpg')]">
           <div className="bg-black bg-opacity-60 p-5 rounded-lg max-w-[80%] text-center">
             <p className="text-white text-[clamp(1rem,2.5vw,1.5rem)]">
               저희 호텔을 찾아주셔서 감사합니다. <br /> 저희 호텔에서의 휴식이
