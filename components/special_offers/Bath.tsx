@@ -17,7 +17,7 @@ const Bath = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               <div className="flex justify-center">
                 <Image
-                  src="/images/bath1.jpeg"
+                  src="/images/bath1.jpg"
                   alt="욕조 이미지 1"
                   width={400}
                   height={300}
@@ -26,7 +26,7 @@ const Bath = () => {
               </div>
               <div className="flex justify-center">
                 <Image
-                  src="/images/bath2.jpeg"
+                  src="/images/bath2.jpg"
                   alt="욕조 이미지 2"
                   width={400}
                   height={300}
@@ -35,7 +35,7 @@ const Bath = () => {
               </div>
               <div className="flex justify-center">
                 <Image
-                  src="/images/bath3.jpeg"
+                  src="/images/bath3.jpg"
                   alt="욕조 이미지 3"
                   width={400}
                   height={300}
@@ -44,7 +44,7 @@ const Bath = () => {
               </div>
               <div className="flex justify-center">
                 <Image
-                  src="/images/bath4.jpeg"
+                  src="/images/bath4.jpg"
                   alt="욕조 이미지 4"
                   width={400}
                   height={300}
