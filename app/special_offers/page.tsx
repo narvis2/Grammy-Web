@@ -1,69 +1,49 @@
 "use client";
 
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
-import { OFFER_TYPE } from "@/data/model/offer/enum";
-import OfferIcon from "@/components/offers/OfferIcon";
-import { useBedTypeList } from "@/data/hooks";
-import { BedModel } from "@/data/model/bed/types";
-import OfferBedAdapter from "@/components/offers/adapter/OfferBedAdapter";
-import OfferServiceAdapter from "@/components/offers/adapter/OfferServiceAdapter";
-import { useOfferStore } from "@/data/store/useOfferStore";
+import { OFFERS_TYPE } from "@/data/model/offers/enum";
 import { useSearchParams } from "next/navigation";
 import TabLayout from "@/components/common/tab/TabLayout";
 import { RoutePath } from "@/data/model/menu/enum";
+import Bed from "@/components/special_offers/Bed";
+import Amenity from "@/components/special_offers/Amenity";
+import Bath from "@/components/special_offers/Bath";
+import Breakfast from "@/components/special_offers/Breakfast";
+import RoomItem from "@/components/special_offers/RoomItem";
+import Service from "@/components/special_offers/Service";
 
 const images = [
-  { src: "/images/room1.jpg" },
-  { src: "/images/room2.jpg" },
-  { src: "/images/room3.jpg" },
+  { src: "/images/offers1.jpg" },
+  { src: "/images/offers2.jpg" },
+  { src: "/images/offers3.jpg" },
+];
+
+const tabList = [
+  OFFERS_TYPE.BED,
+  OFFERS_TYPE.AMENITIES,
+  OFFERS_TYPE.BATH,
+  OFFERS_TYPE.BREAKFAST,
+  OFFERS_TYPE.ROOM_ITEMS,
+  OFFERS_TYPE.SERVICE,
 ];
 
 const SpecialOffers = () => {
   const params = useSearchParams();
 
-  const { offers, offerService: serviceList } = useOfferStore();
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-
   const [showText, setShowText] = useState(false);
 
-  const [selectedOffer, setSelectedOffer] = useState<OFFER_TYPE>(
-    OFFER_TYPE.BED
+  const [selectedOffer, setSelectedOffer] = useState<OFFERS_TYPE>(
+    OFFERS_TYPE.BED
   );
-
-  const { data: bedType } = useBedTypeList();
-
-  const bedModelList = useMemo<BedModel[]>(() => {
-    if (!bedType || !bedType.success) return [];
-
-    const list = bedType.data;
-    if (typeof list !== "undefined" && list.length > 0) {
-      return list.map<BedModel>((item) => {
-        return {
-          bedType: item,
-          img: "/images/room1.jpg",
-          description: "",
-        };
-      });
-    }
-
-    return [];
-  }, [bedType]);
-
-  const tabList = useMemo(() => {
-    return offers.map((item) => item.type);
-  }, [offers]);
-
-  const offersInfo = useMemo(() => {
-    return offers.find((item) => item.type === selectedOffer);
-  }, [selectedOffer]);
 
   const handleSlideButtonClick = (index: number) => {
     setCurrentImageIndex(index);
     setShowText(true);
   };
 
-  const handleTabClick = (offerType: OFFER_TYPE) => {
+  const handleTabClick = (offerType: OFFERS_TYPE) => {
     setShowText(false);
     setTimeout(() => {
       setSelectedOffer(offerType);
@@ -88,7 +68,7 @@ const SpecialOffers = () => {
   useEffect(() => {
     const type = params.get("type");
     if (type) {
-      setSelectedOffer(type as OFFER_TYPE);
+      setSelectedOffer(type as OFFERS_TYPE);
     }
   }, [params]);
 
@@ -139,30 +119,17 @@ const SpecialOffers = () => {
           tabList={tabList}
           currentTab={selectedOffer}
           onTabClick={(type) => {
-            handleTabClick(type as OFFER_TYPE);
+            handleTabClick(type as OFFERS_TYPE);
           }}
         />
-
-        {!!offersInfo && <OfferIcon offers={offersInfo} />}
-
-        {!!offersInfo &&
-          (selectedOffer === OFFER_TYPE.BED ? (
-            <OfferBedAdapter showText={showText} bedModelList={bedModelList} />
-          ) : selectedOffer === OFFER_TYPE.SERVICE ? (
-            <OfferServiceAdapter serviceList={serviceList} />
-          ) : (
-            <div className="flex justify-center mt-8 mb-12">
-              <Image
-                src={offersInfo.image}
-                alt={offersInfo.type}
-                width={400}
-                height={400}
-                className={`object-cover h-96 ${
-                  showText ? "fade-in" : "fade-out"
-                }`}
-              />
-            </div>
-          ))}
+        <div className="mt-8">
+          {selectedOffer === OFFERS_TYPE.BED && <Bed />}
+          {selectedOffer === OFFERS_TYPE.AMENITIES && <Amenity />}
+          {selectedOffer === OFFERS_TYPE.BATH && <Bath />}
+          {selectedOffer === OFFERS_TYPE.BREAKFAST && <Breakfast />}
+          {selectedOffer === OFFERS_TYPE.ROOM_ITEMS && <RoomItem />}
+          {selectedOffer === OFFERS_TYPE.SERVICE && <Service />}
+        </div>
       </section>
     </div>
   );
