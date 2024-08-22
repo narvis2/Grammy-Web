@@ -15,7 +15,7 @@ import { AuthModel } from "@/data/model/auth/types";
 import { useSetAuthModelState } from "@/data/store/useAuthStore";
 
 const images = [
-  { src: "/images/Main1.jpg", label: "GRAMMY HOTEL" },
+  { src: "/images/main1.jpg", label: "GRAMMY HOTEL" },
   { src: "/images/main2.jpg", label: "GRAMMY WELCOME" },
   { src: "/images/main3.jpg", label: "INDIVIDUAL SWIMMING POOL" },
   { src: "/images/main4.jpg", label: "HINOKI BATHTUB" },
