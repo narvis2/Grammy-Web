@@ -11,9 +11,10 @@ import TableView from "@/components/prologue/TableView";
 import OtherInfo from "@/components/prologue/OtherInfo";
 
 const images = [
-  { src: "/images/room1.jpg" },
-  { src: "/images/room2.jpg" },
-  { src: "/images/room3.jpg" },
+  { src: "/images/prologue1.jpg" },
+  { src: "/images/prologue2.jpg" },
+  { src: "/images/prologue3.jpg" },
+  { src: "/images/prologue4.jpg" },
 ];
 
 const tabList = [
@@ -81,7 +82,7 @@ const Prologue = () => {
               PROLOGUE
             </h2>
             <p className="text-base sm:text-lg lg:text-xl font-serif">
-              GRAMMY HOTEL
+              GRAMI HOTEL
             </p>
 
             <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">

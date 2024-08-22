@@ -15,11 +15,11 @@ import { AuthModel } from "@/data/model/auth/types";
 import { useSetAuthModelState } from "@/data/store/useAuthStore";
 
 const images = [
-  { src: "/images/room1.jpg", label: "GRAMMY HOTEL" },
-  { src: "/images/room2.jpg", label: "GRAMMY WELCOME" },
-  { src: "/images/room3.jpg", label: "INDIVIDUAL SWIMMING POOL" },
-  { src: "/images/room1.jpg", label: "HINOKI BATHTUB" },
-  { src: "/images/room2.jpg", label: "ENOUGHPRESSO CAFE" },
+  { src: "/images/Main1.jpg", label: "GRAMMY HOTEL" },
+  { src: "/images/main2.jpg", label: "GRAMMY WELCOME" },
+  { src: "/images/main3.jpg", label: "INDIVIDUAL SWIMMING POOL" },
+  { src: "/images/main4.jpg", label: "HINOKI BATHTUB" },
+  { src: "/images/main1.jpg", label: "ENOUGHPRESSO CAFE" },
 ];
 
 type HomeScreenProps = {
