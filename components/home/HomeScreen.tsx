@@ -15,11 +15,11 @@ import { AuthModel } from "@/data/model/auth/types";
 import { useSetAuthModelState } from "@/data/store/useAuthStore";
 
 const images = [
-  { src: "/images/Main1.jpg", label: "GRAMMY HOTEL" },
-  { src: "/images/main2.jpg", label: "GRAMMY WELCOME" },
-  { src: "/images/main3.jpg", label: "INDIVIDUAL SWIMMING POOL" },
-  { src: "/images/main4.jpg", label: "HINOKI BATHTUB" },
-  { src: "/images/main1.jpg", label: "ENOUGHPRESSO CAFE" },
+  { src: "/images/Main1.jpg", label: "GRAMI HOTEL" },
+  { src: "/images/main2.jpg", label: "GRAMI WELCOME" },
+  { src: "/images/main3.jpg", label: "MOUNTAIN VIEW" },
+  { src: "/images/main4.jpg", label: "OCEAN VIEW" },
+  { src: "/images/Main1.jpg", label: "HEALING TIME" },
 ];
 
 type HomeScreenProps = {
@@ -91,13 +91,23 @@ const HomeScreen = ({
 
   return (
     <div className="relative">
-      {/* 메인 배너 이미지 */}
       <HomeImageBgContainer
         showText={showText}
         currentImageIndex={currentImageIndex}
         images={images}
         onIndicatorClick={handleSlideButtonClick}
       />
+      <div className="absolute bottom-0 left-0 w-full flex flex-col md:flex-row justify-center md:space-x-2 space-y-2 md:space-y-0 p-2">
+        {images.map((image, index) => (
+          <button
+            key={index}
+            onClick={() => handleSlideButtonClick(index)}
+            className="h-8 w-[70px] md:w-[80px] text-xs md:text-sm text-white bg-black bg-opacity-50 rounded-md cursor-pointer"
+          >
+            {image.label}
+          </button>
+        ))}
+      </div>
       {/* Offers */}
       <CarouselContainer images={offersImage} />
       {/* RoomType */}
