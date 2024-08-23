@@ -97,17 +97,6 @@ const HomeScreen = ({
         images={images}
         onIndicatorClick={handleSlideButtonClick}
       />
-      <div className="absolute bottom-0 left-0 w-full flex flex-col md:flex-row justify-center md:space-x-2 space-y-2 md:space-y-0 p-2">
-        {images.map((image, index) => (
-          <button
-            key={index}
-            onClick={() => handleSlideButtonClick(index)}
-            className="h-8 w-[70px] md:w-[80px] text-xs md:text-sm text-white bg-black bg-opacity-50 rounded-md cursor-pointer"
-          >
-            {image.label}
-          </button>
-        ))}
-      </div>
       {/* Offers */}
       <CarouselContainer images={offersImage} />
       {/* RoomType */}
