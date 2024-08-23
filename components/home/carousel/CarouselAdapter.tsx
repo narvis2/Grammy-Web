@@ -31,7 +31,8 @@ const CarouselAdapter = ({ images }: CarouselAdapterProps) => {
             <img
               src={item.src}
               alt={item.label}
-              className="swiper-image object-cover h-30 w-30 rounded-[5px]"
+              className="swiper-image object-cover rounded-[5px]"
+              style={{height: 300, width: '100%'}}
             />
           </SwiperSlide>
         ))}
