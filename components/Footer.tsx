@@ -30,8 +30,8 @@ export default function Footer() {
             </div>
           </div>
 
-          <div className="flex flex-col md:flex-row w-full md:w-2/3 space-y-6 md:space-y-0 md:space-x-8 items-center md:items-start">
-            <div className="flex flex-col space-y-4 md:w-1/3 text-center md:text-left">
+          <div className="flex flex-col md:flex-row w-full md:w-2/3 space-y-6 md:space-y-0 md:space-x-8 lg:space-x-12 items-center md:items-start">
+            <div className="flex flex-col space-y-4 md:w-2/4 text-center md:text-left">
               <div className="flex items-center justify-center md:justify-start">
                 <span className="font-semibold mr-2">주소:</span>{" "}
                 {hotelInfo?.address ?? "" + hotelInfo?.addressDetail ?? ""}
@@ -46,7 +46,7 @@ export default function Footer() {
               </div>
             </div>
 
-            <div className="flex flex-col space-y-4 md:w-1/3 text-center md:text-left">
+            <div className="flex flex-col space-y-4 md:w-2/5 text-center md:text-left">
               <div className="flex items-center justify-center md:justify-start">
                 <span className="font-semibold mr-2">대표자:</span>
                 OOO
