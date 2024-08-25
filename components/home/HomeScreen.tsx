@@ -16,10 +16,10 @@ import { useSetAuthModelState } from "@/data/store/useAuthStore";
 
 const images = [
   { src: "/images/Main1.jpg", label: "GRAMI HOTEL" },
-  { src: "/images/main2.jpg", label: "GRAMI WELCOME" },
+  { src: "/images/main4.jpg", label: "GRAMI WELCOME" },
   { src: "/images/main3.jpg", label: "MOUNTAIN VIEW" },
-  { src: "/images/main4.jpg", label: "OCEAN VIEW" },
-  { src: "/images/Main1.jpg", label: "HEALING TIME" },
+  { src: "/images/main2.jpg", label: "OCEAN VIEW" },
+  { src: "/images/main5.jpg", label: "HEALING TIME" },
 ];
 
 type HomeScreenProps = {
