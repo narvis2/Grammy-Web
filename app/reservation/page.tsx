@@ -49,29 +49,33 @@ const Reservation = () => {
 
   const onReservationClick = useCallback(
     (item: RoomAvailableReservationResponse) => {
-      if (!startValue || !isArray(startValue)) {
-        showCommonModal({
-          title: "알림",
-          contents: "체크인 및 체크아웃 날짜 범위를 선택해 주세요.",
-        });
-        return;
-      }
-
-      const startDate = startValue[0] as Date;
-      const endDate = startValue[1] as Date;
-
-      if (!accessToken || !refreshToken) {
-        router.push("/login");
-        return;
-      }
-
-      setReservationPrepare({
-        checkInDate: startDate,
-        checkOutDate: endDate,
-        totalPrice: item.totalPrice,
-        guestNumber: item.guestCount,
+      showCommonModal({
+        title: '알림',
+        contents: '054-727-0600 번호로 문의해 주세요!'
       });
-      router.push(`/reservation/${item.id}`);
+      // if (!startValue || !isArray(startValue)) {
+      //   showCommonModal({
+      //     title: "알림",
+      //     contents: "체크인 및 체크아웃 날짜 범위를 선택해 주세요.",
+      //   });
+      //   return;
+      // }
+
+      // const startDate = startValue[0] as Date;
+      // const endDate = startValue[1] as Date;
+
+      // if (!accessToken || !refreshToken) {
+      //   router.push("/login");
+      //   return;
+      // }
+
+      // setReservationPrepare({
+      //   checkInDate: startDate,
+      //   checkOutDate: endDate,
+      //   totalPrice: item.totalPrice,
+      //   guestNumber: item.guestCount,
+      // });
+      // router.push(`/reservation/${item.id}`);
     },
     [accessToken, refreshToken, router, startValue]
   );
