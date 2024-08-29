@@ -8,6 +8,7 @@ const things = [
   { name: "커피 포트", image: "/images/coffeeport.jpg" },
   { name: "스타일러", image: "/images/styler.jpg" },
   { name: "수납공간", image: "/images/acceptance.jpg" },
+  { name: "드라이기", image: "/images/dryer.jpg" },
 ];
 
 const RoomItem = () => {

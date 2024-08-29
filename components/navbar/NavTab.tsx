@@ -9,7 +9,7 @@ const NavTab = ({ menu }: NavTabProps) => {
   return (
     <Link
       href={menu.path}
-      className="text-lg sm:text-xl hover:text-gray-300 transition-colors hover:underline"
+      className="md:text-xl sm:text-base hover:text-gray-300 transition-colors hover:border-b"
     >
       {menu.title}
     </Link>

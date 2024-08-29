@@ -7,7 +7,7 @@ import { TbAirConditioning } from "react-icons/tb";
 import { FaYoutube } from "react-icons/fa";
 import { TbBrandDisney } from "react-icons/tb";
 import { SiNetflix } from "react-icons/si";
-import { SiAppletv } from "react-icons/si";
+import { FaGoogle } from "react-icons/fa";
 import { RiBatteryChargeLine } from "react-icons/ri";
 import { LiaSearchPlusSolid } from "react-icons/lia";
 
@@ -33,7 +33,13 @@ const Service = () => {
                 <div className="flex-shrink-0 text-3xl">
                   <FaTv />
                 </div>
-                <div className="text-lg font-serif">OTT(와챠, 티빙)</div>
+                <div className="text-lg font-serif">와챠</div>
+              </div>
+              <div className="flex items-center space-x-4 p-6 bg-gray-50 rounded-lg shadow-md">
+                <div className="flex-shrink-0 text-3xl">
+                  <FaTv />
+                </div>
+                <div className="text-lg font-serif">티빙</div>
               </div>
 
               <div className="flex items-center space-x-4 p-6 bg-gray-50 rounded-lg shadow-md">
@@ -56,9 +62,9 @@ const Service = () => {
               </div>
               <div className="flex items-center space-x-4 p-6 bg-gray-50 rounded-lg shadow-md">
                 <div className="flex-shrink-0 text-3xl">
-                  <SiAppletv />
+                  <FaGoogle />
                 </div>
-                <div className="text-lg font-serif">애플TV</div>
+                <div className="text-lg font-serif">구글TV</div>
               </div>
               <div className="flex items-center space-x-4 p-6 bg-gray-50 rounded-lg shadow-md">
                 <div className="flex-shrink-0 text-3xl">
