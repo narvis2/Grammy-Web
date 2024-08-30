@@ -21,7 +21,7 @@ const NoticeInfoAdapter = ({ model }: NoticeInfoAdapterProps) => {
   return (
     <>
       <div className="w-full border-t-2 border-t-[#262E39] border-b border-b-[#DADADA] h-24 flex flex-col md:flex-row justify-between items-center outline-none px-4 py-4">
-        <span className="text-lg sm:text-xl md:text-2xl lg:text-3xl mb-2 md:mb-0 ml-4">
+        <span className="text-lg sm:text-xl md:text-2xl mb-2 md:mb-0 ml-4">
           {`${model.title}`}
         </span>
         <span className="text-sm sm:text-base md:text-lg text-gray-500 font-normal mr-4 text-start">

@@ -70,7 +70,7 @@ export default function Navbar() {
 
   return (
     <nav className="h-20 z-20 border-b border-gray-200 w-full shadow-sm fixed top-0 bg-white">
-      <div className="flex justify-between items-center sm:px-10 p-4">
+      <div className="flex justify-between items-center sm:px-10 p-4 h-full">
         <div className="flex items-center gap-2">
           <FaHotel className="text-3xl" />
           <Link href="/" className="text-lg sm:text-xl font-semibold">
@@ -79,10 +79,11 @@ export default function Navbar() {
         </div>
 
         <div
-          className="ml-10 flex-1 flex space-x-6 justify-start items-center overflow-x-auto scrollbar-thin scrollbar-thin-gray-300 scrollbar-track-gray-100 sm:justify-center"
+          className="ml-10 flex-1 flex space-x-6 justify-start items-center overflow-x-auto scrollbar-hidden sm:justify-center h-full"
           style={{
             WebkitOverflowScrolling: "touch",
             touchAction: "pan-x",
+            scrollbarWidth: "none",
           }}
         >
           <div
