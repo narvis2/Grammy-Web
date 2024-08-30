@@ -8,9 +8,12 @@ import useRoomTypeInfo from "@/data/hooks/roomType/useRoomTypeInfo";
 import { usePathname } from "next/navigation";
 import { OFFERS_TYPE } from "@/data/model/offers/enum";
 import { PROLOGUE_TYPE } from "@/data/model/prologue/enum";
+import useAgent from "@/data/hooks/agent/useAgent";
 
 export default function Navbar() {
   const pathname = usePathname();
+
+  const { isMobile } = useAgent();
   const [subMenuContent, setSubMenuContent] = useState<string | null>(null);
   const [timeoutId, setTimeoutId] = useState<NodeJS.Timeout | null>(null);
 
@@ -59,10 +62,12 @@ export default function Navbar() {
 
     document.addEventListener("click", handleClickOutside);
 
+    isMobile && document.removeEventListener("click", handleClickOutside);
+
     return () => {
       document.removeEventListener("click", handleClickOutside);
     };
-  }, [isMenuOpen]);
+  }, [isMenuOpen, isMobile]);
 
   if (pathname === RoutePath.LOGIN) {
     return null;
@@ -73,7 +78,7 @@ export default function Navbar() {
       <div className="flex justify-between items-center sm:px-10 p-4 h-full">
         <div className="flex items-center gap-2">
           <FaHotel className="text-3xl" />
-          <Link href="/" className="text-lg sm:text-xl font-semibold">
+          <Link href="/" className="text-sm sm:text-lg font-semibold">
             그라미 호텔
           </Link>
         </div>
@@ -88,8 +93,10 @@ export default function Navbar() {
         >
           <div
             className="relative group flex-shrink-0 snap-start"
-            onMouseEnter={() => handleMouseEnter("prologue")}
-            onMouseLeave={handleMouseLeave}
+            onMouseEnter={() =>
+              isMobile ? undefined : handleMouseEnter("prologue")
+            }
+            onMouseLeave={isMobile ? undefined : handleMouseLeave}
           >
             <NavTab
               menu={{ title: RouteName.PROLOGUE, path: RoutePath.PROLOGUE }}
@@ -100,16 +107,20 @@ export default function Navbar() {
           </div>
           <div
             className="relative group flex-shrink-0 snap-start"
-            onMouseEnter={() => handleMouseEnter("rooms")}
-            onMouseLeave={handleMouseLeave}
+            onMouseEnter={() =>
+              isMobile ? undefined : handleMouseEnter("rooms")
+            }
+            onMouseLeave={isMobile ? undefined : handleMouseLeave}
           >
             <NavTab menu={{ title: RouteName.ROOMS, path: RoutePath.ROOMS }} />
             {subMenuContent === "rooms" && <SubMenu menuList={roomTypeList} />}
           </div>
           <div
             className="relative group flex-shrink-0 snap-start"
-            onMouseEnter={() => handleMouseEnter("special_offers")}
-            onMouseLeave={handleMouseLeave}
+            onMouseEnter={() =>
+              isMobile ? undefined : handleMouseEnter("special_offers")
+            }
+            onMouseLeave={isMobile ? undefined : handleMouseLeave}
           >
             <NavTab
               menu={{
@@ -137,8 +148,10 @@ export default function Navbar() {
           </button>
           <div
             className="relative group flex-shrink-0 snap-start"
-            onMouseEnter={() => handleMouseEnter("reservation")}
-            onMouseLeave={handleMouseLeave}
+            onMouseEnter={() =>
+              isMobile ? undefined : handleMouseEnter("reservation")
+            }
+            onMouseLeave={isMobile ? undefined : handleMouseLeave}
           >
             <NavTab
               menu={{

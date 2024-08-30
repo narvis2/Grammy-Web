@@ -13,6 +13,7 @@ import RoomTypeContainer from "./roomtype/RoomTypeContainer";
 import WayToComeContainer from "./way/WayToComeContainer";
 import { AuthModel } from "@/data/model/auth/types";
 import { useSetAuthModelState } from "@/data/store/useAuthStore";
+import { Grammy } from "@/data/api/endpoint/constants";
 
 const images = [
   { src: "/images/Main1.jpg", label: "GRAMI HOTEL" },
@@ -39,7 +40,7 @@ const HomeScreen = ({
   const { hotelInfo } = useHotelInfo();
   const { offers } = useOfferStore();
 
-  const roomType = queryClient.getQueryData(["useRoomTypeList"]) as
+  const roomType = queryClient.getQueryData([Grammy.ROOM_TYPE]) as
     | BaseResponse<RoomTypeResponse[]>
     | undefined;
 

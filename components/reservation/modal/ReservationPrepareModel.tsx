@@ -6,7 +6,7 @@ import InfoItem from "./content/InfoItem";
 import ReservationPrepareSubHeader from "./header/ReservationPrepareSubHeader";
 import SingleInputItem from "./content/SingleInputItem";
 import { useRequestReservationPrepare, useRoomDetails } from "@/data/hooks";
-import { ChangeEventHandler, useEffect, useMemo, useState } from "react";
+import { ChangeEventHandler, useMemo, useState } from "react";
 import { RoomResponse } from "@/data/model/room";
 import ReservationPaymentButton from "./button/ReservationPaymentButton";
 import AddContentInputItem from "./content/AddContentInputItem";

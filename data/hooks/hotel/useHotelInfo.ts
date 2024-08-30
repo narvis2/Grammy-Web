@@ -1,3 +1,4 @@
+import { Grammy } from "@/data/api/endpoint/constants";
 import { BaseResponse } from "@/data/model/base";
 import { HotelResponse } from "@/data/model/hotel";
 import { useMemo } from "react";
@@ -6,7 +7,7 @@ import { useQueryClient } from "react-query";
 function useQueryInfo() {
   const queryClient = useQueryClient();
 
-  const hotel = queryClient.getQueryData(["useGetHotel"]) as
+  const hotel = queryClient.getQueryData([Grammy.GET_HOTEL]) as
     | BaseResponse<HotelResponse>
     | undefined;
 

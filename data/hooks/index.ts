@@ -27,9 +27,10 @@ import {
   requestReservationPrepare,
 } from "../api/service/reservation";
 import { PaymentRequest } from "../model/pay/types";
+import { Grammy } from "../api/endpoint/constants";
 
 export const useGetHotel = (customOptions?: T_Query<HotelResponse>) =>
-  useQuery(["useGetHotel"], () => getHotel(), {
+  useQuery([Grammy.GET_HOTEL], () => getHotel(), {
     retry: false,
     notifyOnChangeProps: ["data", "error"], // 렌더링 반복의 주범. 나열된 속성 중 하나라도 변경되는 경우에만 구성 요소가 다시 렌더링
     refetchOnMount: false, // 마운트 시 데이터가 오래된 경우 다시 가져옴
@@ -40,7 +41,7 @@ export const useGetHotel = (customOptions?: T_Query<HotelResponse>) =>
   });
 
 export const useRoomTypeList = (customOptions?: T_Query<RoomTypeResponse[]>) =>
-  useQuery(["useRoomTypeList"], () => getRoomTypeList(), {
+  useQuery([Grammy.ROOM_TYPE], () => getRoomTypeList(), {
     retry: false,
     notifyOnChangeProps: ["data", "error"], // 렌더링 반복의 주범. 나열된 속성 중 하나라도 변경되는 경우에만 구성 요소가 다시 렌더링
     refetchOnMount: false, // 마운트 시 데이터가 오래된 경우 다시 가져옴
@@ -51,10 +52,10 @@ export const useRoomTypeList = (customOptions?: T_Query<RoomTypeResponse[]>) =>
   });
 
 export const useBannerList = (customOptions?: T_Query<BannerResponse[]>) =>
-  useQuery(["useBannerList"], () => getBannerList(), customOptions);
+  useQuery([Grammy.BANNER], () => getBannerList(), customOptions);
 
 export const useNoticeList = (customOptions?: T_Query<NoticeResponse[]>) =>
-  useQuery(["useNoticeList"], () => getNoticeList(), {
+  useQuery([Grammy.NOTICE], () => getNoticeList(), {
     notifyOnChangeProps: ["data", "error"], // 렌더링 반복의 주범. 나열된 속성 중 하나라도 변경되는 경우에만 구성 요소가 다시 렌더링
     refetchOnMount: false, // 마운트 시 데이터가 오래된 경우 다시 가져옴
     refetchOnWindowFocus: false, // 윈도우가 다시 포커스되었을 때 데이터를 호출할 것인지 여부
@@ -68,7 +69,7 @@ export const useNoticeDetails = (
   noticeId: string,
   customOptions?: T_Query<NoticeResponse>
 ) =>
-  useQuery(["useNoticeDetails", noticeId], () => getNoticeDetail(noticeId), {
+  useQuery([Grammy.NOTICE_DETAILS, noticeId], () => getNoticeDetail(noticeId), {
     notifyOnChangeProps: ["data", "error"], // 렌더링 반복의 주범. 나열된 속성 중 하나라도 변경되는 경우에만 구성 요소가 다시 렌더링
     refetchOnMount: false, // 마운트 시 데이터가 오래된 경우 다시 가져옴
     refetchOnWindowFocus: false, // 윈도우가 다시 포커스되었을 때 데이터를 호출할 것인지 여부
@@ -89,7 +90,7 @@ export const useRoomAvailableReservationList = (
   );
 
 export const useBedTypeList = (customOptions?: T_Query<BedType[]>) =>
-  useQuery(["useBedTypeList"], () => getBedTypeList(), {
+  useQuery([Grammy.BED], () => getBedTypeList(), {
     notifyOnChangeProps: ["data", "error"], // 렌더링 반복의 주범. 나열된 속성 중 하나라도 변경되는 경우에만 구성 요소가 다시 렌더링
     refetchOnMount: false, // 마운트 시 데이터가 오래된 경우 다시 가져옴
     refetchOnWindowFocus: false, // 윈도우가 다시 포커스되었을 때 데이터를 호출할 것인지 여부
@@ -110,7 +111,7 @@ export const useRoomDetails = (
   roomId: string,
   customOptions?: T_Query<RoomResponse>
 ) =>
-  useQuery(["useRoomDetails", roomId], () => getRoomDetails(roomId), {
+  useQuery([Grammy.ROOM_DETAILS, roomId], () => getRoomDetails(roomId), {
     notifyOnChangeProps: ["data", "error"], // 렌더링 반복의 주범. 나열된 속성 중 하나라도 변경되는 경우에만 구성 요소가 다시 렌더링
     refetchOnMount: false, // 마운트 시 데이터가 오래된 경우 다시 가져옴
     refetchOnWindowFocus: false, // 윈도우가 다시 포커스되었을 때 데이터를 호출할 것인지 여부
