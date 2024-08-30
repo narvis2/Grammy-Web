@@ -53,22 +53,25 @@ export default function Footer() {
               </div>
               <div className="flex items-center justify-center md:justify-start">
                 <span className="font-semibold mr-2">사업자 등록번호:</span>
-                123-45-67890
+                {hotelInfo?.hotelDetail?.businessNumber ??
+                  "등록된 정보가 없습니다."}
               </div>
               <div className="flex items-center justify-center md:justify-start">
                 <span className="font-semibold mr-2">통신판매신고번호:</span>
-                2024-ABC-1234
+                {hotelInfo?.hotelDetail?.mailOrderReportNumber ??
+                  "등록된 정보가 없습니다."}
               </div>
             </div>
 
             <div className="flex flex-col space-y-4 md:w-1/3 text-center md:text-left">
               <div className="flex items-center justify-center md:justify-start">
                 <span className="font-semibold mr-2">계좌번호:</span>
-                123-45-67890
+                {hotelInfo?.hotelDetail?.accountNumber ??
+                  "등록된 정보가 없습니다."}
               </div>
               <div className="flex items-center justify-center md:justify-start">
                 <span className="font-semibold mr-2">예금주:</span>
-                홍길동
+                {hotelInfo?.hotelDetail?.depositor ?? "등록된 정보가 없습니다."}
               </div>
             </div>
           </div>

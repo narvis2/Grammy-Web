@@ -50,8 +50,15 @@ const Reservation = () => {
   const onReservationClick = useCallback(
     (item: RoomAvailableReservationResponse) => {
       showCommonModal({
-        title: '알림',
-        contents: '054-727-0600 번호로 문의해 주세요!'
+        title: "알림",
+        contents: "예약 화면으로 넘어갑니다.",
+        onConfirm() {
+          window.open(
+            "https://gramihotel.modoo.at/?link=194u7d3i",
+            "_blank",
+            "noopener,noreferrer"
+          );
+        },
       });
       // if (!startValue || !isArray(startValue)) {
       //   showCommonModal({

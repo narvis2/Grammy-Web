@@ -1,78 +1,65 @@
 import Link from "next/link";
 import { FaHotel } from "react-icons/fa6";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import SubMenu from "./navbar/SubMenu";
 import { RouteName, RoutePath } from "@/data/model/menu/enum";
-import DrawerMenu from "./navbar/DrawerMenu";
 import NavTab from "./navbar/NavTab";
 import useRoomTypeInfo from "@/data/hooks/roomType/useRoomTypeInfo";
-import { useOfferStore } from "@/data/store/useOfferStore";
-import { MenuModel } from "@/data/model/menu/types";
 import { usePathname } from "next/navigation";
-
-const drawerMenuList = [
-  { title: RouteName.PROLOGUE, path: RoutePath.PROLOGUE },
-  { title: RouteName.ROOMS, path: RoutePath.ROOMS },
-  { title: RouteName.SPECIAL_OFFERS, path: RoutePath.SPECIAL_OFFERS },
-  { title: RouteName.RESERVATION, path: RoutePath.RESERVATION },
-  { title: RouteName.NOTICE, path: RoutePath.NOTICE },
-];
+import { OFFERS_TYPE } from "@/data/model/offers/enum";
+import { PROLOGUE_TYPE } from "@/data/model/prologue/enum";
 
 export default function Navbar() {
   const pathname = usePathname();
+  const [subMenuContent, setSubMenuContent] = useState<string | null>(null);
+  const [timeoutId, setTimeoutId] = useState<NodeJS.Timeout | null>(null);
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  const [subMenuContent, setSubMenuContent] = useState<string | null>(null);
-  let timeoutId: NodeJS.Timeout | null = null;
+  const Prologue_tabList = [
+    { title: PROLOGUE_TYPE.INTRODUCTION, path: RoutePath.PROLOGUE },
+    { title: PROLOGUE_TYPE.TABLE_VIEW, path: RoutePath.PROLOGUE },
+    { title: PROLOGUE_TYPE.OTHER_INFO, path: RoutePath.PROLOGUE },
+    { title: PROLOGUE_TYPE.HOW_TO_COME, path: RoutePath.PROLOGUE },
+  ];
 
-  const { offers } = useOfferStore();
-
+  const Offers_tabList = [
+    { title: OFFERS_TYPE.BED, path: RoutePath.SPECIAL_OFFERS },
+    { title: OFFERS_TYPE.AMENITIES, path: RoutePath.SPECIAL_OFFERS },
+    { title: OFFERS_TYPE.BATH, path: RoutePath.SPECIAL_OFFERS },
+    { title: OFFERS_TYPE.BREAKFAST, path: RoutePath.SPECIAL_OFFERS },
+    { title: OFFERS_TYPE.ROOM_ITEMS, path: RoutePath.SPECIAL_OFFERS },
+    { title: OFFERS_TYPE.SERVICE, path: RoutePath.SPECIAL_OFFERS },
+  ];
   const { roomTypeList } = useRoomTypeInfo();
-
-  const offerMenuList = useMemo<MenuModel[]>(() => {
-    return offers.map((item) => {
-      return {
-        title: item.type,
-        path: RoutePath.SPECIAL_OFFERS,
-      };
-    });
-  }, [offers]);
 
   const handleMouseEnter = (content: string) => {
     if (timeoutId !== null) {
       clearTimeout(timeoutId);
     }
-
     setSubMenuContent(content);
   };
 
   const handleMouseLeave = () => {
-    timeoutId = setTimeout(() => {
+    const id = setTimeout(() => {
       setSubMenuContent(null);
     }, 600);
-  };
-
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
+    setTimeoutId(id);
   };
 
   useEffect(() => {
-    const handleScroll = () => {
-      isMenuOpen && setIsMenuOpen(false);
-    };
     const handleClickOutside = (event: MouseEvent) => {
       const target = event.target as HTMLElement;
       if (!target.closest("nav")) {
-        isMenuOpen && setIsMenuOpen(false);
+        if (isMenuOpen) {
+          setIsMenuOpen(false);
+        }
       }
     };
 
-    window.addEventListener("scroll", handleScroll);
     document.addEventListener("click", handleClickOutside);
 
     return () => {
-      window.removeEventListener("scroll", handleScroll);
       document.removeEventListener("click", handleClickOutside);
     };
   }, [isMenuOpen]);
@@ -82,10 +69,8 @@ export default function Navbar() {
   }
 
   return (
-    <nav
-      className={`h-20 z-20 border-b border-gray-200 w-full shadow-sm fixed top-0 bg-white`}
-    >
-      <div className="flex justify-between items-center sm:px-10 p-4">
+    <nav className="h-20 z-20 border-b border-gray-200 w-full shadow-sm fixed top-0 bg-white">
+      <div className="flex justify-between items-center sm:px-10 p-4 h-full">
         <div className="flex items-center gap-2">
           <FaHotel className="text-3xl" />
           <Link href="/" className="text-lg sm:text-xl font-semibold">
@@ -93,62 +78,36 @@ export default function Navbar() {
           </Link>
         </div>
 
-        {/* Hamburger Menu Button (visible only on small screens) */}
-        <div className="sm:hidden">
-          <button
-            onClick={toggleMenu}
-            className="text-gray-500 hover:text-gray-600 focus:outline-none focus:text-gray-600"
-          >
-            <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
-              {isMenuOpen ? (
-                <path
-                  fillRule="evenodd"
-                  clipRule="evenodd"
-                  d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                />
-              ) : (
-                <path
-                  fillRule="evenodd"
-                  clipRule="evenodd"
-                  d="M4 6a1 1 0 0 1 1-1h10a1 1 0 1 1 0 2H5a1 1 0 0 1-1-1zM5 11a1 1 0 1 1 0-2h10a1 1 0 1 1 0 2H5zm10 2H5a1 1 0 1 0 0 2h10a1 1 0 1 0 0-2z"
-                />
-              )}
-            </svg>
-          </button>
-        </div>
-
-        {/* Desktop Menu Links (hidden on small screens) */}
-        <div className="flex-1 hidden sm:flex space-x-6 justify-center items-center">
+        <div
+          className="ml-10 flex-1 flex space-x-6 justify-start items-center overflow-x-auto scrollbar-hidden sm:justify-center h-full"
+          style={{
+            WebkitOverflowScrolling: "touch",
+            touchAction: "pan-x",
+            scrollbarWidth: "none",
+          }}
+        >
           <div
-            className="relative group"
+            className="relative group flex-shrink-0 snap-start"
             onMouseEnter={() => handleMouseEnter("prologue")}
             onMouseLeave={handleMouseLeave}
           >
             <NavTab
               menu={{ title: RouteName.PROLOGUE, path: RoutePath.PROLOGUE }}
             />
-
-            {/* Submenu for PROLOGUE */}
             {subMenuContent === "prologue" && (
-              <SubMenu
-                menuList={[
-                  { title: "그라미 호텔", path: RoutePath.PROLOGUE },
-                  { title: "오시는 길", path: RoutePath.PROLOGUE },
-                ]}
-              />
+              <SubMenu menuList={Prologue_tabList} />
             )}
           </div>
           <div
-            className="relative group"
+            className="relative group flex-shrink-0 snap-start"
             onMouseEnter={() => handleMouseEnter("rooms")}
             onMouseLeave={handleMouseLeave}
           >
             <NavTab menu={{ title: RouteName.ROOMS, path: RoutePath.ROOMS }} />
-            {/* Submenu for ROOMS */}
             {subMenuContent === "rooms" && <SubMenu menuList={roomTypeList} />}
           </div>
           <div
-            className="relative group"
+            className="relative group flex-shrink-0 snap-start"
             onMouseEnter={() => handleMouseEnter("special_offers")}
             onMouseLeave={handleMouseLeave}
           >
@@ -158,27 +117,26 @@ export default function Navbar() {
                 path: RoutePath.SPECIAL_OFFERS,
               }}
             />
-            {/* Submenu for SPECIAL OFFERS */}
             {subMenuContent === "special_offers" && (
-              <SubMenu menuList={offerMenuList} />
+              <SubMenu menuList={Offers_tabList} />
             )}
           </div>
           <button
             type="button"
-            className="text-lg sm:text-xl hover:text-gray-300 transition-colors hover:underline"
+            className="text-lg sm:text-xl hover:text-gray-300 transition-colors hover:border-b flex-shrink-0 snap-start"
             onClick={() => window.alert("서비스 준비중입니다.")}
           >
             EVENT
           </button>
           <button
             type="button"
-            className="text-lg sm:text-xl hover:text-gray-300 transition-colors hover:underline"
+            className="text-lg sm:text-xl hover:text-gray-300 transition-colors hover:border-b flex-shrink-0 snap-start"
             onClick={() => window.alert("서비스 준비중입니다.")}
           >
             REVIEW
           </button>
           <div
-            className="relative group"
+            className="relative group flex-shrink-0 snap-start"
             onMouseEnter={() => handleMouseEnter("reservation")}
             onMouseLeave={handleMouseLeave}
           >
@@ -188,7 +146,6 @@ export default function Navbar() {
                 path: RoutePath.RESERVATION,
               }}
             />
-            {/* Submenu for RESERVATION */}
             {subMenuContent === "reservation" && (
               <SubMenu
                 menuList={[
@@ -198,12 +155,13 @@ export default function Navbar() {
               />
             )}
           </div>
-          <NavTab menu={{ title: RouteName.NOTICE, path: RoutePath.NOTICE }} />
+          <div className="flex-shrink-0 snap-start">
+            <NavTab
+              menu={{ title: RouteName.NOTICE, path: RoutePath.NOTICE }}
+            />
+          </div>
         </div>
       </div>
-
-      {/* Mobile Menu (visible only when isMenuOpen is true) */}
-      {isMenuOpen && <DrawerMenu menuList={drawerMenuList} />}
     </nav>
   );
 }
