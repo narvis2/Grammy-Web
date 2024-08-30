@@ -54,7 +54,7 @@ const WayToComeContainer = ({ hotelInfo }: WayToComeContainerProps) => {
         {["car", "bus", "walk"].map((type) => (
           <div
             key={type}
-            className="bg-white rounded-lg shadow-md overflow-hidden mb-5"
+            className="bg-white rounded-lg shadow-md overflow-hidden mb-5 mt-5"
           >
             <button
               onClick={() => toggleSection(type)}
