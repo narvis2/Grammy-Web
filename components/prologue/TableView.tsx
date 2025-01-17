@@ -53,50 +53,65 @@ const TableView = () => {
         <tbody>
           <tr>
             <td className="border border-gray-300 p-2 text-center">
-              STANDARD-A
-            </td>
-            <td className="border border-gray-300 p-2 text-center">18</td>
-            <td className="border border-gray-300 p-2 text-center">2</td>
-          </tr>
-          <tr>
-            <td className="border border-gray-300 p-2 text-center">
-              STANDARD-B
-            </td>
-            <td className="border border-gray-300 p-2 text-center">6</td>
-            <td className="border border-gray-300 p-2 text-center">2</td>
-          </tr>
-          <tr>
-            <td className="border border-gray-300 p-2 text-center">
-              STANDARD-C
+              스탠다드 A
             </td>
             <td className="border border-gray-300 p-2 text-center">10</td>
             <td className="border border-gray-300 p-2 text-center">2</td>
           </tr>
           <tr>
-            <td className="border border-gray-300 p-2 text-center">SUITE</td>
+            <td className="border border-gray-300 p-2 text-center">
+              스탠다드 B
+            </td>
+            <td className="border border-gray-300 p-2 text-center">6</td>
+            <td className="border border-gray-300 p-2 text-center">2</td>
+          </tr>
+          <tr>
+            <td className="border border-gray-300 p-2 text-center">스탠다드 트윈</td>
+            <td className="border border-gray-300 p-2 text-center">6</td>
+            <td className="border border-gray-300 p-2 text-center">3</td>
+          </tr>
+          <tr>
+            <td className="border border-gray-300 p-2 text-center">
+              디럭스 A 테라스
+            </td>
+            <td className="border border-gray-300 p-2 text-center">6</td>
+            <td className="border border-gray-300 p-2 text-center">2</td>
+          </tr>
+          <tr>
+            <td className="border border-gray-300 p-2 text-center">디럭스 B 테라스</td>
+            <td className="border border-gray-300 p-2 text-center">6</td>
+            <td className="border border-gray-300 p-2 text-center">2</td>
+          </tr>
+          <tr>
+            <td className="border border-gray-300 p-2 text-center">스위트 A</td>
             <td className="border border-gray-300 p-2 text-center">2</td>
             <td className="border border-gray-300 p-2 text-center">4</td>
           </tr>
           <tr>
+            <td className="border border-gray-300 p-2 text-center">스위트 B</td>
+            <td className="border border-gray-300 p-2 text-center">1</td>
+            <td className="border border-gray-300 p-2 text-center">2</td>
+          </tr>
+          <tr>
             <td className="border border-gray-300 p-2 text-center">
-              CORNER-SUITE
+              코너 스위트
             </td>
             <td className="border border-gray-300 p-2 text-center">3</td>
             <td className="border border-gray-300 p-2 text-center">4</td>
           </tr>
           <tr>
             <td className="border border-gray-300 p-2 text-center">
-              ROYALSUITE-A
+              로얄 스위트 A
             </td>
             <td className="border border-gray-300 p-2 text-center">1</td>
-            <td className="border border-gray-300 p-2 text-center">6</td>
+            <td className="border border-gray-300 p-2 text-center">4</td>
           </tr>
           <tr>
             <td className="border border-gray-300 p-2 text-center">
-              ROYALSUITE-B
+              로얄 스위트 B
             </td>
             <td className="border border-gray-300 p-2 text-center">2</td>
-            <td className="border border-gray-300 p-2 text-center">6</td>
+            <td className="border border-gray-300 p-2 text-center">4</td>
           </tr>
         </tbody>
       </table>

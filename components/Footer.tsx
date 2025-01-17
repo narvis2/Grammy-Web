@@ -38,27 +38,22 @@ export default function Footer() {
               </div>
               <div className="flex items-center justify-center md:justify-start">
                 <span className="font-semibold mr-2">전화번호:</span>{" "}
-                {phoneFormatter(hotelInfo?.phoneNumber ?? "")}
+                {"054-727-0600"}
               </div>
               <div className="flex items-center justify-center md:justify-start">
                 <span className="font-semibold mr-2">이메일:</span>
-                OOO.naver.com
+                az49890@naver.com
               </div>
             </div>
 
             <div className="flex flex-col space-y-4 md:w-2/5 text-center md:text-left">
               <div className="flex items-center justify-center md:justify-start">
                 <span className="font-semibold mr-2">대표자:</span>
-                OOO
+                최수영
               </div>
               <div className="flex items-center justify-center md:justify-start">
                 <span className="font-semibold mr-2">사업자 등록번호:</span>
                 {hotelInfo?.hotelDetail?.businessNumber ??
-                  "등록된 정보가 없습니다."}
-              </div>
-              <div className="flex items-center justify-center md:justify-start">
-                <span className="font-semibold mr-2">통신판매신고번호:</span>
-                {hotelInfo?.hotelDetail?.mailOrderReportNumber ??
                   "등록된 정보가 없습니다."}
               </div>
             </div>
