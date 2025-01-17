@@ -20,7 +20,7 @@ const images = [
   { src: "/images/main4.jpg", label: "GRAMI WELCOME" },
   { src: "/images/main2.jpg", label: "OCEAN VIEW" },
   { src: "/images/main3.jpg", label: "MOUNTAIN VIEW" },
-  { src: "/images/terace_view.jpg", label: "TERRACE VIEW" },
+  { src: "/images/common_terace_view.jpg", label: "TERRACE VIEW" },
 ];
 
 type HomeScreenProps = {
