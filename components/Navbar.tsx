@@ -76,7 +76,7 @@ export default function Navbar() {
     <nav className="h-20 z-20 border-b border-gray-200 w-full shadow-sm fixed top-0 bg-white">
       <div className="flex justify-between items-center sm:px-10 p-4 h-full">
         <div className="flex items-center gap-2 cursor-pointer" onClick={() => {window.location.href = "/";}}>
-          <Image src={"/images/grami_logo.svg"} alt="logo" width={180} height={10} />
+          <Image src={"/images/grami_logo.svg"} alt="logo" width={165} height={10} />
         </div>
 
         <div
