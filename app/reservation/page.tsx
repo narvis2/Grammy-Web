@@ -113,14 +113,14 @@ const Reservation = () => {
               return;
             }
 
-            const roomTypeList = list.reduce<string[]>((acc, item, index) => {
-              if (!acc.includes(item.roomType)) {
-                return [...acc, item.roomType];
-              }
-              return acc;
-            }, [] as string[]);
+            // const roomTypeList = list.reduce<string[]>((acc, item, index) => {
+            //   if (!acc.includes(item.roomType)) {
+            //     return [...acc, item.roomType];
+            //   }
+            //   return acc;
+            // }, [] as string[]);
 
-            setRoomTypeList(roomTypeList);
+            setRoomTypeList([]);
           }
         },
       }
