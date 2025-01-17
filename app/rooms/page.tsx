@@ -13,7 +13,7 @@ import React, { useState, useMemo, useEffect } from "react";
 
 const Room = () => {
   const params = useSearchParams();
-  const [currentTab, setCurrentTab] = useState<string>("STANDARD-A");
+  const [currentTab, setCurrentTab] = useState<string>("스탠다드 A");
 
   const { data: roomType, isFetching } = useRoomTypeList();
 

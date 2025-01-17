@@ -179,12 +179,12 @@ const Introduction = () => {
 
       <Plx parallaxData={parallaxData.fadeIn}>
         <section className="mt-10 h-[300px] flex justify-center items-center bg-cover bg-center relative bg-[url('/images/Introduction2.jpg')]">
-          <div className="bg-black bg-opacity-60 p-5 rounded-lg max-w-[80%] text-center">
+          <div className="bg-black bg-opacity-60 p-5 rounded-lg max-w-[90%] text-center">
             <h2 className="text-white font-bold text-shadow-md mb-5 text-[clamp(1.5rem,4vw,2.5rem)]">
               다양한 객실 시설
             </h2>
             <p className="text-white text-[clamp(1rem,2.5vw,1.5rem)]">
-              총 43개의 객실을 6가지 유형으로 나뉘어, 객실마다 차별화된 시설을
+              총 43개의 객실을 10가지 유형으로 나뉘어, 객실마다 차별화된 시설을
               배치하여 여행자님의 취향과 일행의 수에 맞추어
               <br /> 아름다운 전망과 편안하고 독특한 시설을 부담 없는 가격으로
               누리실 수 있습니다.
@@ -198,7 +198,7 @@ const Introduction = () => {
           <Plx parallaxData={parallaxData.fadeIn}>
             <div className="p-5 border border-gray-300 rounded-lg shadow-md min-h-[400px] max-h-[600px]">
               <Image
-                src="/images/terrace.jpg"
+                src="/images/ocean_view_terace.jpg"
                 alt="Terrace"
                 layout="responsive"
                 width={600}
@@ -230,7 +230,7 @@ const Introduction = () => {
           <Plx parallaxData={parallaxData.fadeIn}>
             <div className="p-5 border border-gray-300 rounded-lg shadow-md min-h-[400px] max-h-[600px]">
               <Image
-                src="/images/oceanbath.jpg"
+                src="/images/loyal_suite_a_bathtub.jpg"
                 alt="Ocean Bathtub"
                 layout="responsive"
                 width={600}
@@ -262,7 +262,7 @@ const Introduction = () => {
           <Plx parallaxData={parallaxData.fadeIn}>
             <div className="p-5 border border-gray-300 rounded-lg shadow-md min-h-[400px] max-h-[600px]">
               <Image
-                src="/images/inview.jpg"
+                src="/images/loyal_suite_b_room.jpg"
                 alt="Separate View Space"
                 layout="responsive"
                 width={600}

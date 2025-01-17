@@ -18,9 +18,9 @@ import { Grammy } from "@/data/api/endpoint/constants";
 const images = [
   { src: "/images/Main1.jpg", label: "GRAMI HOTEL" },
   { src: "/images/main4.jpg", label: "GRAMI WELCOME" },
-  { src: "/images/main3.jpg", label: "MOUNTAIN VIEW" },
   { src: "/images/main2.jpg", label: "OCEAN VIEW" },
-  { src: "/images/main5.jpg", label: "HEALING TIME" },
+  { src: "/images/main3.jpg", label: "MOUNTAIN VIEW" },
+  { src: "/images/terace_view.jpg", label: "TERRACE VIEW" },
 ];
 
 type HomeScreenProps = {
@@ -68,13 +68,6 @@ const HomeScreen = ({
     setCurrentImageIndex(index);
     !showText && setShowText(true);
   };
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
-    }, 3000);
-    return () => clearInterval(interval);
-  }, []);
 
   useEffect(() => {
     const textTimer = setTimeout(() => {

@@ -1,5 +1,3 @@
-import Link from "next/link";
-import { FaHotel } from "react-icons/fa6";
 import { useEffect, useState } from "react";
 import SubMenu from "./navbar/SubMenu";
 import { RouteName, RoutePath } from "@/data/model/menu/enum";
@@ -9,6 +7,7 @@ import { usePathname } from "next/navigation";
 import { OFFERS_TYPE } from "@/data/model/offers/enum";
 import { PROLOGUE_TYPE } from "@/data/model/prologue/enum";
 import useAgent from "@/data/hooks/agent/useAgent";
+import Image from "next/image";
 
 export default function Navbar() {
   const pathname = usePathname();
@@ -76,11 +75,8 @@ export default function Navbar() {
   return (
     <nav className="h-20 z-20 border-b border-gray-200 w-full shadow-sm fixed top-0 bg-white">
       <div className="flex justify-between items-center sm:px-10 p-4 h-full">
-        <div className="flex items-center gap-2">
-          <FaHotel className="text-3xl" />
-          <Link href="/" className="text-sm sm:text-lg font-semibold">
-            그라미 호텔
-          </Link>
+        <div className="flex items-center gap-2 cursor-pointer" onClick={() => {window.location.href = "/";}}>
+          <Image src={"/images/grami_logo.svg"} alt="logo" width={180} height={10} />
         </div>
 
         <div
@@ -153,20 +149,23 @@ export default function Navbar() {
             }
             onMouseLeave={isMobile ? undefined : handleMouseLeave}
           >
-            <NavTab
-              menu={{
-                title: RouteName.RESERVATION,
-                path: RoutePath.RESERVATION,
+            <button
+              type="button"
+              className="text-lg sm:text-xl hover:text-gray-300 transition-colors hover:border-b flex-shrink-0 snap-start"
+              onClick={() => {
+                window.location.href = "https://booking.naver.com/booking/3/bizes/1227540?area=pll";
               }}
-            />
-            {subMenuContent === "reservation" && (
+            >
+              RESERVATION
+            </button>
+            {/* {subMenuContent === "reservation" && (
               <SubMenu
                 menuList={[
                   { title: "예약안내", path: RoutePath.RESERVATION },
                   { title: "실시간 예약", path: RoutePath.RESERVATION },
                 ]}
               />
-            )}
+            )} */}
           </div>
           <div className="flex-shrink-0 snap-start">
             <NavTab

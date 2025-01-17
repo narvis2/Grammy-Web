@@ -35,9 +35,12 @@ const ProductAdapter = ({ roomTypeInfo }: ProductAdapterProps) => {
               <span className="text-gray-600">{`${roomTypeInfo.maxCount} 명`}</span>
             </p>
           </div>
-          <div className="flex items-baseline space-x-2 font-roboto mt-2">
+          <div className="flex flex-col items-baseline font-roboto mt-2">
             <p className="text-base text-primary font-semibold">{`주중 가격 : ${getCommaNumber(
               roomTypeInfo.weekdayPrice
+            )} ￦`}</p>
+            <p className="text-base text-primary font-semibold">{`금요일 가격 : ${getCommaNumber(
+              roomTypeInfo.fridayPrice
             )} ￦`}</p>
             {/* text-base text-gray-400 line-through */}
             <p className="text-base text-primary font-semibold">{`주말 가격 : ${getCommaNumber(
@@ -47,18 +50,18 @@ const ProductAdapter = ({ roomTypeInfo }: ProductAdapterProps) => {
 
           <div className="grid grid-cols-2 gap-2 mt-8 justify-items-start">
             <ConvenienceItem
-              title={`${roomType === "STANDARD-A" ? "마운틴 뷰" : "오션뷰"}`}
+              title={`${roomType === "스탠다드 A" || roomType === "스위트 A" || roomType === "디럭스 A 테라스" || roomType === "로얄 스위트 B" || roomType === "로얄 스위트 A 테라스" ? "오션뷰" : roomType === "코너 스위트" ? "측면 오션뷰" : "마운틴 뷰"}`}
             />
             <ConvenienceItem title="욕조" />
             <ConvenienceItem title="와이파이" />
-            <ConvenienceItem title="OTT(넷플릭스)" />
+            <ConvenienceItem title="OTT(넷플릭스 등등..)" />
             <ConvenienceItem title="구글 스마트 티비" />
-            <ConvenienceItem title="스타일러" />
+            {roomType === "스위트 B" || roomTypeInfo.maxCount >= 4 && <ConvenienceItem title="스타일러" />}
             <ConvenienceItem title="에어컨" />
-            {roomType === "STANDARD-B" ||
-              (roomType === "ROYAL SUITE-A" && (
+            {roomType === "디럭스 A 테라스" || roomType === "디럭스 B 테라스" ||
+              roomType === "로얄 스위트 A 테라스" && (
                 <ConvenienceItem title="테라스" />
-              ))}
+              )}
             {roomTypeInfo.rooms[0].beds.map((item) => (
               <ConvenienceItem
                 key={item.type}
@@ -74,6 +77,16 @@ const ProductAdapter = ({ roomTypeInfo }: ProductAdapterProps) => {
             />
           )}
         </section>
+
+        <button
+          type="submit"
+          className="text-white inline-flex items-center bg-[#d76076] font-medium rounded-lg text-sm px-5 py-2.5 text-center w-100% justify-center mt-5"
+          onClick={() => {
+            window.location.href = "https://booking.naver.com/booking/3/bizes/1227540?area=pll";
+          }}
+        >
+          예약 및 결제
+        </button>
       </div>
     </div>
   );

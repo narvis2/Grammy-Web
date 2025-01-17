@@ -107,6 +107,9 @@ const RoomTypeItem = ({ roomType }: RoomTypeItemProps) => {
             {`주중 가격 : ${getCommaNumber(roomType.weekdayPrice)} ￦`}
           </p>
           <p className="block antialiased font-sans text-base font-light leading-relaxed text-blue-gray-900 mb-0.5 !font-semibold">
+            {`금요일 가격 : ${getCommaNumber(roomType.fridayPrice)} ￦`}
+          </p>
+          <p className="block antialiased font-sans text-base font-light leading-relaxed text-blue-gray-900 mb-0.5 !font-semibold">
             {`주말 가격 : ${getCommaNumber(roomType.weekendPrice)} ￦`}
           </p>
         </div>

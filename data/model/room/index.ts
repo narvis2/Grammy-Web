@@ -20,6 +20,7 @@ export type RoomTypeResponse = {
   id: number;
   roomTypeName: string;
   weekdayPrice: number;
+  fridayPrice: number;
   weekendPrice: number;
   maxCount: number;
   rooms: RoomResponse[];
