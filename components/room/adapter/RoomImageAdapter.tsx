@@ -1,5 +1,6 @@
 import { RoomTypeImageModel } from "@/data/model/room";
 import { useEffect, useState } from "react";
+import { PiMouseSimpleDuotone } from "react-icons/pi";
 
 type RoomImageAdapterProps = {
   roomTypeImages: RoomTypeImageModel[];
@@ -41,7 +42,7 @@ const RoomImageAdapter = ({ roomTypeImages }: RoomImageAdapterProps) => {
             {roomTypeImages[imageIndex].roomType}
           </h2>
 
-          <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
+          <div className="absolute bottom-24 left-1/2 transform -translate-x-1/2 flex space-x-2">
             {roomTypeImages.map((image, index) => (
               <button
                 key={index}
@@ -55,6 +56,10 @@ const RoomImageAdapter = ({ roomTypeImages }: RoomImageAdapterProps) => {
             ))}
           </div>
         </div>
+      </div>
+      <div className="absolute bottom-16 left-1/2 transform -translate-x-1/2 flex flex-col items-center">
+        <PiMouseSimpleDuotone className="text-4xl text-white" />
+        <span className="text-xl font-sans text-white mt-2">Scroll Down</span>
       </div>
     </div>
   );

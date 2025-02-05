@@ -1,5 +1,5 @@
 import useHotelInfo from "@/data/hooks/hotel/useHotelInfo";
-import { phoneFormatter } from "@/data/mapper";
+import { AiFillInstagram } from "react-icons/ai";
 
 export default function Footer() {
   const { hotelInfo } = useHotelInfo();
@@ -21,7 +21,15 @@ export default function Footer() {
                   <a href="/notice">공지사항</a>
                 </li>
                 <li className="border-b border-transparent hover:border-black py-2">
-                  <a href="/reservation">예약하기</a>
+                  <a 
+                    href="#"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      window.location.href = "https://booking.naver.com/booking/3/bizes/1227540?area=pll";
+                    }}
+                  >
+                    예약하기
+                  </a>
                 </li>
               </ul>
             </div>
@@ -67,6 +75,11 @@ export default function Footer() {
               <div className="flex items-center justify-center md:justify-start">
                 <span className="font-semibold mr-2">예금주:</span>
                 {hotelInfo?.hotelDetail?.depositor ?? "등록된 정보가 없습니다."}
+              </div>
+              <div className="flex items-center justify-center md:justify-start">
+                {/* 인스타그램 텍스트 대신 아이콘 사용 */}
+                <AiFillInstagram className="text-2xl mr-2" />
+                {"grami_hotel_offical"}
               </div>
             </div>
           </div>
