@@ -30,8 +30,8 @@ const ProductAdapter = ({ roomTypeInfo }: ProductAdapterProps) => {
             <ChipAdapter chipList={roomNumberList} />
           </div>
           <div className="space-y-2 mt-8">
-            <p className="text-gray-800 font-semibold space-x-2">
-              <span>최대 인원: </span>
+            <p className="text-gray-800 font-semibold">
+              <span>최대 인원 : </span>
               <span className="text-gray-600">{`${roomTypeInfo.maxCount} 명`}</span>
             </p>
           </div>
@@ -79,6 +79,7 @@ const ProductAdapter = ({ roomTypeInfo }: ProductAdapterProps) => {
 
           <section className="mt-8">
             <div className="flex items-center">
+              <div className="flex-1 h-px bg-gray-300 mr-2"></div>
               <p className="text-gray-800 text-primary font-semibold">
                 [객실 이용 안내]
               </p>
@@ -103,9 +104,14 @@ const ProductAdapter = ({ roomTypeInfo }: ProductAdapterProps) => {
             </div>
             <div className="mt-2 flex items-start">
               <span className="text-base text-gray-600 font-serif mr-2">ㆍ</span>
-              <p className="text-base text-gray-600 font-serif">
-                반려동물은 객실 내 출입 불가입니다. <span className="font-bold text-red-500">(위반 시 환불불가, 퇴실조치)</span>
-              </p>
+              <div>
+                <p className="text-base text-gray-600 font-serif">
+                  반려동물은 객실 내 출입 불가입니다.
+                </p>
+                <p className="text-base text-red-500 font-serif">
+                  (위반 시 환불불가, 퇴실조치)
+                </p>
+              </div>
             </div>
             <div className="mt-2 flex items-start">
               <span className="text-base text-gray-600 font-serif mr-2">ㆍ</span>

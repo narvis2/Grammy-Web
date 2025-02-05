@@ -189,7 +189,7 @@ export default function Navbar() {
           <button
             type="button"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="p-2 focus:outline-none"
+            className="p-2 focus:outline-none animate-pulse"
           >
             <svg
               className="w-6 h-6"
@@ -210,7 +210,7 @@ export default function Navbar() {
       </div>
 
       {/* 모바일 네비게이션 메뉴 */}
-      {isMobile && isMenuOpen && (
+      {isMenuOpen && (
         <div className="sm:hidden bg-white shadow-md">
           <div className="flex flex-col space-y-2 p-4">
             <div

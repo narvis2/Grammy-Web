@@ -72,7 +72,7 @@ const Room = () => {
         <div className="inner-con flex items-center justify-center">
           <div className="text-center font-semibold font-serif text-4xl">
             <span className="block mb-4">객실 유형</span>
-            <h5 className="text-sm">그라미 호텔의 특별한 객실을 누려보세요.</h5>
+            <h5 className="text-lg">그라미 호텔의 특별한 객실을 누려보세요.</h5>
           </div>
         </div>
 
