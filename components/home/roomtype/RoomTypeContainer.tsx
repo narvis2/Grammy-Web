@@ -7,6 +7,7 @@ type RoomTypeContainerProps = {
 };
 
 const RoomTypeContainer = ({ roomTypeList }: RoomTypeContainerProps) => {
+
   return (
     <section className="pt-12 pb-20 bg-[#FFFFFF] ">
       <RoomTypeHeader
@@ -16,7 +17,9 @@ const RoomTypeContainer = ({ roomTypeList }: RoomTypeContainerProps) => {
 
       <div className="flex items-start justify-center min-h-screen p-8 mt-8">
         {roomTypeList.length > 0 && (
-          <div className="container grid grid-cols-1 gap-8  lg:grid-cols-2">
+          <div 
+            className="container grid grid-cols-1 gap-8  lg:grid-cols-2"
+          >
             {roomTypeList.map((item) => {
               return <RoomTypeItem key={item.roomTypeName} roomType={item} />;
             })}
