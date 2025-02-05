@@ -12,7 +12,7 @@ const RoomImageAdapter = ({ roomTypeImages }: RoomImageAdapterProps) => {
   useEffect(() => {
     const interval = setInterval(() => {
       setImageIndex((prevIndex) => (prevIndex + 1) % roomTypeImages.length);
-    }, 3000);
+    }, 5000);
     return () => clearInterval(interval);
   }, []);
 

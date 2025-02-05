@@ -1,10 +1,13 @@
 import { getCommaNumber } from "@/data/mapper";
+import { RoutePath } from "@/data/model/menu/enum";
 import { RoomTypeResponse } from "@/data/model/room";
 import {
   roomTypeSubDescriptions,
   staticImageUrl,
 } from "@/data/utils/constants";
+import { bedTypeConvert, heightDividerText } from "@/data/utils/utils";
 import Image from "next/image";
+import Link from "next/link";
 import { useState } from "react";
 
 type RoomTypeItemProps = {
@@ -21,6 +24,7 @@ const RoomTypeItem = ({ roomType }: RoomTypeItemProps) => {
     const index = isNext
       ? (currentImgIndex + 1) % imageList.length
       : (currentImgIndex - 1 + imageList.length) % imageList.length;
+    console.log(`👠 index 👉`, index);
     setCurrentImageIndex(index);
   }
 
@@ -93,9 +97,18 @@ const RoomTypeItem = ({ roomType }: RoomTypeItemProps) => {
         </button>
       </div>
       <div className="p-6 px-2 sm:pr-6 sm:pl-6">
-        <p className="block antialiased font-sans text-sm font-light leading-normal text-inherit mb-4 !font-semibold">
-          {roomType.roomTypeName}
-        </p>
+        <div className="flex justify-between items-center mb-4">
+          <p className="antialiased font-sans text-lg font-light leading-normal text-inherit !font-semibold">
+            {roomType.roomTypeName}
+          </p>
+          <Link
+            type="button"
+            href={RoutePath.ROOMS + `?type=${roomType.roomTypeName}`}
+            className="text-gray-500 text-sm border border-gray-500 rounded-md px-3 py-1 hover:bg-[#d76076] hover:text-white hover:border-transparent transition-colors"
+          >
+            더보기
+          </Link>
+        </div>
         <p className="block antialiased font-sans text-base leading-relaxed text-inherit mb-4 font-normal !text-gray-500">
           {description ?? ""}
         </p>
@@ -113,18 +126,28 @@ const RoomTypeItem = ({ roomType }: RoomTypeItemProps) => {
             {`주말 가격 : ${getCommaNumber(roomType.weekendPrice)} ￦`}
           </p>
         </div>
-        <div className="mt-4">
+        <div className="mt-4 flex flex-row space-x-1">
           {room.beds.map((item, index) => {
             return (
               <p
                 key={item.type}
                 className="block antialiased font-sans text-sm leading-normal text-gray-700 font-normal"
               >
-                {`${item.type} 침대 ${item.count}개`}
+                {`${bedTypeConvert(item.type)} 침대 ${item.count}개${heightDividerText(room.beds.length, index)}`}
               </p>
             );
           })}
         </div>
+
+        <button
+          type="submit"
+          className="text-white inline-flex items-center bg-[#d76076] font-medium rounded-lg text-sm px-5 py-2.5 text-center w-full justify-center mt-5"
+          onClick={() => {
+            window.location.href = "https://booking.naver.com/booking/3/bizes/1227540?area=pll";
+          }}
+        >
+          실시간 예약
+        </button>
       </div>
     </div>
   );
