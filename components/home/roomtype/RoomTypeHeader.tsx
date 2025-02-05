@@ -10,7 +10,7 @@ const RoomTypeHeader = ({ title, description }: RoomTypeHeaderProps) => {
     <div className="inner-con flex items-center justify-center">
       <div className="text-center font-semibold font-serif text-4xl">
         <span className="block mb-4">{title}</span>
-        <h5 className="text-sm">{description}</h5>
+        <h5 className="text-lg">{description}</h5>
       </div>
     </div>
   );
