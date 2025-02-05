@@ -11,7 +11,7 @@ const WayToComeHeader = ({ title, description }: WayToComeHeaderProps) => {
       <h2 className="text-center font-semibold font-serif text-4xl">
         <span className="block mb-4">{title}</span>
       </h2>
-      <p className="font-semibold font-serif text-sm mb-6">{description}</p>
+      <p className="font-semibold font-serif text-lg mb-6">{description}</p>
     </>
   );
 };
