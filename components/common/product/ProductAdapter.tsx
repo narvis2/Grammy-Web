@@ -76,16 +76,82 @@ const ProductAdapter = ({ roomTypeInfo }: ProductAdapterProps) => {
               dangerouslySetInnerHTML={{ __html: description }}
             />
           )}
-        </section>
 
+          <section className="mt-8">
+            <div className="flex items-center">
+              <p className="text-gray-800 text-primary font-semibold">
+                [객실 이용 안내]
+              </p>
+              <div className="flex-1 h-px bg-gray-300 ml-2"></div>
+            </div>
+            {roomTypeInfo.maxCount > 2 && (<div className="mt-2 flex items-start">
+              <span className="text-base text-gray-600 font-serif mr-2">ㆍ</span>
+              <p className="text-base text-gray-600 font-serif">
+                2인 기준 금액으로 <span className="font-bold text-red-500">기준 인원 초과 시 1인 20,000원의 추가 비용</span>이 발생합니다.
+              </p>
+            </div>)}
+            <div className="mt-2 flex items-start">
+              <span className="text-base text-gray-600 font-serif mr-2">ㆍ</span>
+              <div>
+                <p className="text-base text-gray-600 font-serif">
+                  객실 및 호텔 내부 전체 <span className="font-bold text-red-500">금연</span>입니다.
+                </p>
+                <p className="text-base text-red-500 font-serif">
+                  (흡연 시 객실 재정비 비용 10만원이 부과됩니다.)
+                </p>
+              </div>
+            </div>
+            <div className="mt-2 flex items-start">
+              <span className="text-base text-gray-600 font-serif mr-2">ㆍ</span>
+              <p className="text-base text-gray-600 font-serif">
+                반려동물은 객실 내 출입 불가입니다. <span className="font-bold text-red-500">(위반 시 환불불가, 퇴실조치)</span>
+              </p>
+            </div>
+            <div className="mt-2 flex items-start">
+              <span className="text-base text-gray-600 font-serif mr-2">ㆍ</span>
+              <p className="text-base text-gray-600 font-serif">
+                객실 <span className="font-bold text-red-500">카드 키 분실 시 20,000원</span>이 청구됩니다.
+              </p>
+            </div>
+            <div className="mt-2 flex items-start">
+              <span className="text-base text-gray-600 font-serif mr-2">ㆍ</span>
+              <p className="text-base text-gray-600 font-serif">
+                미성년자는 법적 동의 없이 입실 및 혼숙이 불가합니다.
+              </p>
+            </div>
+            <div className="mt-2 flex items-start">
+              <span className="text-base text-gray-600 font-serif mr-2">ㆍ</span>
+              <div>
+                <p className="text-base text-gray-600 font-serif">
+                  객실 내 <span className="font-bold text-red-500">대게 및 홍게 반입</span>, 취사, 풍선부착, 촛불 이벤트를 금지합니다.
+                </p>
+                <p className="text-base text-red-500 font-serif">
+                  (위반 시 퇴실 조치 및 객실 재정비 비용 10만원이 부과됩니다.)
+                </p>
+              </div>
+            </div>
+            <div className="mt-2 flex items-start">
+              <span className="text-base text-gray-600 font-serif mr-2">ㆍ</span>
+              <p className="text-base text-gray-600 font-serif">
+                사전 문의 없이 예약인원 초과 또는 무단 출입 시 <span className="font-bold text-red-500">환불 없이 퇴실조치</span>됩니다.
+              </p>
+            </div>
+            <div className="mt-2 flex items-start">
+              <span className="text-base text-gray-600 font-serif mr-2">ㆍ</span>
+              <p className="text-base text-gray-600 font-serif">
+                3인 이상 투숙 시 혼숙 불가합니다. (가족 제외)
+              </p>
+            </div>
+          </section>
+        </section>
         <button
           type="submit"
-          className="text-white inline-flex items-center bg-[#d76076] font-medium rounded-lg text-sm px-5 py-2.5 text-center w-100% justify-center mt-5"
+          className="text-white inline-flex items-center bg-[#d76076] font-medium rounded-lg text-sm px-5 py-2.5 text-center w-100% justify-center mt-8 lg:mt-0"
           onClick={() => {
             window.location.href = "https://booking.naver.com/booking/3/bizes/1227540?area=pll";
           }}
         >
-          예약 및 결제
+          실시간 예약
         </button>
       </div>
     </div>

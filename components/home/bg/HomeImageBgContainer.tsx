@@ -1,4 +1,5 @@
 import { CarouselImageModel } from "@/data/model/image/types";
+import Image from "next/image";
 import { PiMouseSimpleDuotone } from "react-icons/pi";
 
 type HomeImageBgContainerProps = {
@@ -16,11 +17,12 @@ const HomeImageBgContainer = ({
 }: HomeImageBgContainerProps) => {
   return (
     <div className="slideshow-container relative">
-      <img
+      <Image 
         src={images[currentImageIndex].src}
         alt="Slideshow"
-        className="slideshow-image w-full object-cover"
-      />
+        width={600}
+        height={600}
+        className="slideshow-image w-full object-cover" />
       <div
         className={`absolute bottom-20 flex flex-col items-center text-center text-white transition-opacity duration-500 ${
           showText ? "opacity-100" : "opacity-0"

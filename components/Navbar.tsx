@@ -11,11 +11,9 @@ import Image from "next/image";
 
 export default function Navbar() {
   const pathname = usePathname();
-
   const { isMobile } = useAgent();
   const [subMenuContent, setSubMenuContent] = useState<string | null>(null);
   const [timeoutId, setTimeoutId] = useState<NodeJS.Timeout | null>(null);
-
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const Prologue_tabList = [
@@ -33,6 +31,7 @@ export default function Navbar() {
     { title: OFFERS_TYPE.ROOM_ITEMS, path: RoutePath.SPECIAL_OFFERS },
     { title: OFFERS_TYPE.SERVICE, path: RoutePath.SPECIAL_OFFERS },
   ];
+
   const { roomTypeList } = useRoomTypeInfo();
 
   const handleMouseEnter = (content: string) => {
@@ -59,14 +58,20 @@ export default function Navbar() {
       }
     };
 
-    document.addEventListener("click", handleClickOutside);
+    const handleScroll = () => {
+      if (isMenuOpen) {
+        setIsMenuOpen(false);
+      }
+    };
 
-    isMobile && document.removeEventListener("click", handleClickOutside);
+    document.addEventListener("click", handleClickOutside);
+    window.addEventListener("scroll", handleScroll);
 
     return () => {
       document.removeEventListener("click", handleClickOutside);
+      window.removeEventListener("scroll", handleScroll);
     };
-  }, [isMenuOpen, isMobile]);
+  }, [isMenuOpen]);
 
   if (pathname === RoutePath.LOGIN) {
     return null;
@@ -75,12 +80,24 @@ export default function Navbar() {
   return (
     <nav className="h-20 z-20 border-b border-gray-200 w-full shadow-sm fixed top-0 bg-white">
       <div className="flex justify-between items-center sm:px-10 p-4 h-full">
-        <div className="flex items-center gap-2 cursor-pointer" onClick={() => {window.location.href = "/";}}>
-          <Image src={"/images/grami_logo.svg"} alt="logo" width={165} height={10} />
+        {/* 로고 영역 */}
+        <div
+          className="flex items-center gap-2 cursor-pointer"
+          onClick={() => {
+            window.location.href = "/";
+          }}
+        >
+          <Image
+            src={"/images/grami_logo.svg"}
+            alt="logo"
+            width={165}
+            height={10}
+          />
         </div>
 
+        {/* 데스크탑 네비게이션 (화면 사이즈 sm 이상) */}
         <div
-          className="ml-10 flex-1 flex space-x-6 justify-start items-center overflow-x-auto scrollbar-hidden sm:justify-center h-full"
+          className="hidden sm:flex ml-10 flex-1 flex space-x-6 justify-start items-center overflow-x-auto scrollbar-hidden sm:justify-center h-full"
           style={{
             WebkitOverflowScrolling: "touch",
             touchAction: "pan-x",
@@ -153,19 +170,12 @@ export default function Navbar() {
               type="button"
               className="text-lg sm:text-xl hover:text-gray-300 transition-colors hover:border-b flex-shrink-0 snap-start"
               onClick={() => {
-                window.location.href = "https://booking.naver.com/booking/3/bizes/1227540?area=pll";
+                window.location.href =
+                  "https://booking.naver.com/booking/3/bizes/1227540?area=pll";
               }}
             >
               RESERVATION
             </button>
-            {/* {subMenuContent === "reservation" && (
-              <SubMenu
-                menuList={[
-                  { title: "예약안내", path: RoutePath.RESERVATION },
-                  { title: "실시간 예약", path: RoutePath.RESERVATION },
-                ]}
-              />
-            )} */}
           </div>
           <div className="flex-shrink-0 snap-start">
             <NavTab
@@ -173,7 +183,127 @@ export default function Navbar() {
             />
           </div>
         </div>
+
+        {/* 모바일 햄버거 버튼 (sm 미만) */}
+        <div className="sm:hidden">
+          <button
+            type="button"
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            className="p-2 focus:outline-none"
+          >
+            <svg
+              className="w-6 h-6"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M4 6h16M4 12h16M4 18h16"
+              ></path>
+            </svg>
+          </button>
+        </div>
       </div>
+
+      {/* 모바일 네비게이션 메뉴 */}
+      {isMobile && isMenuOpen && (
+        <div className="sm:hidden bg-white shadow-md">
+          <div className="flex flex-col space-y-2 p-4">
+            <div
+              className="relative group"
+              onClick={() => {
+                setIsMenuOpen(false);
+                window.location.href = RoutePath.PROLOGUE;
+              }}
+            >
+              <NavTab
+                menu={{ title: RouteName.PROLOGUE, path: RoutePath.PROLOGUE }}
+              />
+            </div>
+            <div
+              className="relative group"
+              onClick={() => {
+                setIsMenuOpen(false);
+                window.location.href = RoutePath.ROOMS;
+              }}
+            >
+              <NavTab
+                menu={{ title: RouteName.ROOMS, path: RoutePath.ROOMS }}
+              />
+            </div>
+            <div
+              className="relative group"
+              onClick={() => {
+                setIsMenuOpen(false);
+                window.location.href = RoutePath.SPECIAL_OFFERS;
+              }}
+            >
+              <NavTab
+                menu={{
+                  title: RouteName.SPECIAL_OFFERS,
+                  path: RoutePath.SPECIAL_OFFERS,
+                }}
+              />
+            </div>
+            <div
+              className="relative group"
+              onClick={() => {
+                setIsMenuOpen(false);
+                window.alert("서비스 준비중입니다.");
+              }}
+            >
+              <button
+                type="button"
+                className="md:text-xl sm:text-base hover:text-gray-300 transition-colors hover:border-b"
+                onClick={() => window.alert("서비스 준비중입니다.")}
+              >
+                EVENT
+              </button>
+            </div>
+            <div
+              className="relative group"
+              onClick={() => {
+                setIsMenuOpen(false);
+                window.alert("서비스 준비중입니다.");
+              }}
+            >
+              <button
+                type="button"
+                className="md:text-xl sm:text-base hover:text-gray-300 transition-colors hover:border-b"
+              >
+                REVIEW
+              </button>
+            </div>
+            <div
+              className="relative group"
+              onClick={() => {
+                setIsMenuOpen(false);
+                window.location.href =
+                  "https://booking.naver.com/booking/3/bizes/1227540?area=pll";
+              }}
+            >
+              <button type="button" className="md:text-xl sm:text-base hover:text-gray-300 transition-colors hover:border-b">
+                RESERVATION
+              </button>
+            </div>
+            <div
+              className="relative group"
+              onClick={() => {
+                setIsMenuOpen(false);
+                window.location.href = RoutePath.NOTICE;
+              }}
+            >
+              <NavTab
+                menu={{ title: RouteName.NOTICE, path: RoutePath.NOTICE }}
+              />
+            </div>
+          </div>
+        </div>
+      )}
     </nav>
   );
 }

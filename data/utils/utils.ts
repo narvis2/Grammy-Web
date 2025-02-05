@@ -15,3 +15,24 @@ export const allowScroll = (prevScrollY: number) => {
   document.body.style.overflowY = "";
   window.scrollTo(0, prevScrollY);
 };
+
+export const bedTypeConvert = (type: string) => {
+  switch (type) {
+    case 'SINGLE':
+      return '싱글';
+    default:
+      return '더블'
+  }
+}
+
+export const heightDividerText = (size: number, index: number) => {
+  if (size === 1) {
+    return '';
+  }
+
+  if (index > 0) {
+    return '';
+  }
+
+  return ' | ';
+}
