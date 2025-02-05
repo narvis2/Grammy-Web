@@ -47,9 +47,7 @@ const WayToComeContainer = ({ hotelInfo }: WayToComeContainerProps) => {
 
       <div className="w-full lg:w-1/2">
         <p className="text-lg">{`• 주소 : ${getFullAddress(hotelInfo)}`}</p>
-        <p className="text-lg">{`• 연락처 : ${phoneFormatter(
-          hotelInfo?.phoneNumber
-        )}`}</p>
+        <p className="text-lg">{`• 연락처 : 054-727-0600`}</p>
 
         {["car", "bus", "walk"].map((type) => (
           <div
