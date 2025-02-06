@@ -68,7 +68,7 @@ const Room = () => {
         </section>
       )}
 
-      <section className="pt-12 pb-20 bg-gray-200 mt-28">
+      <section className="pt-12 pb-20 bg-gray-200 mt-20">
         <div className="inner-con flex items-center justify-center">
           <div className="text-center font-semibold font-serif text-4xl">
             <span className="block mb-4">객실 유형</span>

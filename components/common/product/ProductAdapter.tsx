@@ -4,6 +4,7 @@ import ConvenienceItem from "../ConvenienceItem";
 import ProductImageAdapter from "./ProductImageAdapter";
 import { getCommaNumber } from "@/data/mapper";
 import { roomTypeDescriptions, staticImageUrl } from "@/data/utils/constants";
+import { viewTypeConvert, viewTypeDescription } from "@/data/utils/utils";
 
 type ProductAdapterProps = {
   roomTypeInfo: RoomTypeResponse;
@@ -25,11 +26,15 @@ const ProductAdapter = ({ roomTypeInfo }: ProductAdapterProps) => {
         <ProductImageAdapter imageList={mainImageList} />
 
         <section>
-          <h2 className="text-3xl font-serif uppercase mb-2">{roomType}</h2>
-          <div className="flex items-center">
-            <ChipAdapter chipList={roomNumberList} />
+          <h2 className="text-3xl font-serif uppercase mb-2">{`${roomType} - ${viewTypeConvert(roomType)}`}</h2>
+          <div 
+            className="flex items-center text-start font-serif text-lg text-#939393 mt-4" 
+            style={{ whiteSpace: 'pre-line' }}
+          >
+            {/* <ChipAdapter chipList={roomNumberList} /> */}
+            {`${viewTypeDescription(roomType)}`}
           </div>
-          <div className="space-y-2 mt-8">
+          <div className="space-y-2 mt-6">
             <p className="text-gray-800 font-semibold">
               <span>최대 인원 : </span>
               <span className="text-gray-600">{`${roomTypeInfo.maxCount} 명`}</span>
@@ -50,12 +55,13 @@ const ProductAdapter = ({ roomTypeInfo }: ProductAdapterProps) => {
 
           <div className="grid grid-cols-2 gap-2 mt-8 justify-items-start">
             <ConvenienceItem
-              title={`${roomType === "스탠다드 A" || roomType === "스위트 A" || roomType === "디럭스 A 테라스" || roomType === "로얄 스위트 B" || roomType === "로얄 스위트 A 테라스" ? "오션뷰" : roomType === "코너 스위트" ? "측면 오션뷰" : "마운틴 뷰"}`}
+              title={`${viewTypeConvert(roomType)}`}
             />
             <ConvenienceItem title="욕조" />
             <ConvenienceItem title="와이파이" />
             <ConvenienceItem title="OTT(넷플릭스 등등..)" />
-            <ConvenienceItem title="구글 스마트 티비" />
+            <ConvenienceItem title="64인치 구글 스마트 티비" />
+            <ConvenienceItem title="평일 조식" />
             {roomType === "스위트 B" || roomTypeInfo.maxCount >= 4 && <ConvenienceItem title="스타일러" />}
             <ConvenienceItem title="에어컨" />
             {roomType === "디럭스 A 테라스" || roomType === "디럭스 B 테라스" ||
