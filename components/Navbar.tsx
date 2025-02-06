@@ -283,12 +283,6 @@ export default function Navbar() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{
-              opacity: {
-                duration: 0.6, // fade in/out 시간이 0.6초
-                ease: [0.33, 1, 0.68, 1], // 약간의 overshoot와 lingering 효과를 주는 cubic-bezier 함수
-              },
-            }}
             className="fixed inset-x-0 top-20 bottom-0 z-50 transition-opacity duration-300"
           >
             {/* 반투명 배경 (클릭 시 메뉴 닫기) */}
