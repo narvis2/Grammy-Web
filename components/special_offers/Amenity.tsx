@@ -38,7 +38,7 @@ const Amenity = () => {
             <div className="gap-8">
               <div className="flex justify-center">
                 <Image
-                  src="/images/shampoo.jpg"
+                  src="/images/offers_shampoo.jpg"
                   alt="shampoo"
                   width={350}
                   height={350}
