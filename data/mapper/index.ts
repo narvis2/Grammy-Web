@@ -37,7 +37,7 @@ export function checkPhoneNumber(number: string) {
 export function getFullAddress(hotelInfo: HotelResponse | undefined) {
   if (!hotelInfo) return "";
 
-  return `${hotelInfo.address} ${hotelInfo.addressDetail}`;
+  return `${hotelInfo.address}`;
 }
 
 export function stringToDateFormat(date: string, pattern?: string) {
