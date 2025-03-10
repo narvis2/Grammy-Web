@@ -18,7 +18,7 @@ const Breakfast = () => {
             </p>
             <div className="flex justify-center">
               <Image
-                src="/images/breakfast.jpg"
+                src="/images/offers_cafe.jpg"
                 alt="조식 이미지"
                 width={400}
                 height={400}

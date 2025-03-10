@@ -17,7 +17,7 @@ const Bath = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               <div className="flex justify-center">
                 <Image
-                  src="/images/bath1.jpg"
+                  src="/images/offers_bath.jpg"
                   alt="욕조 이미지 1"
                   width={400}
                   height={300}
