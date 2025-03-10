@@ -6,7 +6,7 @@ const nextConfig = {
         source: '/api/:path*',
         headers: [
           { key: 'Access-Control-Allow-Credentials', value: 'true' },
-          { key: 'Access-Control-Allow-Origin', value: 'https://grammy-hotel-api-server.fly.dev' },
+          { key: 'Access-Control-Allow-Origin', value: 'https://grami-api-server.fly.dev' },
           { key: 'Access-Control-Allow-Methods', value: 'GET,OPTIONS,PATCH,DELETE,POST,PUT' },
           { key: 'Access-Control-Allow-Headers', value: '*' },
         ],
@@ -17,11 +17,11 @@ const nextConfig = {
     return [
       {
         source: '/api/v1/:path*',
-        destination: 'https://grammy-hotel-api-server.fly.dev/api/v1/:path*',
+        destination: 'https://grami-api-server.fly.dev/api/v1/:path*',
       },
       {
         source: '/(.*)/api/v1/:path*',
-        destination: 'https://grammy-hotel-api-server.fly.dev/api/v1/:path*',
+        destination: 'https://grami-api-server.fly.dev/api/v1/:path*',
       },
       // {
       //   source: '/api/v1/:path*',

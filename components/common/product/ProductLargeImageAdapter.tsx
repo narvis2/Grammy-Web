@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 type ProductLargeImageAdapterProps = {
   imageUrl: string;
   onSlideImage: (isNext: boolean) => void;
@@ -8,11 +10,17 @@ const ProductLargeImageAdapter = ({
   onSlideImage,
 }: ProductLargeImageAdapterProps) => {
   return (
-    <div className="relative bg-clip-border rounded-xl overflow-hidden bg-white text-gray-700 shadow-lg">
-      <img
+    <div className="relative w-full h-[450px] bg-clip-border rounded-xl overflow-hidden bg-white text-gray-700 shadow-lg">
+      {/* <img
         src={imageUrl}
         alt="product"
         className="object-cover w-full h-full border rounded-[10px]"
+      /> */}
+      <Image
+        src={imageUrl}
+        alt="product"
+        fill
+        className="object-cover border rounded-[10px]"
       />
       <button
         type="button"

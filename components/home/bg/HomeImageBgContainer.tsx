@@ -17,12 +17,13 @@ const HomeImageBgContainer = ({
 }: HomeImageBgContainerProps) => {
   return (
     <div className="slideshow-container relative">
-      <Image 
-        src={images[currentImageIndex].src}
-        alt="Slideshow"
-        width={600}
-        height={600}
-        className="slideshow-image w-full object-cover" />
+      <div className="relative w-full h-full">
+        <Image 
+          src={images[currentImageIndex].src}
+          alt="Slideshow"
+          fill
+          className="slideshow-image object-cover" />
+      </div>
       <div
         className={`absolute bottom-20 flex flex-col items-center text-center text-white transition-opacity duration-500 ${
           showText ? "opacity-100" : "opacity-0"
