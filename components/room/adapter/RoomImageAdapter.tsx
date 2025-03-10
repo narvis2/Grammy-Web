@@ -1,6 +1,7 @@
 import { RoomTypeImageModel } from "@/data/model/room";
 import { useEffect, useState } from "react";
 import { PiMouseSimpleDuotone } from "react-icons/pi";
+import Image from "next/image";
 
 type RoomImageAdapterProps = {
   roomTypeImages: RoomTypeImageModel[];
@@ -27,11 +28,14 @@ const RoomImageAdapter = ({ roomTypeImages }: RoomImageAdapterProps) => {
 
   return (
     <div className="slideshow-container relative">
-      <img
-        src={roomTypeImages[imageIndex].imageUrl}
-        alt="Slideshow"
-        className="slideshow-image w-full object-cover"
-      />
+      <div className="relative w-full h-full">
+        <Image
+          src={roomTypeImages[imageIndex].imageUrl}
+          alt="Slideshow"
+          fill
+          className="slideshow-image object-cover"
+        />
+      </div>
       <div
         className={`absolute bottom-20 inset-0 flex flex-col items-center justify-center text-center text-white transition-opacity duration-500 ${
           showText ? "opacity-100" : "opacity-0"

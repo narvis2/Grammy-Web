@@ -2,7 +2,7 @@ export const isDev = false;
 
 export const baseUrl = isDev
   ? "http://localhost:8080/"
-  : "https://grammy-hotel-api-server.fly.dev/";
+  : "https://grami-api-server.fly.dev/";
 
 export const endpoint = "api/v1";
 
