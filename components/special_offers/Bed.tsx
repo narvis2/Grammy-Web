@@ -29,8 +29,8 @@ const Bed = () => {
             </div>
             <div className="w-full">
               <Image
-                src="/images/bed2.jpg"
-                alt="bed2"
+                src="/images/twin_bed.jpg"
+                alt="twin_bed"
                 width={500}
                 height={500}
                 className="rounded-lg shadow-lg"
@@ -38,8 +38,8 @@ const Bed = () => {
             </div>
             <div className="w-full">
               <Image
-                src="/images/bed3.jpg"
-                alt="bed3"
+                src="/images/two_bed.jpg"
+                alt="two_bed"
                 width={500}
                 height={500}
                 className="rounded-lg shadow-lg"
