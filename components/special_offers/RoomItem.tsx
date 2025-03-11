@@ -5,10 +5,11 @@ import { RiServiceLine } from "react-icons/ri";
 const things = [
   { name: "TV", image: "/images/tv.jpg" },
   { name: "냉장고", image: "/images/refrigerator.jpg" },
-  { name: "커피 포트", image: "/images/coffeeport.jpg" },
+  { name: "커피 포트", image: "/images/coffee_pot.jpg" },
   { name: "스타일러", image: "/images/styler.jpg" },
-  { name: "수납공간", image: "/images/acceptance.jpg" },
+  { name: "수납공간", image: "/images/towel.jpg" },
   { name: "드라이기", image: "/images/dryer.jpg" },
+  { name: "가운", image: "/images/gown.jpg" },
 ];
 
 const RoomItem = () => {
