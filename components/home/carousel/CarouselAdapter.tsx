@@ -34,7 +34,7 @@ const CarouselAdapter = ({ images }: CarouselAdapterProps) => {
         slidesPerView={1}
         breakpoints={{
           976: {
-            slidesPerView: 4,
+            slidesPerView: 3,
           },
         }}
       >
