@@ -23,7 +23,7 @@ const tabList = [
   OFFERS_TYPE.BED,
   OFFERS_TYPE.AMENITIES,
   OFFERS_TYPE.BATH,
-  OFFERS_TYPE.BREAKFAST,
+  OFFERS_TYPE.CAFETERIA,
   OFFERS_TYPE.ROOM_ITEMS,
   OFFERS_TYPE.SERVICE,
 ];
@@ -126,7 +126,7 @@ const SpecialOffers = () => {
           {selectedOffer === OFFERS_TYPE.BED && <Bed />}
           {selectedOffer === OFFERS_TYPE.AMENITIES && <Amenity />}
           {selectedOffer === OFFERS_TYPE.BATH && <Bath />}
-          {selectedOffer === OFFERS_TYPE.BREAKFAST && <Breakfast />}
+          {selectedOffer === OFFERS_TYPE.CAFETERIA && <Breakfast />}
           {selectedOffer === OFFERS_TYPE.ROOM_ITEMS && <RoomItem />}
           {selectedOffer === OFFERS_TYPE.SERVICE && <Service />}
         </div>
