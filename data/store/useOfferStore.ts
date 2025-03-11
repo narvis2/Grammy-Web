@@ -16,19 +16,29 @@ const defaultOfferState: OfferModel[] = [
     description: "카페를 즐기실 수 있습니다.",
   },
   {
-    type: OFFER_TYPE.BED,
-    image: "/images/offers_bed.jpg",
-    description: "총 4가지 유형의 침대를 제공해드리고 있습니다.",
-  },
-  {
-    type: OFFER_TYPE.AMENITIES,
-    image: "/images/offers_shampoo.jpg",
-    description: "일회용 욕실 어메니티를 제공해드리고 있습니다.",
-  },
-  {
     type: OFFER_TYPE.BATH,
     image: "/images/offers_bath.jpg",
     description: "욕조가 설치되어 있습니다.",
+  },
+  {
+    type: OFFER_TYPE.ROYAL_B_SUNRISE,
+    image: "/images/royal_b_sunrise.jpg",
+    description: "",
+  },
+  {
+    type: OFFER_TYPE.TERRACE_A,
+    image: "/images/terrace_night.jpg",
+    description: "",
+  },
+  {
+    type: OFFER_TYPE.TERRACE_B,
+    image: "/images/common_terace_view.jpg",
+    description: "",
+  },
+  {
+    type: OFFER_TYPE.BED,
+    image: "/images/offers_bed.jpg",
+    description: "총 4가지 유형의 침대를 제공해드리고 있습니다.",
   },
   {
     type: OFFER_TYPE.SERVICE,

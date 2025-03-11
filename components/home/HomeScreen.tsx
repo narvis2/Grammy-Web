@@ -16,11 +16,11 @@ import { useSetAuthModelState } from "@/data/store/useAuthStore";
 import { Grammy } from "@/data/api/endpoint/constants";
 
 const images = [
-  { src: "/images/Main1.jpg", label: "GRAMI HOTEL" },
-  { src: "/images/main4.jpg", label: "GRAMI WELCOME" },
+  { src: "/images/terrace_b_sunrise.jpg", label: "GRAMI HOTEL" },
+  { src: "/images/lobby_a.jpg", label: "GRAMI WELCOME" },
   { src: "/images/main2.jpg", label: "OCEAN VIEW" },
-  { src: "/images/main3.jpg", label: "MOUNTAIN VIEW" },
-  { src: "/images/common_terace_view.jpg", label: "TERRACE VIEW" },
+  { src: "/images/mountain_rainbow.jpg", label: "MOUNTAIN VIEW" },
+  { src: "/images/terrace_a_morning.jpg", label: "TERRACE VIEW" },
 ];
 
 type HomeScreenProps = {
