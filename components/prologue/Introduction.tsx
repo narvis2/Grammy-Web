@@ -299,7 +299,7 @@ const Introduction = () => {
           <div className="bg-black bg-opacity-60 p-5 rounded-lg max-w-[80%] text-center">
             <p className="text-white text-[clamp(1rem,2.5vw,1.5rem)]">
               저희 호텔을 찾아주셔서 감사합니다. <br /> 저희 호텔에서의 휴식이
-              여행자님의 소중한 추억으로 남길 바라겠습니다. <br /> 여행의 마지막
+              여행자님의 소중한 추억으로 남길 희망합니다. <br /> 여행의 마지막
               순간까지도 특별한 경험이 되도록 최선을 다하겠습니다.
             </p>
           </div>
