@@ -11,10 +11,10 @@ import TableView from "@/components/prologue/TableView";
 import OtherInfo from "@/components/prologue/OtherInfo";
 
 const images = [
-  { src: "/images/prologue1.jpg" },
-  { src: "/images/prologue2.jpg" },
-  { src: "/images/prologue3.jpg" },
-  { src: "/images/prologue4.jpg" },
+  { src: "/images/lobby_a.jpg" },
+  { src: "/images/nine_f.jpg" },
+  { src: "/images/cafe_b.jpg" },
+  { src: "/images/terrace_a_2.jpg" },
 ];
 
 const tabList = [
@@ -65,13 +65,14 @@ const Prologue = () => {
   return (
     <div className="relative">
       <div className="slideshow-container relative">
-        <Image
-          src={images[currentImageIndex].src}
-          alt="Slideshow"
-          width={600}
-          height={600}
-          className="slideshow-image w-full object-cover"
-        />
+        <div className="relative w-full h-full">
+          <Image
+            src={images[currentImageIndex].src}
+            alt="Slideshow"
+            fill
+            className="slideshow-image object-cover"
+          />
+        </div>
         <div
           className={`absolute bottom-20 inset-0 flex flex-col items-center justify-center text-center text-white transition-opacity duration-500 ${
             showText ? "opacity-100" : "opacity-0"
