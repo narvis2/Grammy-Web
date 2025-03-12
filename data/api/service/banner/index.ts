@@ -8,7 +8,9 @@ export async function getBannerList() {
     .get<BaseResponse<BannerResponse[]>>(Grammy.BANNER)
     .then((response) => response.data)
     .then((data) => {
-      console.log(`⭐️ '${Grammy.BANNER} Response 👉`, data);
+      if (process.env.NODE_ENV === "development") {
+        console.log(`⭐️ '${Grammy.BANNER} Response 👉`, data);
+      }
       return data;
     })
     .catch(axiosErrorHandler());

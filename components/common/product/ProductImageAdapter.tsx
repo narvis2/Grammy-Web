@@ -1,12 +1,13 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ProductSmallImageAdapter from "./ProductSmallImageAdapter";
 import ProductLargeImageAdapter from "./ProductLargeImageAdapter";
 
 type ProductImageAdapterProps = {
   imageList: string[];
+  currentTab: string
 };
 
-const ProductImageAdapter = ({ imageList }: ProductImageAdapterProps) => {
+const ProductImageAdapter = ({ imageList, currentTab }: ProductImageAdapterProps) => {
   const [currentImgIndex, setCurrentImageIndex] = useState<number>(0);
 
   function onSlideImage(isNext: boolean) {
@@ -15,6 +16,12 @@ const ProductImageAdapter = ({ imageList }: ProductImageAdapterProps) => {
       : (currentImgIndex - 1 + imageList.length) % imageList.length;
     setCurrentImageIndex(index);
   }
+
+  useEffect(() => {
+    if (currentImgIndex !== 0) {
+      setCurrentImageIndex(0);
+    }
+  }, [currentTab])
 
   return (
     <section>

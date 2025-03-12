@@ -14,7 +14,9 @@ export async function getRoomTypeList() {
     .get<BaseResponse<RoomTypeResponse[]>>(Grammy.ROOM_TYPE)
     .then((response) => response.data)
     .then((data) => {
-      console.log(`⭐️ '${Grammy.ROOM_TYPE} Response 👉`, data);
+      if (process.env.NODE_ENV === "development") {
+        console.log(`⭐️ '${Grammy.ROOM_TYPE} Response 👉`, data);
+      }
       return data;
     })
     .catch(axiosErrorHandler());
@@ -39,7 +41,9 @@ export async function getRoomAvailableReservationList(
   })
     .then((response) => response.data)
     .then((data) => {
-      console.log(`⭐️ '${Grammy.AVAILABLE_RESERVATION} Response 👉`, data);
+      if (process.env.NODE_ENV === "development") {
+        console.log(`⭐️ '${Grammy.AVAILABLE_RESERVATION} Response 👉`, data);
+      }
       return data;
     })
     .catch(axiosErrorHandler());
@@ -54,7 +58,9 @@ export async function getRoomDetails(roomId: string) {
     .get<BaseResponse<RoomResponse>>(url)
     .then((response) => response.data)
     .then((data) => {
-      console.log(`⭐️ '${Grammy.ROOM_DETAILS} Response 👉`, data);
+      if (process.env.NODE_ENV === "development") {
+        console.log(`⭐️ '${Grammy.ROOM_DETAILS} Response 👉`, data);
+      }
       return data;
     })
     .catch(axiosErrorHandler());

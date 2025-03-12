@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { useRef } from "react";
 import { Autoplay, Navigation, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
+import Image from "next/image";
 
 type CarouselAdapterProps = {
   images: CarouselImageModel[];
@@ -40,12 +41,16 @@ const CarouselAdapter = ({ images }: CarouselAdapterProps) => {
       >
         {images.map((item, idx) => (
           <SwiperSlide key={`carousel${idx}`}>
-            <img
-              src={item.src}
-              alt={item.label}
-              className="swiper-image object-cover rounded-[5px]"
-              style={{height: 300, width: '100%'}}
-            />
+            <div className="relative w-full" style={{ height: 300 }}>
+              <Image
+                src={item.src}
+                alt={item.label}
+                fill
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                className="object-cover rounded-[5px]"
+                priority={idx === 0}
+              />
+            </div>
           </SwiperSlide>
         ))}
       </Swiper>

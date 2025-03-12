@@ -13,7 +13,9 @@ export async function requestReservationPrepare(
       return response.data;
     })
     .then((data) => {
-      console.log(`⭐️ '${Grammy.RESERVATION_PREPARE} Response 👉`, data);
+      if (process.env.NODE_ENV === "development") {
+        console.log(`⭐️ '${Grammy.RESERVATION_PREPARE} Response 👉`, data);
+      }
       return data;
     })
     .catch(axiosErrorHandler());
@@ -26,7 +28,9 @@ export async function requestReservation(request: PaymentRequest) {
     .post<BaseResponse<any>>(Grammy.RESERVATION, request)
     .then((response) => response.data)
     .then((data) => {
-      console.log(`⭐️ POST '${Grammy.RESERVATION} Response 👉`, data);
+      if (process.env.NODE_ENV === "development") {
+        console.log(`⭐️ POST '${Grammy.RESERVATION} Response 👉`, data);
+      }
       return data;
     })
     .catch(axiosErrorHandler());

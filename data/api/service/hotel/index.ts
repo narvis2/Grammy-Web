@@ -8,7 +8,9 @@ export async function getHotel() {
     .get<BaseResponse<HotelResponse>>(Grammy.GET_HOTEL)
     .then((response) => response.data)
     .then((data) => {
-      console.log(`⭐️ '${Grammy.GET_HOTEL} Response 👉`, data);
+      if (process.env.NODE_ENV === "development") {
+        console.log(`⭐️ '${Grammy.GET_HOTEL} Response 👉`, data);
+      }
       return data;
     })
     .catch(axiosErrorHandler());
