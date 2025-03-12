@@ -8,7 +8,9 @@ export async function getBedTypeList() {
     .get<BaseResponse<BedType[]>>(Grammy.BED)
     .then((response) => response.data)
     .then((data) => {
-      console.log(`⭐️ '${Grammy.BED} Response 👉`, data);
+      if (process.env.NODE_ENV === "development") {
+        console.log(`⭐️ '${Grammy.BED} Response 👉`, data);
+      }
       return data;
     })
     .catch(axiosErrorHandler());

@@ -15,7 +15,9 @@ noneAuthInstance.interceptors.request.use(
     const baseUrl = config.baseURL;
     const url = config.url;
 
-    console.log(`📮 API Request Url 👉`, baseUrl + url);
+    if (process.env.NODE_ENV === "development") {
+      console.log(`📮 API Request Url 👉`, baseUrl + url);
+    }
     return config;
   },
   async (error) => {

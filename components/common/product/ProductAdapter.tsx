@@ -8,9 +8,10 @@ import { viewTypeConvert, viewTypeDescription } from "@/data/utils/utils";
 
 type ProductAdapterProps = {
   roomTypeInfo: RoomTypeResponse;
+  currentTab: string
 };
 
-const ProductAdapter = ({ roomTypeInfo }: ProductAdapterProps) => {
+const ProductAdapter = ({ roomTypeInfo, currentTab }: ProductAdapterProps) => {
   const roomType = roomTypeInfo.roomTypeName;
   const mainImageList = roomTypeInfo.rooms[0].images.map(
     (item) => staticImageUrl + item.imageUrl
@@ -23,7 +24,7 @@ const ProductAdapter = ({ roomTypeInfo }: ProductAdapterProps) => {
   return (
     <div className="flex justify-center items-center py-10 px-5">
       <div className="container grid grid-cols-1 gap-6 lg:grid-cols-2">
-        <ProductImageAdapter imageList={mainImageList} />
+        <ProductImageAdapter imageList={mainImageList} currentTab={currentTab} />
 
         <section>
           <h2 className="text-3xl font-serif uppercase mb-2">{`${roomType} - ${viewTypeConvert(roomType)}`}</h2>
