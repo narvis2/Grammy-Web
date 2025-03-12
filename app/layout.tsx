@@ -11,6 +11,9 @@ export const metadata: Metadata = {
   icons: {
     icon: '/grami_icon.png',
   },
+  verification: {
+    google: 'xXx3IWwiMA0Fx9tekBLB2C9PNdZTu9f1w1bU_ygV6nU',
+  },
 };
 
 export default function RootLayout({
