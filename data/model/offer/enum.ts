@@ -5,5 +5,6 @@ export enum OFFER_TYPE {
   BATH = "욕조",
   ROYAL_B_SUNRISE = "로얄 B 일출",
   ESPRESSO_CAFE = "에스프레소 바 카페",
-  SERVICE = "시설 및 서비스",
+  ROYAL_A_CONCEPT = "로얄 A 컨셉",
+  ROYAL_B_CONCEPT = "로얄 B 컨셉",
 }
