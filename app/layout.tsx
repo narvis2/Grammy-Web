@@ -8,6 +8,9 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
   title: "그라미 호텔",
   description: "포항 그라미 호텔",
+  icons: {
+    icon: '/grami_icon.png',
+  },
 };
 
 export default function RootLayout({
