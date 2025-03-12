@@ -8,7 +8,9 @@ export async function getNoticeList() {
     .get<BaseResponse<NoticeResponse[]>>(Grammy.NOTICE)
     .then((response) => response.data)
     .then((data) => {
-      console.log(`⭐️ '${Grammy.NOTICE} Response 👉`, data);
+      if (process.env.NODE_ENV === "development") {
+        console.log(`⭐️ '${Grammy.NOTICE} Response 👉`, data);
+      }
       return data;
     })
     .catch(axiosErrorHandler());
@@ -23,7 +25,9 @@ export async function getNoticeDetail(noticeId: string) {
     .get<BaseResponse<NoticeResponse>>(url)
     .then((response) => response.data)
     .then((data) => {
-      console.log(`⭐️ '${Grammy.NOTICE_DETAILS} Response 👉`, data);
+      if (process.env.NODE_ENV === "development") {
+        console.log(`⭐️ '${Grammy.NOTICE_DETAILS} Response 👉`, data);
+      }
       return data;
     })
     .catch(axiosErrorHandler());

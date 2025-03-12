@@ -64,7 +64,7 @@ const Room = () => {
               setCurrentTab(type);
             }}
           />
-          {!!roomTypeInfo && <ProductAdapter roomTypeInfo={roomTypeInfo} />}
+          {!!roomTypeInfo && <ProductAdapter roomTypeInfo={roomTypeInfo} currentTab={currentTab} />}
         </section>
       )}
 

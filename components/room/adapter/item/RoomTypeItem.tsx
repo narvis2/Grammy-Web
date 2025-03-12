@@ -24,7 +24,9 @@ const RoomTypeItem = ({ roomType }: RoomTypeItemProps) => {
     const index = isNext
       ? (currentImgIndex + 1) % imageList.length
       : (currentImgIndex - 1 + imageList.length) % imageList.length;
-    console.log(`👠 index 👉`, index);
+    if (process.env.NODE_ENV === "development") {
+      console.log(`👠 index 👉`, index);
+    }
     setCurrentImageIndex(index);
   }
 
