@@ -17,7 +17,7 @@ const TableView = () => {
           <tr>
             <td className="border border-gray-300 p-2 text-center">7F</td>
             <td className="border border-gray-300 p-2 text-center">
-              로비 / 객실
+              로비 / 카페테리아 / 테라스 / 객실
             </td>
           </tr>
           <tr>
@@ -33,7 +33,7 @@ const TableView = () => {
 
       <div className="relative mb-5">
         <h1 className="text-2xl font-bold mb-5 text-center">객실 정보</h1>
-        <div className="font-semibold">총 44 객실</div>
+        <div className="font-semibold">총 43 객실</div>
       </div>
 
       <table className="w-full border-collapse mb-10 text-base">
