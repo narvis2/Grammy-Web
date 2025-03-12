@@ -10,8 +10,8 @@ const CarouselContainer = ({ images }: CarouselContainerProps) => {
   return (
     <section className="pt-20 pb-20 text-4xl">
       <CarouselHeader
-        title="Offers"
-        description="그라미 호텔에서 준비한 특별함을 느껴보세요"
+        title="Gallery"
+        description="그라미 호텔에서만 느낄 수 있는 특별한 감성"
       />
       <CarouselAdapter images={images} />
     </section>

@@ -91,7 +91,7 @@ const HomeScreen = ({
         images={images}
         onIndicatorClick={handleSlideButtonClick}
       />
-      {/* Offers */}
+      {/* Gallery */}
       <CarouselContainer images={offersImage} />
       {/* RoomType */}
       <RoomTypeContainer roomTypeList={roomTypeList} />
