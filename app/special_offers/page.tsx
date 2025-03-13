@@ -15,7 +15,7 @@ import Terrace from "@/components/special_offers/Terrace";
 
 const images: Map<string, string[]> = new Map([
   [OFFERS_TYPE.BED, ["/images/offers_bed.jpg", "/images/twin_bed.jpg", "/images/two_bed.jpg"]],
-  [OFFERS_TYPE.TERRACE, ["/images/terrace_night.jpg", "/images/terrace_a_night_2.jpg", "/images/terrace_b_sunrise.jpg", "/images/terrace_a_morning.jpg", "/images/terrace_a_2.jpg"]],
+  [OFFERS_TYPE.TERRACE, ["/images/terrace_night.jpg", "/images/terrace_a_night_2.jpg", "/images/terrace_b_sunrise.jpg", "/images/terrace_a_morning.jpg", "/images/terrace_a_2.jpg", "/images/terrace_view.jpg"]],
   [OFFERS_TYPE.CAFETERIA, ["/images/offers_cafe.jpg", "/images/offers_cafe_2.jpg", "/images/offers_cafe_3.jpg", "/images/offers_cafe_4.jpg"]],
   [OFFERS_TYPE.BATH, ["/images/offers_bath.jpg", "/images/bath2.jpg", "/images/bath3.jpg", "/images/bath4.jpg"]],
   [OFFERS_TYPE.AMENITIES, ["/images/amenities.jpg", "/images/offers_shampoo.jpg"]],
