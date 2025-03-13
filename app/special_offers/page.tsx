@@ -103,6 +103,17 @@ const SpecialOffers = () => {
     }
   }, [selectedOffer])
 
+  useEffect(() => {
+      const type = params.get("type");
+      const matchedPrologue = Object.values(OFFERS_TYPE).find(
+        (value) => value === type
+      );
+      
+      if (matchedPrologue) {
+        setSelectedOffer(matchedPrologue);
+      }
+    }, [params])
+
   return (
     <div className="relative mb-40">
       <div className="slideshow-container relative">
