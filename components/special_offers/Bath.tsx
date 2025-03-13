@@ -11,7 +11,7 @@ const Bath = ({imgList}: BathProps) => {
   const [currentImgIndex, setCurrentImgIndex] = useState(0);
 
   return (
-    <section className="py-24 relative">
+    <section className="max-w-6xl mx-auto px-4 py-12 relative">
       <div className="mx-auto max-w-7xl px-4 sm:px-5 lg:px-6">
         <OffersHeader title="욕조" />
         <p className="text-base md:text-lg text-gray-700 leading-relaxed text-center mb-12 md:mb-24">

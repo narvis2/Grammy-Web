@@ -7,4 +7,5 @@ export enum OFFER_TYPE {
   ESPRESSO_CAFE = "에스프레소 바 카페",
   ROYAL_A_CONCEPT = "로얄 A 컨셉",
   ROYAL_B_CONCEPT = "로얄 B 컨셉",
+  STANDARD_A_CONCEPT = "스탠다드 A 컨셉",
 }
