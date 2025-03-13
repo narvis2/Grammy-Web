@@ -33,18 +33,21 @@ export const metadata: Metadata = {
       'naver-site-verification': '00810c0a9432a58a26e3dc58db486ce13634b299',
     },
   },
+  // 소셜 미디어 공유용
   openGraph: {
-    type: 'website',
-    title: '그라미호텔',
-    description:
-      '포항, 포항호텔, 포항숙소, 그라미호텔, 포항 남구호텔, 풀빌라, 테라스, 오션뷰, 마운틴뷰, 구룡포 해수욕장, 구룡포시장, 일출',
+    type: 'website', // 소셜 플랫폼에서 웹사이트임을 명확히 명시
+    title: '그라미호텔', // 공유할때 제목
+    // 공유할때 노출되는 설명
+    description: '포항, 포항호텔, 포항숙소, 그라미호텔, 포항 남구호텔, 풀빌라, 테라스, 오션뷰, 마운틴뷰, 구룡포 해수욕장, 구룡포시장, 일출',
     url: 'https://www.gramihotel.co.kr',
+    // 공유 시 대표 이미지로 사용될 URL 
     images: [
       {
         url: 'https://storage.googleapis.com/grammy_static/e608212b-89b7-4fd1-bc10-a97766ac0cb6.jpg',
       },
     ],
   },
+  // 정규 URL을 명시하여 중복 콘텐츠 문제 방지
   alternates: {
     canonical: 'https://www.gramihotel.co.kr',
   },
