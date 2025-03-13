@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import Image from "next/image";
 import { OFFERS_TYPE } from "@/data/model/offers/enum";
 import { useSearchParams } from "next/navigation";
@@ -11,21 +11,25 @@ import Amenity from "@/components/special_offers/Amenity";
 import Bath from "@/components/special_offers/Bath";
 import Breakfast from "@/components/special_offers/Breakfast";
 import RoomItem from "@/components/special_offers/RoomItem";
-import Service from "@/components/special_offers/Service";
+import Terrace from "@/components/special_offers/Terrace";
 
-const images = [
-  { src: "/images/offers1.jpg" },
-  { src: "/images/offers2.jpg" },
-  { src: "/images/offers3.jpg" },
-];
+const images: Map<string, string[]> = new Map([
+  [OFFERS_TYPE.BED, ["/images/offers_bed.jpg", "/images/twin_bed.jpg", "/images/two_bed.jpg"]],
+  [OFFERS_TYPE.TERRACE, ["/images/terrace_night.jpg", "/images/terrace_a_night_2.jpg", "/images/terrace_b_sunrise.jpg", "/images/terrace_a_morning.jpg", "/images/terrace_a_2.jpg"]],
+  [OFFERS_TYPE.CAFETERIA, ["/images/offers_cafe.jpg", "/images/offers_cafe_2.jpg", "/images/offers_cafe_3.jpg", "/images/offers_cafe_4.jpg"]],
+  [OFFERS_TYPE.BATH, ["/images/offers_bath.jpg", "/images/bath2.jpg", "/images/bath3.jpg", "/images/bath4.jpg"]],
+  [OFFERS_TYPE.AMENITIES, ["/images/amenities.jpg", "/images/offers_shampoo.jpg"]],
+  [OFFERS_TYPE.ROOM_ITEMS, ["/images/coffee_pot.jpg", "/images/towel.jpg", "/images/gown.jpg", "/images/tv.jpg"]],
+]);
+
 
 const tabList = [
   OFFERS_TYPE.BED,
-  OFFERS_TYPE.AMENITIES,
+  OFFERS_TYPE.TERRACE,
   OFFERS_TYPE.BATH,
   OFFERS_TYPE.CAFETERIA,
+  OFFERS_TYPE.AMENITIES,
   OFFERS_TYPE.ROOM_ITEMS,
-  OFFERS_TYPE.SERVICE,
 ];
 
 const SpecialOffers = () => {
@@ -51,12 +55,16 @@ const SpecialOffers = () => {
     }, 200);
   };
 
+  const currentImageList = useMemo(() => {
+    return images.get(selectedOffer) ?? []
+  }, [selectedOffer]);
+
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
+      setCurrentImageIndex((prevIndex) => (prevIndex + 1) % currentImageList.length);
     }, 3000);
     return () => clearInterval(interval);
-  }, []);
+  }, [currentImageList]);
 
   useEffect(() => {
     const textTimer = setTimeout(() => {
@@ -72,16 +80,23 @@ const SpecialOffers = () => {
     }
   }, [params]);
 
+  useEffect(() => {
+    if (currentImageIndex !== 0) {
+      setCurrentImageIndex(0);
+    }
+  }, [selectedOffer])
+
   return (
     <div className="relative">
       <div className="slideshow-container relative">
-        <Image
-          src={images[currentImageIndex].src}
-          alt="Slideshow"
-          width={600}
-          height={600}
-          className="slideshow-image w-full object-cover"
-        />
+        <div className="relative w-full h-full">
+          <Image
+            src={currentImageList[currentImageIndex]}
+            alt="Slideshow"
+            fill
+            className="slideshow-image object-cover"
+          />
+        </div>
 
         <div
           className={`absolute bottom-20 inset-0 flex flex-col items-center justify-center text-center text-white transition-opacity duration-500 ${
@@ -98,7 +113,7 @@ const SpecialOffers = () => {
             </p>
 
             <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
-              {images.map((image, index) => (
+              {currentImageList.map((image, index) => (
                 <button
                   key={index}
                   onClick={() => handleSlideButtonClick(index)}
@@ -124,11 +139,11 @@ const SpecialOffers = () => {
         />
         <div className="mt-8">
           {selectedOffer === OFFERS_TYPE.BED && <Bed />}
-          {selectedOffer === OFFERS_TYPE.AMENITIES && <Amenity />}
+          {selectedOffer === OFFERS_TYPE.TERRACE && <Terrace />}
           {selectedOffer === OFFERS_TYPE.BATH && <Bath />}
           {selectedOffer === OFFERS_TYPE.CAFETERIA && <Breakfast />}
+          {selectedOffer === OFFERS_TYPE.AMENITIES && <Amenity />}
           {selectedOffer === OFFERS_TYPE.ROOM_ITEMS && <RoomItem />}
-          {selectedOffer === OFFERS_TYPE.SERVICE && <Service />}
         </div>
       </section>
     </div>

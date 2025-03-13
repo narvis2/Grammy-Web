@@ -26,11 +26,11 @@ export default function Navbar() {
 
   const Offers_tabList = [
     { title: OFFERS_TYPE.BED, path: RoutePath.SPECIAL_OFFERS },
-    { title: OFFERS_TYPE.AMENITIES, path: RoutePath.SPECIAL_OFFERS },
+    { title: OFFERS_TYPE.TERRACE, path: RoutePath.SPECIAL_OFFERS },
     { title: OFFERS_TYPE.BATH, path: RoutePath.SPECIAL_OFFERS },
     { title: OFFERS_TYPE.CAFETERIA, path: RoutePath.SPECIAL_OFFERS },
+    { title: OFFERS_TYPE.AMENITIES, path: RoutePath.SPECIAL_OFFERS },
     { title: OFFERS_TYPE.ROOM_ITEMS, path: RoutePath.SPECIAL_OFFERS },
-    { title: OFFERS_TYPE.SERVICE, path: RoutePath.SPECIAL_OFFERS },
   ];
 
   const { roomTypeList } = useRoomTypeInfo();
