@@ -21,7 +21,7 @@ const CarouselHeader = ({ title, description }: CarouselHeaderProps) => {
     >
       <div className="text-center font-semibold font-serif text-4xl">
         <span>{title}</span>
-        <h5 className="text-lg">{description}</h5>
+        <h5 className="text-lg mt-2">{description}</h5>
       </div>
     </motion.div>
   );
