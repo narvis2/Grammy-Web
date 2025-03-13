@@ -41,6 +41,11 @@ const defaultOfferState: OfferModel[] = [
     description: "",
   },
   {
+    type: OFFER_TYPE.STANDARD_A_CONCEPT,
+    image: "/images/standard_a_view.jpg",
+    description: '',
+  },
+  {
     type: OFFER_TYPE.BED,
     image: "/images/offers_bed.jpg",
     description: "총 4가지 유형의 침대를 제공해드리고 있습니다.",
