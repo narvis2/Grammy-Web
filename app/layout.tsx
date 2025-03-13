@@ -6,6 +6,7 @@ import { NextLayout, NextProviders } from "./providers";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://www.gramihotel.co.kr"),
   title: "그라미호텔",
   description: "포항, 포항호텔, 포항숙소, 그라미호텔, 포항 남구호텔, 풀빌라, 테라스, 오션뷰, 마운틴뷰, 구룡포 해수욕장, 포항 구룡포 과메기문화관, 구룡포항, 구룡포시장",
   icons: {
