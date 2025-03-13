@@ -12,6 +12,12 @@ import Bath from "@/components/special_offers/Bath";
 import Cafeteria from "@/components/special_offers/Cafeteria";
 import RoomItem from "@/components/special_offers/RoomItem";
 import Terrace from "@/components/special_offers/Terrace";
+import { useOfferStore } from "@/data/store/useOfferStore";
+import { CarouselImageModel } from "@/data/model/image/types";
+import CarouselContainer from "@/components/home/carousel/CarouselContainer";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
 
 const images: Map<string, string[]> = new Map([
   [OFFERS_TYPE.BED, ["/images/offers_bed.jpg", "/images/twin_bed.jpg", "/images/two_bed.jpg"]],
@@ -35,6 +41,8 @@ const tabList = [
 const SpecialOffers = () => {
   const params = useSearchParams();
 
+  const { offers } = useOfferStore();
+
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [showText, setShowText] = useState(false);
 
@@ -54,6 +62,15 @@ const SpecialOffers = () => {
       setShowText(true);
     }, 200);
   };
+
+  const galleryImage = useMemo<CarouselImageModel[]>(() => {
+    return offers.map((item) => {
+      return {
+        src: item.image,
+        label: item.type,
+      };
+    });
+  }, [offers]);
 
   const currentImageList = useMemo(() => {
     return images.get(selectedOffer) ?? []
@@ -87,7 +104,7 @@ const SpecialOffers = () => {
   }, [selectedOffer])
 
   return (
-    <div className="relative">
+    <div className="relative mb-40">
       <div className="slideshow-container relative">
         <div className="relative w-full h-full">
           <Image
@@ -146,6 +163,8 @@ const SpecialOffers = () => {
           {selectedOffer === OFFERS_TYPE.ROOM_ITEMS && <RoomItem />}
         </div>
       </section>
+
+      <CarouselContainer images={galleryImage} />
     </div>
   );
 };
