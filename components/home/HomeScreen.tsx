@@ -55,7 +55,7 @@ const HomeScreen = ({
     return [];
   }, [roomType]);
 
-  const offersImage = useMemo<CarouselImageModel[]>(() => {
+  const galleryImage = useMemo<CarouselImageModel[]>(() => {
     return offers.map((item) => {
       return {
         src: item.image,
@@ -92,7 +92,7 @@ const HomeScreen = ({
         onIndicatorClick={handleSlideButtonClick}
       />
       {/* Gallery */}
-      <CarouselContainer images={offersImage} />
+      <CarouselContainer images={galleryImage} />
       {/* RoomType */}
       <RoomTypeContainer roomTypeList={roomTypeList} />
       {/* 오시는 길 */}

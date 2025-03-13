@@ -3,12 +3,18 @@
 import TabLayout from "@/components/common/tab/TabLayout";
 import WayToComeContainer from "@/components/home/way/WayToComeContainer";
 import useHotelInfo from "@/data/hooks/hotel/useHotelInfo";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { PROLOGUE_TYPE } from "@/data/model/prologue/enum";
 import Image from "next/image";
 import Introduction from "@/components/prologue/Introduction";
 import TableView from "@/components/prologue/TableView";
 import OtherInfo from "@/components/prologue/OtherInfo";
+import CarouselContainer from "@/components/home/carousel/CarouselContainer";
+import { useOfferStore } from "@/data/store/useOfferStore";
+import { CarouselImageModel } from "@/data/model/image/types";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
 
 const images = [
   { src: "/images/lobby_a.jpg" },
@@ -25,12 +31,23 @@ const tabList = [
 ];
 
 const Prologue = () => {
+  const { offers } = useOfferStore();
+  
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [showText, setShowText] = useState(false);
 
   const [selectedPrologue, setSelectedPrologue] = useState<PROLOGUE_TYPE>(
     PROLOGUE_TYPE.INTRODUCTION
   );
+
+  const galleryImage = useMemo<CarouselImageModel[]>(() => {
+      return offers.map((item) => {
+        return {
+          src: item.image,
+          label: item.type,
+        };
+      });
+    }, [offers]);
 
   const handleSlideButtonClick = (index: number) => {
     setCurrentImageIndex(index);
@@ -63,7 +80,7 @@ const Prologue = () => {
   }, []);
 
   return (
-    <div className="relative">
+    <div className="relative mb-40">
       <div className="slideshow-container relative">
         <div className="relative w-full h-full">
           <Image
@@ -120,6 +137,8 @@ const Prologue = () => {
           {selectedPrologue === PROLOGUE_TYPE.OTHER_INFO && <OtherInfo />}
         </div>
       </section>
+
+      <CarouselContainer images={galleryImage} />
     </div>
   );
 };

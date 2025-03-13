@@ -56,27 +56,6 @@ const Bath = ({imgList}: BathProps) => {
           </div>
         </div>
       </div>
-
-      <div
-        id="lightbox"
-        className="hidden fixed z-[999] top-0 left-0 w-screen h-screen overflow-hidden bg-black/80"
-      >
-        <span
-          id="close"
-          className="text-white text-3xl absolute top-5 right-7 cursor-pointer"
-        >
-          &times;
-        </span>
-        <div className="relative w-full h-full flex items-center justify-center">
-          <Image
-            id="lightbox-image"
-            src=""
-            alt=""
-            fill
-            className="object-contain"
-          />
-        </div>
-      </div>
     </section>
   );
 };
