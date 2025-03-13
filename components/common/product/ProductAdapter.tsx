@@ -4,7 +4,7 @@ import ConvenienceItem from "../ConvenienceItem";
 import ProductImageAdapter from "./ProductImageAdapter";
 import { getCommaNumber } from "@/data/mapper";
 import { roomTypeDescriptions, staticImageUrl } from "@/data/utils/constants";
-import { viewTypeConvert, viewTypeDescription } from "@/data/utils/utils";
+import { viewTypeConvert, viewTypeDescription, viewTypeReservationLink } from "@/data/utils/utils";
 
 type ProductAdapterProps = {
   roomTypeInfo: RoomTypeResponse;
@@ -161,7 +161,7 @@ const ProductAdapter = ({ roomTypeInfo, currentTab }: ProductAdapterProps) => {
           type="submit"
           className="text-white inline-flex items-center bg-[#d76076] font-medium rounded-lg text-sm px-5 py-2.5 text-center w-100% justify-center mt-8 lg:mt-0"
           onClick={() => {
-            window.location.href = "https://booking.naver.com/booking/3/bizes/1227540?area=pll";
+            window.location.href = viewTypeReservationLink(roomType);
           }}
         >
           실시간 예약
