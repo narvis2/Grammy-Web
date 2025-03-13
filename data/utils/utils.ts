@@ -65,3 +65,30 @@ export const viewTypeDescription = (roomType: string) => {
       return "그라미 호텔의 시그니처 객실 중 하나인 로얄스위트 B 타입은 대형 유리창으로 자연광이 가득한 럭셔리한 공간으로,\n객실 내 욕조에서 탁 트인 오션뷰를 감상하며 편안한 휴식을 제공합니다.";
   }
 }
+
+export const viewTypeReservationLink = (roomType: string) => {
+  switch (roomType) {
+    case "스탠다드 A":
+      return "https://booking.naver.com/booking/3/bizes/1227540/items/6159676?area=pll";
+    case "스탠다드 B":
+      return "https://booking.naver.com/booking/3/bizes/1227540/items/6160519?area=pll";
+    case "디럭스 A 테라스":
+      return "https://booking.naver.com/booking/3/bizes/1227540/items/6160665?area=pll";
+    case "디럭스 B 테라스":
+      return "https://booking.naver.com/booking/3/bizes/1227540/items/6160696?area=pll";
+    case "스위트 B":
+      return "https://booking.naver.com/booking/3/bizes/1227540/items/6160725?area=pll";
+    case "스위트 A":
+      return "https://booking.naver.com/booking/3/bizes/1227540/items/6160706?area=pll";
+    case "스탠다드 트윈":
+      return "https://booking.naver.com/booking/3/bizes/1227540/items/6160558?area=pll";
+    case "코너 스위트":
+      return "https://booking.naver.com/booking/3/bizes/1227540/items/6160750?area=pll";
+    case "로얄 스위트 A 테라스":
+      return "https://booking.naver.com/booking/3/bizes/1227540/items/6160755?area=pll";
+    case "로얄 스위트 B":
+      return "https://booking.naver.com/booking/3/bizes/1227540/items/6160760?area=pll";
+    default:
+      return "https://booking.naver.com/booking/3/bizes/1227540?area=pll";
+  }
+}
