@@ -319,7 +319,7 @@ export default function Navbar() {
                         {item.submenu.map((subItem, subIndex) => (
                           <li key={subIndex}>
                             <a
-                              href={subItem.path}
+                              href={subItem.path + `?type=${subItem.title}`}
                               onClick={() => setIsMenuOpen(false)}
                               className="text-sm hover:text-gray-600"
                             >

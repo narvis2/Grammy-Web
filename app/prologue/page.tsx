@@ -15,6 +15,7 @@ import { CarouselImageModel } from "@/data/model/image/types";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
+import { useSearchParams } from "next/navigation";
 
 const images = [
   { src: "/images/lobby_a.jpg" },
@@ -31,6 +32,7 @@ const tabList = [
 ];
 
 const Prologue = () => {
+  const params = useSearchParams();
   const { offers } = useOfferStore();
   
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -78,6 +80,17 @@ const Prologue = () => {
 
     return () => clearTimeout(textTimer);
   }, []);
+
+  useEffect(() => {
+    const type = params.get("type");
+    const matchedPrologue = Object.values(PROLOGUE_TYPE).find(
+      (value) => value === type
+    );
+    
+    if (matchedPrologue) {
+      setSelectedPrologue(matchedPrologue);
+    }
+  }, [params])
 
   return (
     <div className="relative mb-40">
