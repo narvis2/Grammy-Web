@@ -5,7 +5,7 @@ export default function Footer() {
   const { hotelInfo } = useHotelInfo();
 
   return (
-    <footer className="bg-gray-300 py-8">
+    <footer className="bg-gray-300 py-8" role="contentinfo">
       <div className="container mx-auto px-6">
         <div className="flex flex-col md:flex-row items-center md:items-start justify-between mb-8">
           <div className="flex flex-col items-center md:items-start md:w-1/3 mb-6 md:mb-0 text-center md:text-left">

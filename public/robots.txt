@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://www.gramihotel.co.kr/sitemap.xml
