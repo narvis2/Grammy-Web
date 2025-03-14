@@ -29,7 +29,7 @@ const RoomItem = () => {
   return (
     <section className="max-w-6xl mx-auto px-4 py-12">
       <OffersHeader title="객실 구비 물품" />
-      <div id="carouselExampleCaptions" className="relative">
+      <div className="relative">
       {/* Indicators (UI용, 클릭 시 동작 X) */}
       <div className="absolute bottom-0 left-0 right-0 z-[2] mx-[15%] mb-4 flex list-none justify-center p-0">
         {things.map((value, index) => {
