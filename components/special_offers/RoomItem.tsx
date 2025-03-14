@@ -4,7 +4,7 @@ import OffersHeader from "./OffersHeader";
 
 const things = [
   { name: "TV", image: "/images/tv.jpg", description: "유튜브 및 넷플릭스, 티빙, 와차, 디즈니 플러스, 애플TV 총 5가지의 OTT를 무료로 제공합니다." },
-  { name: "냉장고", image: "/images/refrigerator_1.jpg", description: ""},
+  { name: "냉장고", image: "/images/refrigerator_a.jpg", description: ""},
   { name: "커피 포트", image: "/images/coffee_pot.jpg", description: ""},
   { name: "스타일러", image: "/images/styler.jpg", description: ""},
   { name: "수납공간", image: "/images/towel.jpg", description: ""},
