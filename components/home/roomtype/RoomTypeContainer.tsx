@@ -12,7 +12,7 @@ const RoomTypeContainer = ({ roomTypeList }: RoomTypeContainerProps) => {
     <section className="pt-12 pb-20 bg-[#FFFFFF] ">
       <RoomTypeHeader
         title="객실 유형"
-        description="그라미 호텔의 특별한 객실을 누려보세요."
+        description="포항 그라미 호텔의 특별한 객실을 누려보세요."
       />
 
       <div className="flex items-start justify-center min-h-screen p-8 mt-8">
