@@ -36,7 +36,7 @@ const WayToComeContainer = ({ hotelInfo }: WayToComeContainerProps) => {
     <section className="pt-12 pb-20 px-10 bg-[#FcFcFc] flex flex-col justify-center items-center">
       <WayToComeHeader
         title="오시는 길"
-        description="그라미 호텔에 오시는 길을 안내해드립니다."
+        description="포항 그라미 호텔에 오시는 길을 안내해드립니다."
       />
 
       <div

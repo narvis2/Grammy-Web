@@ -132,11 +132,11 @@ const SpecialOffers = () => {
           }`}
         >
           <div>
-            <h2 className="text-3xl sm:text-5xl lg:text-8xl font-serif mb-2">
+            <h2 className="text-3xl sm:text-5xl lg:text-6xl font-serif mb-2">
               Special Offers
             </h2>
 
-            <p className="text-base sm:text-lg lg:text-xl font-serif">
+            <p className="text-base sm:text-lg lg:text-2xl font-serif mt-4">
               {selectedOffer}
             </p>
 
