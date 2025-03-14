@@ -14,6 +14,14 @@ import WayToComeContainer from "./way/WayToComeContainer";
 import { AuthModel } from "@/data/model/auth/types";
 import { useSetAuthModelState } from "@/data/store/useAuthStore";
 import { Grammy } from "@/data/api/endpoint/constants";
+import { useSpecialEventList } from "@/data/hooks";
+import { staticImageUrl } from "@/data/utils/constants";
+import { Swiper, SwiperSlide } from "swiper/react";
+import CarouselHeader from "./carousel/CarouselHeader";
+import { Navigation, Autoplay, Pagination } from "swiper/modules";
+import { SpecialEventResponse } from "@/data/model/event/types";
+import HomeEventAdapter from "./event/HomeEventAdapter";
+import { findVideoUrlList } from "@/data/utils/utils";
 
 const images = [
   { src: "/images/terrace_b_sunrise.jpg", label: "GRAMI HOTEL" },
@@ -40,6 +48,8 @@ const HomeScreen = ({
   const { hotelInfo } = useHotelInfo();
   const { offers } = useOfferStore();
 
+  const {data: specialEvent} = useSpecialEventList();
+
   const roomType = queryClient.getQueryData([Grammy.ROOM_TYPE]) as
     | BaseResponse<RoomTypeResponse[]>
     | undefined;
@@ -54,6 +64,19 @@ const HomeScreen = ({
 
     return [];
   }, [roomType]);
+
+  const specialEventList = useMemo<SpecialEventResponse[]>(() => {
+    if (!specialEvent) return [];
+
+    const list = specialEvent.data ?? [];
+    if (specialEvent.success && list.length > 0) {
+      return list.filter((event) => 
+        event.contents.some((content) => findVideoUrlList(content.contentUrl))
+      );
+    }
+
+    return [];
+  }, [specialEvent]);
 
   const galleryImage = useMemo<CarouselImageModel[]>(() => {
     return offers.map((item) => {
@@ -93,6 +116,10 @@ const HomeScreen = ({
       />
       {/* Gallery */}
       <CarouselContainer images={galleryImage} />
+      {/* Special Event */}
+      {specialEventList.length > 0 && (
+        <HomeEventAdapter specialEventList={specialEventList} />
+      )}
       {/* RoomType */}
       <RoomTypeContainer roomTypeList={roomTypeList} />
       {/* 오시는 길 */}
