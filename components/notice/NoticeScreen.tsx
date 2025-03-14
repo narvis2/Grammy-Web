@@ -31,7 +31,7 @@ const NoticeScreen = () => {
       <div className={`${noticeList.length > 0 ? `mb-14` : `mb-0`}`}>
         <div className="container mx-auto">
           <h3 className="text-2xl font-normal text-center text-gray-800">
-            그라미 호텔 공지사항
+            포항 그라미 호텔 공지사항
           </h3>
         </div>
       </div>
