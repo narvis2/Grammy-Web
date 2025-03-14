@@ -28,6 +28,8 @@ import {
 } from "../api/service/reservation";
 import { PaymentRequest } from "../model/pay/types";
 import { Grammy } from "../api/endpoint/constants";
+import { SpecialEventResponse } from "../model/event/types";
+import { getSpecialEventList } from "../api/service/event";
 
 export const useGetHotel = (customOptions?: T_Query<HotelResponse>) =>
   useQuery([Grammy.GET_HOTEL], () => getHotel(), {
@@ -48,6 +50,18 @@ export const useRoomTypeList = (customOptions?: T_Query<RoomTypeResponse[]>) =>
     refetchOnWindowFocus: false, // 윈도우가 다시 포커스되었을 때 데이터를 호출할 것인지 여부
     refetchIntervalInBackground: false, // 탭/창이 백그라운드에 있는 동안 가져오지 않게
     refetchOnReconnect: false, // 다시 연결할 때 쿼리를 다시 가져오지 않음
+    ...customOptions,
+  });
+
+export const useSpecialEventList = (customOptions?: T_Query<SpecialEventResponse[]>) =>
+  useQuery([Grammy.EVENT], () => getSpecialEventList(), {
+    retry: false,
+    notifyOnChangeProps: ["data", "error"], // 렌더링 반복의 주범. 나열된 속성 중 하나라도 변경되는 경우에만 구성 요소가 다시 렌더링
+    refetchOnMount: false, // 마운트 시 데이터가 오래된 경우 다시 가져옴
+    refetchOnWindowFocus: false, // 윈도우가 다시 포커스되었을 때 데이터를 호출할 것인지 여부
+    refetchIntervalInBackground: false, // 탭/창이 백그라운드에 있는 동안 가져오지 않게
+    refetchOnReconnect: false, // 다시 연결할 때 쿼리를 다시 가져오지 않음
+    keepPreviousData: true,
     ...customOptions,
   });
 
