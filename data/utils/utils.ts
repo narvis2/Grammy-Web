@@ -92,3 +92,9 @@ export const viewTypeReservationLink = (roomType: string) => {
       return "https://booking.naver.com/booking/3/bizes/1227540?area=pll";
   }
 }
+
+const videoExtensions = ['.mp4', '.mov', '.avi', '.wmv', '.flv', '.mkv'];
+
+export function findVideoUrlList(contentUrls: string): boolean {
+  return videoExtensions.some((ext) => contentUrls.toLowerCase().endsWith(ext));
+}

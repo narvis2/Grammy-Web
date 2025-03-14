@@ -10,4 +10,5 @@ export const Grammy = {
   SIGN_IN: "/sign/sign-in",
   RESERVATION_PREPARE: "/reservation/prepare",
   RESERVATION: "/reservation",
+  EVENT: "/event/hotel/1",
 };
