@@ -13,7 +13,7 @@ const OffersImageBackground = ({
   name,
 }: OffersImageBackgroundProps) => {
   return (
-    <div className="relative w-full h-[600px] overflow-hidden after:clear-both after:block after:content-['']">
+    <div className="relative w-full overflow-hidden aspect-[4/3] md:aspect-auto md:h-[600px] after:clear-both after:block after:content-['']">
       {/* 여기서 h-full을 추가하여 부모 높이를 상속 */}
       <div
         className="relative float-left w-full h-full"
