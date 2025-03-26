@@ -39,6 +39,9 @@ const images: Map<string, string[]> = new Map([
     OFFERS_TYPE.CAFETERIA,
     [
       "/images/offers_cafe.jpg",
+      "/images/cafeteria_5.jpg",
+      "/images/cafeteria_6.jpg",
+      "/images/cafeteria_7.jpg",
       "/images/offers_cafe_2.jpg",
       "/images/offers_cafe_3.jpg",
       "/images/offers_cafe_4.jpg",
