@@ -4,6 +4,9 @@ import OffersSlice from "./OffersSlice";
 
 const imageList = [
   { name: "카페테리아", image: "/images/offers_cafe.jpg" },
+  { name: "카페테리아", image: "/images/cafeteria_5.jpg" },
+  { name: "카페테리아", image: "/images/cafeteria_6.jpg" },
+  { name: "카페테리아", image: "/images/cafeteria_7.jpg" },
   { name: "카페테리아", image: "/images/cafeteria_new.jpg" },
   { name: "카페테리아", image: "/images/offers_cafe_2.jpg" },
   { name: "카페테리아", image: "/images/offers_cafe_3.jpg" },
