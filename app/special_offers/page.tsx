@@ -20,20 +20,59 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 
 const images: Map<string, string[]> = new Map([
-  [OFFERS_TYPE.BED, ["/images/offers_bed.jpg", "/images/twin_bed.jpg", "/images/two_bed.jpg"]],
-  [OFFERS_TYPE.TERRACE, ["/images/terrace_night.jpg", "/images/terrace_a_night_2.jpg", "/images/terrace_b_sunrise.jpg", "/images/terrace_a_morning.jpg", "/images/terrace_a_2.jpg", "/images/terrace_view.jpg"]],
-  [OFFERS_TYPE.CAFETERIA, ["/images/offers_cafe.jpg", "/images/offers_cafe_2.jpg", "/images/offers_cafe_3.jpg", "/images/offers_cafe_4.jpg"]],
-  [OFFERS_TYPE.BATH, ["/images/offers_bath.jpg", "/images/royal_b_bath.jpg", "/images/bath3.jpg", "/images/bath4.jpg"]],
-  [OFFERS_TYPE.AMENITIES, ["/images/amenity_a.jpg", "/images/offers_shampoo.jpg"]],
-  [OFFERS_TYPE.ROOM_ITEMS, ["/images/coffee_pot.jpg", "/images/towel.jpg", "/images/gown.jpg", "/images/tv.jpg"]],
+  [
+    OFFERS_TYPE.BED,
+    ["/images/offers_bed.jpg", "/images/twin_bed.jpg", "/images/two_bed.jpg"],
+  ],
+  [
+    OFFERS_TYPE.TERRACE,
+    [
+      "/images/terrace_night.jpg",
+      "/images/terrace_a_night_2.jpg",
+      "/images/terrace_b_sunrise.jpg",
+      "/images/terrace_a_morning.jpg",
+      "/images/terrace_a_2.jpg",
+      "/images/terrace_view.jpg",
+    ],
+  ],
+  [
+    OFFERS_TYPE.CAFETERIA,
+    [
+      "/images/offers_cafe.jpg",
+      "/images/offers_cafe_2.jpg",
+      "/images/offers_cafe_3.jpg",
+      "/images/offers_cafe_4.jpg",
+    ],
+  ],
+  [
+    OFFERS_TYPE.BATH,
+    [
+      "/images/offers_bath.jpg",
+      "/images/royal_b_bath.jpg",
+      "/images/bath3.jpg",
+      "/images/bath4.jpg",
+    ],
+  ],
+  [
+    OFFERS_TYPE.AMENITIES,
+    ["/images/amenity_a.jpg", "/images/offers_shampoo.jpg"],
+  ],
+  [
+    OFFERS_TYPE.ROOM_ITEMS,
+    [
+      "/images/coffee_pot.jpg",
+      "/images/towel.jpg",
+      "/images/gown.jpg",
+      "/images/tv.jpg",
+    ],
+  ],
 ]);
 
-
 const tabList = [
-  OFFERS_TYPE.BED,
+  OFFERS_TYPE.CAFETERIA,
   OFFERS_TYPE.TERRACE,
   OFFERS_TYPE.BATH,
-  OFFERS_TYPE.CAFETERIA,
+  OFFERS_TYPE.BED,
   OFFERS_TYPE.AMENITIES,
   OFFERS_TYPE.ROOM_ITEMS,
 ];
@@ -73,12 +112,14 @@ const SpecialOffers = () => {
   }, [offers]);
 
   const currentImageList = useMemo(() => {
-    return images.get(selectedOffer) ?? []
+    return images.get(selectedOffer) ?? [];
   }, [selectedOffer]);
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentImageIndex((prevIndex) => (prevIndex + 1) % currentImageList.length);
+      setCurrentImageIndex(
+        (prevIndex) => (prevIndex + 1) % currentImageList.length
+      );
     }, 3000);
     return () => clearInterval(interval);
   }, [currentImageList]);
@@ -101,18 +142,18 @@ const SpecialOffers = () => {
     if (currentImageIndex !== 0) {
       setCurrentImageIndex(0);
     }
-  }, [selectedOffer])
+  }, [selectedOffer]);
 
   useEffect(() => {
-      const type = params.get("type");
-      const matchedPrologue = Object.values(OFFERS_TYPE).find(
-        (value) => value === type
-      );
-      
-      if (matchedPrologue) {
-        setSelectedOffer(matchedPrologue);
-      }
-    }, [params])
+    const type = params.get("type");
+    const matchedPrologue = Object.values(OFFERS_TYPE).find(
+      (value) => value === type
+    );
+
+    if (matchedPrologue) {
+      setSelectedOffer(matchedPrologue);
+    }
+  }, [params]);
 
   return (
     <div className="relative mb-40">
@@ -168,7 +209,9 @@ const SpecialOffers = () => {
         <div className="mt-8">
           {selectedOffer === OFFERS_TYPE.BED && <Bed />}
           {selectedOffer === OFFERS_TYPE.TERRACE && <Terrace />}
-          {selectedOffer === OFFERS_TYPE.BATH && <Bath imgList={currentImageList} />}
+          {selectedOffer === OFFERS_TYPE.BATH && (
+            <Bath imgList={currentImageList} />
+          )}
           {selectedOffer === OFFERS_TYPE.CAFETERIA && <Cafeteria />}
           {selectedOffer === OFFERS_TYPE.AMENITIES && <Amenity />}
           {selectedOffer === OFFERS_TYPE.ROOM_ITEMS && <RoomItem />}
