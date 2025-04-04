@@ -16,6 +16,7 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { useSearchParams } from "next/navigation";
+import useGetAnalyticsTag from "@/data/hooks/analytics/useGetAnalyticsTag";
 
 const images = [
   { src: "/images/lobby_a.jpg" },
@@ -34,7 +35,8 @@ const tabList = [
 const Prologue = () => {
   const params = useSearchParams();
   const { offers } = useOfferStore();
-  
+  useGetAnalyticsTag();
+
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [showText, setShowText] = useState(false);
 
@@ -43,13 +45,13 @@ const Prologue = () => {
   );
 
   const galleryImage = useMemo<CarouselImageModel[]>(() => {
-      return offers.map((item) => {
-        return {
-          src: item.image,
-          label: item.type,
-        };
-      });
-    }, [offers]);
+    return offers.map((item) => {
+      return {
+        src: item.image,
+        label: item.type,
+      };
+    });
+  }, [offers]);
 
   const handleSlideButtonClick = (index: number) => {
     setCurrentImageIndex(index);
@@ -86,11 +88,11 @@ const Prologue = () => {
     const matchedPrologue = Object.values(PROLOGUE_TYPE).find(
       (value) => value === type
     );
-    
+
     if (matchedPrologue) {
       setSelectedPrologue(matchedPrologue);
     }
-  }, [params])
+  }, [params]);
 
   return (
     <div className="relative mb-40">

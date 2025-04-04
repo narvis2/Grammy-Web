@@ -5,7 +5,11 @@ import {
   roomTypeSubDescriptions,
   staticImageUrl,
 } from "@/data/utils/constants";
-import { bedTypeConvert, heightDividerText, viewTypeReservationLink } from "@/data/utils/utils";
+import {
+  bedTypeConvert,
+  heightDividerText,
+  viewTypeReservationLink,
+} from "@/data/utils/utils";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
@@ -135,7 +139,9 @@ const RoomTypeItem = ({ roomType }: RoomTypeItemProps) => {
                 key={item.type}
                 className="block antialiased font-sans text-sm leading-normal text-gray-700 font-normal"
               >
-                {`${bedTypeConvert(item.type)} 침대 ${item.count}개${heightDividerText(room.beds.length, index)}`}
+                {`${bedTypeConvert(item.type)} 침대 ${
+                  item.count
+                }개${heightDividerText(room.beds.length, index)}`}
               </p>
             );
           })}
@@ -145,7 +151,16 @@ const RoomTypeItem = ({ roomType }: RoomTypeItemProps) => {
           type="submit"
           className="text-white inline-flex items-center bg-[#d76076] font-medium rounded-lg text-sm px-5 py-2.5 text-center w-full justify-center mt-5"
           onClick={() => {
-            window.location.href = viewTypeReservationLink(roomType.roomTypeName);
+            if (typeof window !== "undefined" && window.gtag) {
+              window.gtag("event", "click", {
+                event_category: "예약버튼",
+                event_label: "실시간 예약",
+              });
+            }
+
+            window.location.href = viewTypeReservationLink(
+              roomType.roomTypeName
+            );
           }}
         >
           실시간 예약
