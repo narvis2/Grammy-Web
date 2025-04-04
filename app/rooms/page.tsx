@@ -5,6 +5,7 @@ import TabLayout from "@/components/common/tab/TabLayout";
 import RoomTypeItem from "@/components/room/adapter/item/RoomTypeItem";
 import RoomImageAdapter from "@/components/room/adapter/RoomImageAdapter";
 import { useRoomTypeList } from "@/data/hooks";
+import useGetAnalyticsTag from "@/data/hooks/analytics/useGetAnalyticsTag";
 import { roomTypeToRoomTypeImageList } from "@/data/mapper/room";
 import { RoutePath } from "@/data/model/menu/enum";
 import { RoomTypeImageModel, RoomTypeResponse } from "@/data/model/room";
@@ -14,6 +15,8 @@ import React, { useState, useMemo, useEffect } from "react";
 const Room = () => {
   const params = useSearchParams();
   const [currentTab, setCurrentTab] = useState<string>("스탠다드 A");
+
+  useGetAnalyticsTag();
 
   const { data: roomType, isFetching } = useRoomTypeList();
 
@@ -64,7 +67,12 @@ const Room = () => {
               setCurrentTab(type);
             }}
           />
-          {!!roomTypeInfo && <ProductAdapter roomTypeInfo={roomTypeInfo} currentTab={currentTab} />}
+          {!!roomTypeInfo && (
+            <ProductAdapter
+              roomTypeInfo={roomTypeInfo}
+              currentTab={currentTab}
+            />
+          )}
         </section>
       )}
 
@@ -72,7 +80,9 @@ const Room = () => {
         <div className="inner-con flex items-center justify-center">
           <div className="text-center font-semibold font-serif text-4xl">
             <span className="block mb-4">객실 유형</span>
-            <h5 className="text-lg">포항 그라미 호텔의 특별한 객실을 누려보세요.</h5>
+            <h5 className="text-lg">
+              포항 그라미 호텔의 특별한 객실을 누려보세요.
+            </h5>
           </div>
         </div>
 

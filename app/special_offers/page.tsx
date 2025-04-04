@@ -18,6 +18,7 @@ import CarouselContainer from "@/components/home/carousel/CarouselContainer";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
+import useGetAnalyticsTag from "@/data/hooks/analytics/useGetAnalyticsTag";
 
 const images: Map<string, string[]> = new Map([
   [
@@ -84,6 +85,7 @@ const SpecialOffers = () => {
   const params = useSearchParams();
 
   const { offers } = useOfferStore();
+  useGetAnalyticsTag();
 
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [showText, setShowText] = useState(false);
