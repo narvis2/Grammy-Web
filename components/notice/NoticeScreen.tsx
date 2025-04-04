@@ -6,10 +6,13 @@ import { useRouter } from "next/navigation";
 import { useMemo } from "react";
 import NoticeAdapter from "./NoticeAdapter";
 import EmptyAdapter from "../empty/EmptyAdapter";
+import useGetAnalyticsTag from "@/data/hooks/analytics/useGetAnalyticsTag";
 
 const NoticeScreen = () => {
   const router = useRouter();
   const { data: notice } = useNoticeList();
+
+  useGetAnalyticsTag();
 
   const noticeList = useMemo(() => {
     if (!notice) return [];
