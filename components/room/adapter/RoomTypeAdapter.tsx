@@ -92,7 +92,7 @@ const RoomTypeAdapter = ({ roomType }: RoomTypeAdapterProps) => {
         <p className="block antialiased font-sans text-base leading-relaxed text-inherit mb-8 font-normal !text-gray-500">
           {description ?? ""}
         </p>
-        <div>
+        {/* <div>
           <p className="block antialiased font-sans text-base font-light leading-relaxed text-blue-gray-900 mb-0.5 !font-semibold">
             {`최대 인원 : ${roomType.maxCount} 명`}
           </p>
@@ -102,7 +102,7 @@ const RoomTypeAdapter = ({ roomType }: RoomTypeAdapterProps) => {
           <p className="block antialiased font-sans text-base font-light leading-relaxed text-blue-gray-900 mb-0.5 !font-semibold">
             {`주말 가격 : ${getCommaNumber(roomType.weekendPrice)} ￦`}
           </p>
-        </div>
+        </div> */}
         <div className="mt-4">
           {roomType.rooms[0].beds.map((item, index) => {
             return (
