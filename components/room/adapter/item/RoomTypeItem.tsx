@@ -122,7 +122,7 @@ const RoomTypeItem = ({ roomType }: RoomTypeItemProps) => {
           <p className="block antialiased font-sans text-base font-light leading-relaxed text-blue-gray-900 mb-0.5 !font-semibold">
             {`최대 인원 : ${roomType.maxCount} 명`}
           </p>
-          <p className="block antialiased font-sans text-base font-light leading-relaxed text-blue-gray-900 mb-0.5 !font-semibold">
+          {/* <p className="block antialiased font-sans text-base font-light leading-relaxed text-blue-gray-900 mb-0.5 !font-semibold">
             {`주중 가격 : ${getCommaNumber(roomType.weekdayPrice)} ￦`}
           </p>
           <p className="block antialiased font-sans text-base font-light leading-relaxed text-blue-gray-900 mb-0.5 !font-semibold">
@@ -130,7 +130,7 @@ const RoomTypeItem = ({ roomType }: RoomTypeItemProps) => {
           </p>
           <p className="block antialiased font-sans text-base font-light leading-relaxed text-blue-gray-900 mb-0.5 !font-semibold">
             {`주말 가격 : ${getCommaNumber(roomType.weekendPrice)} ￦`}
-          </p>
+          </p> */}
         </div>
         <div className="mt-4 flex flex-row space-x-1">
           {room.beds.map((item, index) => {

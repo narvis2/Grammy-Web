@@ -50,18 +50,7 @@ const ProductAdapter = ({ roomTypeInfo, currentTab }: ProductAdapterProps) => {
               <span className="text-gray-600">{`${roomTypeInfo.maxCount} 명`}</span>
             </p>
           </div>
-          <div className="flex flex-col items-baseline font-roboto mt-2">
-            <p className="text-base text-primary font-semibold">{`주중 가격 : ${getCommaNumber(
-              roomTypeInfo.weekdayPrice
-            )} ￦`}</p>
-            <p className="text-base text-primary font-semibold">{`금요일 가격 : ${getCommaNumber(
-              roomTypeInfo.fridayPrice
-            )} ￦`}</p>
-            {/* text-base text-gray-400 line-through */}
-            <p className="text-base text-primary font-semibold">{`주말 가격 : ${getCommaNumber(
-              roomTypeInfo.weekendPrice
-            )} ￦`}</p>
-          </div>
+          <div className="flex flex-col items-baseline font-roboto mt-2"></div>
 
           <div className="grid grid-cols-2 gap-2 mt-8 justify-items-start">
             <ConvenienceItem title={`${viewTypeConvert(roomType)}`} />
