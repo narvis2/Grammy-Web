@@ -54,15 +54,22 @@ const ProductAdapter = ({ roomTypeInfo, currentTab }: ProductAdapterProps) => {
 
           <div className="grid grid-cols-2 gap-2 mt-8 justify-items-start">
             <ConvenienceItem title={`${viewTypeConvert(roomType)}`} />
-            <ConvenienceItem title="욕조" />
+            {roomType !== "스탠다드 B" &&
+              roomType !== "스탠다드 트윈" &&
+              roomType !== "디럭스 B 테라스" && (
+                <ConvenienceItem title="욕조" />
+              )}
             <ConvenienceItem title="와이파이" />
             <ConvenienceItem title="OTT(넷플릭스 등등..)" />
             <ConvenienceItem title="64인치 구글 스마트 티비" />
             <ConvenienceItem title="평일 조식" />
-            {roomType === "스위트 B" ||
-              (roomTypeInfo.maxCount >= 4 && (
-                <ConvenienceItem title="스타일러" />
-              ))}
+            {roomType === "스위트 B" ? (
+              <ConvenienceItem title="스타일러" />
+            ) : roomTypeInfo.maxCount >= 4 ? (
+              <ConvenienceItem title="스타일러" />
+            ) : (
+              <></>
+            )}
             <ConvenienceItem title="에어컨" />
             {roomType === "디럭스 A 테라스" ||
               roomType === "디럭스 B 테라스" ||
