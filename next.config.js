@@ -1,44 +1,27 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  trailingSlash: false,
+  images:  {
+    domains: ["storage.googleapis.com"],
+    formats: ['image/avif', 'image/webp'],
+  },
   async headers() {
     return [
       {
-        source: '/api/:path*',
+        source: "/(.*)",
         headers: [
-          { key: 'Access-Control-Allow-Credentials', value: 'true' },
-          { key: 'Access-Control-Allow-Origin', value: 'https://api.gramihotel.co.kr' },
-          { key: 'Access-Control-Allow-Methods', value: 'GET,OPTIONS,PATCH,DELETE,POST,PUT' },
-          { key: 'Access-Control-Allow-Headers', value: '*' },
+          {
+            key: "X-Content-Type-Options",
+            value: "nosniff",
+          },
+{
+            key: "Referrer-Policy",
+            value: "strict-origin-when-cross-origin",
+          },
         ],
       },
-    ]
-  },
-  async rewrites() {
-    return [
-      {
-        source: '/api/v1/:path*',
-        destination: 'https://api.gramihotel.co.kr/api/v1/:path*',
-      },
-      {
-        source: '/(.*)/api/v1/:path*',
-        destination: 'https://api.gramihotel.co.kr/api/v1/:path*',
-      },
-      // {
-      //   source: '/api/v1/:path*',
-      //   destination: 'http://localhost:8080/api/v1/:path*',
-      // },
-      // {
-      //   source: '/(.*)/api/v1/:path*',
-      //   destination: 'http://localhost:8080/api/v1/:path*',
-      // },
     ];
   },
-  trailingSlash: false,
-  images:  {
-    domains: ["storage.googleapis.com", "*"],
-    formats: ['image/avif', 'image/webp'],
-  },
 };
-  
 
 module.exports = nextConfig

@@ -16,25 +16,22 @@ type NoticeDetailScreenProps = {
 
 const NoticeDetailScreen = ({ noticeId }: NoticeDetailScreenProps) => {
   const router = useRouter();
-  const { data, isFetching } = useNoticeDetails(noticeId);
+  const { data: notice } = useNoticeDetails(noticeId);
 
   const noticeInfo = useMemo<NoticeModel | undefined>(() => {
-    if (data && data.data && data.success) {
-      const notice = data.data;
-      const noticeImage = notice.images;
-      const imageList =
-        noticeImage.length === 0
-          ? []
-          : noticeImage.map((item) => staticImageUrl + item.imageUrl);
+    if (!notice) return undefined;
 
-      return {
-        ...notice,
-        imageList: imageList,
-      } as NoticeModel;
-    }
+    const noticeImage = notice.images;
+    const imageList =
+      noticeImage.length === 0
+        ? []
+        : noticeImage.map((item) => staticImageUrl + item.imageUrl);
 
-    return undefined;
-  }, [data]);
+    return {
+      ...notice,
+      imageList: imageList,
+    } as NoticeModel;
+  }, [notice]);
 
   const onNavigateNotice = useCallback(() => {
     router.replace(RoutePath.NOTICE);

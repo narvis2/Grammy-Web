@@ -19,10 +19,10 @@ import { useSearchParams } from "next/navigation";
 import useGetAnalyticsTag from "@/data/hooks/analytics/useGetAnalyticsTag";
 
 const images = [
-  { src: "/images/lobby_a.jpg" },
-  { src: "/images/nine_f.jpg" },
-  { src: "/images/cafe_b.jpg" },
-  { src: "/images/terrace_a_2.jpg" },
+  { src: "/images/lobby_a.jpg", alt: "그라미호텔 로비 전경" },
+  { src: "/images/nine_f.jpg", alt: "그라미호텔 9층 전망" },
+  { src: "/images/cafe_b.jpg", alt: "그라미호텔 카페테리아" },
+  { src: "/images/terrace_a_2.jpg", alt: "그라미호텔 오션뷰 테라스" },
 ];
 
 const tabList = [
@@ -100,7 +100,7 @@ const Prologue = () => {
         <div className="relative w-full h-full">
           <Image
             src={images[currentImageIndex].src}
-            alt="Slideshow"
+            alt={images[currentImageIndex].alt}
             fill
             className="slideshow-image object-cover"
           />

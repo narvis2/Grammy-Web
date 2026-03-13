@@ -1,7 +1,16 @@
-import LoginScreen from "@/components/login/LoginScreen";
+"use client";
+
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
 const Login = () => {
-  return <LoginScreen />;
+  const router = useRouter();
+
+  useEffect(() => {
+    router.replace("/");
+  }, [router]);
+
+  return null;
 };
 
 export default Login;
