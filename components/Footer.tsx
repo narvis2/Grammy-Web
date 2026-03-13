@@ -42,7 +42,7 @@ export default function Footer() {
             <div className="flex flex-col space-y-4 md:w-2/4 text-center md:text-left">
               <div className="flex items-center justify-center md:justify-start">
                 <span className="font-semibold mr-2">주소:</span>{" "}
-                {hotelInfo?.address ?? "" + hotelInfo?.addressDetail ?? ""}
+                {(hotelInfo?.address ?? "") + " " + (hotelInfo?.addressDetail ?? "")}
               </div>
               <div className="flex items-center justify-center md:justify-start">
                 <span className="font-semibold mr-2">전화번호:</span>{" "}
