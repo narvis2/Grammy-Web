@@ -19,6 +19,7 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import useGetAnalyticsTag from "@/data/hooks/analytics/useGetAnalyticsTag";
+import { AnimatePresence, motion } from "framer-motion";
 
 const images: Map<string, string[]> = new Map([
   [
@@ -83,7 +84,6 @@ const tabList = [
 
 const SpecialOffers = () => {
   const params = useSearchParams();
-
   const { offers } = useOfferStore();
   useGetAnalyticsTag();
 
@@ -108,12 +108,10 @@ const SpecialOffers = () => {
   };
 
   const galleryImage = useMemo<CarouselImageModel[]>(() => {
-    return offers.map((item) => {
-      return {
-        src: item.image,
-        label: item.type,
-      };
-    });
+    return offers.map((item) => ({
+      src: item.image,
+      label: item.type,
+    }));
   }, [offers]);
 
   const currentImageList = useMemo(() => {
@@ -125,14 +123,12 @@ const SpecialOffers = () => {
       setCurrentImageIndex(
         (prevIndex) => (prevIndex + 1) % currentImageList.length
       );
-    }, 3000);
+    }, 5000);
     return () => clearInterval(interval);
   }, [currentImageList]);
 
   useEffect(() => {
-    const textTimer = setTimeout(() => {
-      setShowText(true);
-    }, 1000);
+    const textTimer = setTimeout(() => setShowText(true), 800);
     return () => clearTimeout(textTimer);
   }, []);
 
@@ -154,64 +150,122 @@ const SpecialOffers = () => {
     const matchedPrologue = Object.values(OFFERS_TYPE).find(
       (value) => value === type
     );
-
     if (matchedPrologue) {
       setSelectedOffer(matchedPrologue);
     }
   }, [params]);
 
   return (
-    <div className="relative mb-40">
+    <div className="relative">
+      {/* Hero Section */}
       <div className="slideshow-container relative">
-        <div className="relative w-full h-full">
-          <Image
-            src={currentImageList[currentImageIndex]}
-            alt={`그라미호텔 ${selectedOffer} 시설 이미지`}
-            fill
-            className="slideshow-image object-cover"
-          />
-        </div>
+        <AnimatePresence mode="sync">
+          <motion.div
+            key={`${selectedOffer}-${currentImageIndex}`}
+            className="absolute inset-0"
+            initial={{ opacity: 0, scale: 1.05 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 1.2, ease: "easeInOut" }}
+          >
+            {currentImageList[currentImageIndex] && (
+              <Image
+                src={currentImageList[currentImageIndex]}
+                alt={`그라미호텔 ${selectedOffer} 시설 이미지`}
+                fill
+                className="object-cover"
+                priority
+              />
+            )}
+          </motion.div>
+        </AnimatePresence>
 
-        <div
-          className={`absolute bottom-20 inset-0 flex flex-col items-center justify-center text-center text-white transition-opacity duration-500 ${
-            showText ? "opacity-100" : "opacity-0"
-          }`}
-        >
-          <div>
-            <h2 className="text-3xl sm:text-5xl lg:text-6xl font-serif mb-2">
+        {/* Gradient Overlay */}
+        <div className="hero-overlay absolute inset-0 z-[1]" />
+
+        {/* Content */}
+        <div className="absolute inset-0 z-[2] flex flex-col items-center justify-center">
+          <motion.div
+            className="text-center text-white"
+            initial={{ opacity: 0, y: 30 }}
+            animate={showText ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+            transition={{ duration: 1, ease: "easeOut" }}
+          >
+            <motion.div
+              className="w-px h-16 bg-white/50 mx-auto mb-8"
+              initial={{ scaleY: 0 }}
+              animate={showText ? { scaleY: 1 } : { scaleY: 0 }}
+              transition={{ duration: 0.8, delay: 0.3 }}
+            />
+            <p className="text-xs sm:text-sm tracking-widest-2xl font-light mb-4 uppercase font-body">
+              Grami Hotel · Special Offers
+            </p>
+            <h1 className="text-4xl sm:text-6xl lg:text-8xl font-display font-light tracking-wide mb-4">
               Special Offers
-            </h2>
-
-            <p className="text-base sm:text-lg lg:text-2xl font-serif mt-4">
+            </h1>
+            <p className="text-base sm:text-lg font-light tracking-wider font-body opacity-80">
               {selectedOffer}
             </p>
 
-            <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
-              {currentImageList.map((image, index) => (
+            {/* Dot Indicators */}
+            <div className="flex items-center justify-center gap-2 mt-10">
+              {currentImageList.map((_, index) => (
                 <button
                   key={index}
                   onClick={() => handleSlideButtonClick(index)}
-                  className={`w-4 h-4 rounded-full focus:outline-none ${
-                    currentImageIndex === index ? "bg-blue-800" : "bg-blue-400"
+                  className={`rounded-full transition-all duration-500 ${
+                    currentImageIndex === index
+                      ? "w-8 h-2 bg-white"
+                      : "w-2 h-2 bg-white/40"
                   }`}
                 />
               ))}
             </div>
-          </div>
+          </motion.div>
+
+          {/* Scroll Indicator */}
+          <motion.div
+            className="absolute bottom-10 flex flex-col items-center text-white/60"
+            initial={{ opacity: 0 }}
+            animate={showText ? { opacity: 1 } : { opacity: 0 }}
+            transition={{ delay: 1.5, duration: 0.8 }}
+          >
+            <span className="text-[10px] tracking-widest-2xl uppercase font-body mb-3">
+              Scroll
+            </span>
+            <div className="scroll-indicator">
+              <svg width="16" height="24" viewBox="0 0 16 24" fill="none" className="opacity-60">
+                <rect x="1" y="1" width="14" height="22" rx="7" stroke="white" strokeWidth="1" />
+                <motion.circle
+                  cx="8"
+                  cy="8"
+                  r="2"
+                  fill="white"
+                  animate={{ cy: [8, 14, 8] }}
+                  transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                />
+              </svg>
+            </div>
+          </motion.div>
         </div>
       </div>
 
-      <section className="mt-4">
+      {/* Tab Section */}
+      <section>
         <TabLayout
           title="SPECIAL OFFERS"
           href={RoutePath.SPECIAL_OFFERS}
           tabList={tabList}
           currentTab={selectedOffer}
-          onTabClick={(type) => {
-            handleTabClick(type as OFFERS_TYPE);
-          }}
+          onTabClick={(type) => handleTabClick(type as OFFERS_TYPE)}
         />
-        <div className="mt-8">
+
+        <motion.div
+          key={selectedOffer}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, ease: "easeOut" }}
+        >
           {selectedOffer === OFFERS_TYPE.BED && <Bed />}
           {selectedOffer === OFFERS_TYPE.TERRACE && <Terrace />}
           {selectedOffer === OFFERS_TYPE.BATH && (
@@ -220,7 +274,7 @@ const SpecialOffers = () => {
           {selectedOffer === OFFERS_TYPE.CAFETERIA && <Cafeteria />}
           {selectedOffer === OFFERS_TYPE.AMENITIES && <Amenity />}
           {selectedOffer === OFFERS_TYPE.ROOM_ITEMS && <RoomItem />}
-        </div>
+        </motion.div>
       </section>
 
       <CarouselContainer images={galleryImage} />
