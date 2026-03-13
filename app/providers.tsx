@@ -22,7 +22,7 @@ export const NextLayout = ({ children }: Props) => {
 				<GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS} />
 			) : null}
       <Navbar />
-      <div className="min-h-[80vh]">{children}</div>
+      <main className="min-h-[80vh]">{children}</main>
       <Footer />
       <Toaster position={"top-center"} />
       <CommonModal />

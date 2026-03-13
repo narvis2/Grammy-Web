@@ -1,4 +1,6 @@
-import { useEffect, useState } from "react";
+"use client";
+
+import { useEffect, useState, useCallback } from "react";
 import SubMenu from "./navbar/SubMenu";
 import { RouteName, RoutePath } from "@/data/model/menu/enum";
 import NavTab from "./navbar/NavTab";
@@ -16,6 +18,7 @@ export default function Navbar() {
   const [subMenuContent, setSubMenuContent] = useState<string | null>(null);
   const [timeoutId, setTimeoutId] = useState<NodeJS.Timeout | null>(null);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
 
   const Prologue_tabList = [
     { title: PROLOGUE_TYPE.INTRODUCTION, path: RoutePath.PROLOGUE },
@@ -35,7 +38,6 @@ export default function Navbar() {
 
   const { roomTypeList } = useRoomTypeInfo();
 
-  // 모바일 오버레이에 표시할 메인 메뉴 배열 (하위 서브메뉴 포함)
   const mainMenu = [
     {
       title: RouteName.PROLOGUE,
@@ -72,32 +74,27 @@ export default function Navbar() {
     },
   ];
 
+  const isHome = pathname === "/";
+
+  const handleScroll = useCallback(() => {
+    setIsScrolled(window.scrollY > 80);
+    if (isMenuOpen) setIsMenuOpen(false);
+  }, [isMenuOpen]);
+
   const handleMouseEnter = (content: string) => {
-    if (timeoutId !== null) {
-      clearTimeout(timeoutId);
-    }
+    if (timeoutId !== null) clearTimeout(timeoutId);
     setSubMenuContent(content);
   };
 
   const handleMouseLeave = () => {
-    const id = setTimeout(() => {
-      setSubMenuContent(null);
-    }, 600);
+    const id = setTimeout(() => setSubMenuContent(null), 600);
     setTimeoutId(id);
   };
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       const target = event.target as HTMLElement;
-      if (!target.closest("nav")) {
-        if (isMenuOpen) {
-          setIsMenuOpen(false);
-        }
-      }
-    };
-
-    const handleScroll = () => {
-      if (isMenuOpen) {
+      if (!target.closest("nav") && isMenuOpen) {
         setIsMenuOpen(false);
       }
     };
@@ -109,197 +106,208 @@ export default function Navbar() {
       document.removeEventListener("click", handleClickOutside);
       window.removeEventListener("scroll", handleScroll);
     };
-  }, [isMenuOpen]);
+  }, [isMenuOpen, handleScroll]);
 
-  if (pathname === RoutePath.LOGIN) {
-    return null;
-  }
+  if (pathname === RoutePath.LOGIN) return null;
+
+  const showTransparent = isHome && !isScrolled && !isMenuOpen;
+  const textColor = showTransparent ? "text-white" : "text-charcoal";
 
   return (
-    <nav className="h-20 z-20 border-b border-gray-200 w-full shadow-sm fixed top-0 bg-white">
-      <div className="flex justify-between items-center sm:px-10 p-4 h-full">
-        {/* 로고 영역 */}
-        <div
-          className="flex items-center gap-2 cursor-pointer"
-          onClick={() => {
-            window.location.href = "/";
-          }}
-        >
-          <Image
-            src={"/images/grami_logo.svg"}
-            alt="logo"
-            width={165}
-            height={10}
-          />
-        </div>
+    <>
+      <nav
+        className={`h-20 z-30 w-full fixed top-0 transition-all duration-500 ${
+          showTransparent ? "navbar-transparent" : "navbar-solid"
+        }`}
+      >
+        {/* 투명 navbar일 때 텍스트 가독성을 위한 상단 그라디언트 */}
+        {showTransparent && (
+          <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/20 to-transparent pointer-events-none" />
+        )}
+        <div className="relative flex justify-between items-center sm:px-10 px-5 h-full max-w-[1400px] mx-auto">
+          {/* Logo */}
+          <div
+            className="flex items-center gap-2 cursor-pointer"
+            onClick={() => (window.location.href = "/")}
+          >
+            <Image
+              src="/images/grami_logo.svg"
+              alt="그라미호텔 로고"
+              width={150}
+              height={10}
+              className={`transition-all duration-300 ${
+                showTransparent ? "brightness-0 invert" : ""
+              }`}
+            />
+          </div>
 
-        {/* 데스크탑 네비게이션 (sm 이상) */}
-        <div
-          className="hidden sm:flex ml-10 flex-1 flex space-x-6 justify-start items-center overflow-x-auto scrollbar-hidden sm:justify-center h-full"
-          style={{
-            WebkitOverflowScrolling: "touch",
-            touchAction: "pan-x",
-            scrollbarWidth: "none",
-          }}
-        >
+          {/* Desktop Nav */}
           <div
-            className="relative group flex-shrink-0 snap-start"
-            onMouseEnter={() =>
-              isMobile ? undefined : handleMouseEnter("prologue")
-            }
-            onMouseLeave={isMobile ? undefined : handleMouseLeave}
+            className="hidden sm:flex ml-10 flex-1 space-x-8 justify-center items-center overflow-x-auto h-full"
+            style={{
+              WebkitOverflowScrolling: "touch",
+              scrollbarWidth: "none",
+            }}
           >
-            <NavTab
-              menu={{ title: RouteName.PROLOGUE, path: RoutePath.PROLOGUE }}
-            />
-            {subMenuContent === "prologue" && (
-              <SubMenu menuList={Prologue_tabList} />
-            )}
-          </div>
-          <div
-            className="relative group flex-shrink-0 snap-start"
-            onMouseEnter={() =>
-              isMobile ? undefined : handleMouseEnter("rooms")
-            }
-            onMouseLeave={isMobile ? undefined : handleMouseLeave}
-          >
-            <NavTab menu={{ title: RouteName.ROOMS, path: RoutePath.ROOMS }} />
-            {subMenuContent === "rooms" && <SubMenu menuList={roomTypeList} />}
-          </div>
-          <div
-            className="relative group flex-shrink-0 snap-start"
-            onMouseEnter={() =>
-              isMobile ? undefined : handleMouseEnter("special_offers")
-            }
-            onMouseLeave={isMobile ? undefined : handleMouseLeave}
-          >
-            <NavTab
-              menu={{
-                title: RouteName.SPECIAL_OFFERS,
-                path: RoutePath.SPECIAL_OFFERS,
-              }}
-            />
-            {subMenuContent === "special_offers" && (
-              <SubMenu menuList={Offers_tabList} />
-            )}
-          </div>
-          <button
-            type="button"
-            className="text-lg sm:text-xl hover:text-gray-300 transition-colors hover:border-b flex-shrink-0 snap-start"
-            onClick={() => window.alert("서비스 준비중입니다.")}
-          >
-            EVENT
-          </button>
-          <button
-            type="button"
-            className="text-lg sm:text-xl hover:text-gray-300 transition-colors hover:border-b flex-shrink-0 snap-start"
-            onClick={() => window.alert("서비스 준비중입니다.")}
-          >
-            REVIEW
-          </button>
-          <div
-            className="relative group flex-shrink-0 snap-start"
-            onMouseEnter={() =>
-              isMobile ? undefined : handleMouseEnter("reservation")
-            }
-            onMouseLeave={isMobile ? undefined : handleMouseLeave}
-          >
+            <div
+              className="relative group flex-shrink-0"
+              onMouseEnter={() => !isMobile && handleMouseEnter("prologue")}
+              onMouseLeave={!isMobile ? handleMouseLeave : undefined}
+            >
+              <NavTab
+                menu={{ title: RouteName.PROLOGUE, path: RoutePath.PROLOGUE }}
+                className={`text-sm tracking-widest-xl font-light uppercase transition-colors duration-300 hover:opacity-70 ${textColor}`}
+              />
+              {subMenuContent === "prologue" && (
+                <SubMenu menuList={Prologue_tabList} />
+              )}
+            </div>
+            <div
+              className="relative group flex-shrink-0"
+              onMouseEnter={() => !isMobile && handleMouseEnter("rooms")}
+              onMouseLeave={!isMobile ? handleMouseLeave : undefined}
+            >
+              <NavTab
+                menu={{ title: RouteName.ROOMS, path: RoutePath.ROOMS }}
+                className={`text-sm tracking-widest-xl font-light uppercase transition-colors duration-300 hover:opacity-70 ${textColor}`}
+              />
+              {subMenuContent === "rooms" && <SubMenu menuList={roomTypeList} />}
+            </div>
+            <div
+              className="relative group flex-shrink-0"
+              onMouseEnter={() => !isMobile && handleMouseEnter("special_offers")}
+              onMouseLeave={!isMobile ? handleMouseLeave : undefined}
+            >
+              <NavTab
+                menu={{
+                  title: RouteName.SPECIAL_OFFERS,
+                  path: RoutePath.SPECIAL_OFFERS,
+                }}
+                className={`text-sm tracking-widest-xl font-light uppercase transition-colors duration-300 hover:opacity-70 ${textColor}`}
+              />
+              {subMenuContent === "special_offers" && (
+                <SubMenu menuList={Offers_tabList} />
+              )}
+            </div>
             <button
               type="button"
-              className="text-lg sm:text-xl hover:text-gray-300 transition-colors hover:border-b flex-shrink-0 snap-start"
-              onClick={() => {
-                window.location.href =
-                  "https://booking.naver.com/booking/3/bizes/1227540?area=pll";
-              }}
+              className={`text-sm tracking-widest-xl font-light uppercase transition-colors duration-300 hover:opacity-70 flex-shrink-0 ${textColor}`}
+              onClick={() => window.alert("서비스 준비중입니다.")}
             >
-              RESERVATION
+              EVENT
+            </button>
+            <button
+              type="button"
+              className={`text-sm tracking-widest-xl font-light uppercase transition-colors duration-300 hover:opacity-70 flex-shrink-0 ${textColor}`}
+              onClick={() => window.alert("서비스 준비중입니다.")}
+            >
+              REVIEW
+            </button>
+            <div className="relative group flex-shrink-0">
+              <button
+                type="button"
+                className={`text-sm tracking-widest-xl font-light uppercase transition-colors duration-300 hover:opacity-70 flex-shrink-0 ${textColor}`}
+                onClick={() => {
+                  window.location.href =
+                    "https://booking.naver.com/booking/3/bizes/1227540?area=pll";
+                }}
+              >
+                RESERVATION
+              </button>
+            </div>
+            <div className="flex-shrink-0">
+              <NavTab
+                menu={{ title: RouteName.NOTICE, path: RoutePath.NOTICE }}
+                className={`text-sm tracking-widest-xl font-light uppercase transition-colors duration-300 hover:opacity-70 ${textColor}`}
+              />
+            </div>
+          </div>
+
+          {/* Mobile Hamburger */}
+          <div className="sm:hidden">
+            <button
+              type="button"
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              className="p-2 focus:outline-none"
+            >
+              <AnimatePresence mode="wait">
+                {isMenuOpen ? (
+                  <motion.svg
+                    key="close"
+                    initial={{ opacity: 0, rotate: -90 }}
+                    animate={{ opacity: 1, rotate: 0 }}
+                    exit={{ opacity: 0, rotate: 90 }}
+                    transition={{ duration: 0.3 }}
+                    className={`w-6 h-6 ${showTransparent ? "text-white" : "text-charcoal"}`}
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="1.5"
+                      d="M6 18L18 6M6 6l12 12"
+                    />
+                  </motion.svg>
+                ) : (
+                  <motion.svg
+                    key="menu"
+                    initial={{ opacity: 0, rotate: 90 }}
+                    animate={{ opacity: 1, rotate: 0 }}
+                    exit={{ opacity: 0, rotate: -90 }}
+                    transition={{ duration: 0.3 }}
+                    className={`w-6 h-6 ${showTransparent ? "text-white" : "text-charcoal"}`}
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="1.5"
+                      d="M4 6h16M4 12h16M4 18h16"
+                    />
+                  </motion.svg>
+                )}
+              </AnimatePresence>
             </button>
           </div>
-          <div className="flex-shrink-0 snap-start">
-            <NavTab
-              menu={{ title: RouteName.NOTICE, path: RoutePath.NOTICE }}
-            />
-          </div>
         </div>
+      </nav>
 
-        {/* 모바일 햄버거 버튼 (sm 미만) */}
-        <div className="sm:hidden">
-          <button
-            type="button"
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="p-2 focus:outline-none"
-          >
-            <AnimatePresence mode="wait">
-              {isMenuOpen ? (
-                <motion.svg
-                  key="close"
-                  initial={{ opacity: 0, rotate: -90 }}
-                  animate={{ opacity: 1, rotate: 0 }}
-                  exit={{ opacity: 0, rotate: 90 }}
-                  transition={{ duration: 0.3 }}
-                  className="w-6 h-6 text-black"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M6 18L18 6M6 6l12 12"
-                  ></path>
-                </motion.svg>
-              ) : (
-                <motion.svg
-                  key="menu"
-                  initial={{ opacity: 0, rotate: 90 }}
-                  animate={{ opacity: 1, rotate: 0 }}
-                  exit={{ opacity: 0, rotate: -90 }}
-                  transition={{ duration: 0.3 }}
-                  className="w-6 h-6 text-black"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M4 6h16M4 12h16M4 18h16"
-                  ></path>
-                </motion.svg>
-              )}
-            </AnimatePresence>
-          </button>
-        </div>
-      </div>
-
-      {/* 모바일 네비게이션 메뉴 오버레이 */}
+      {/* Mobile Overlay - nav 외부에 렌더링하여 backdrop-filter 의 containing block 영향을 받지 않도록 함 */}
       <AnimatePresence>
         {isMenuOpen && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-x-0 top-20 bottom-0 z-50 transition-opacity duration-300"
+            transition={{ duration: 0.3 }}
+            className="fixed left-0 right-0 top-20 bottom-0 z-50"
           >
-            {/* 반투명 배경 (클릭 시 메뉴 닫기) */}
-            <div
-              className="absolute inset-0 bg-black bg-opacity-50"
-              onClick={() => setIsMenuOpen(false)}
-            ></div>
-            {/* 전체 화면 오버레이 메뉴 패널 */}
-            <div className="relative bg-white w-full h-full p-6 overflow-y-auto">
-              <div className="grid grid-cols-2 gap-4">
+            {/* 불투명 배경으로 전체 덮기 */}
+            <motion.div
+              initial={{ y: -20, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              exit={{ y: -20, opacity: 0 }}
+              transition={{ duration: 0.3, delay: 0.05 }}
+              className="absolute inset-0 bg-cream overflow-y-auto p-8 min-h-full"
+            >
+              <div className="max-w-md mx-auto space-y-6">
                 {mainMenu.map((item, index) => (
-                  <div key={index} className="space-y-2">
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.1 + index * 0.05 }}
+                    className="border-b border-warm-dark pb-4"
+                  >
                     {item.path ? (
                       <a
                         href={item.path}
                         onClick={() => setIsMenuOpen(false)}
-                        className="block text-lg font-medium hover:text-gray-700"
+                        className="block text-lg font-display tracking-widest-xl text-charcoal hover:text-brand transition-colors"
                       >
                         {item.title}
                       </a>
@@ -307,21 +315,21 @@ export default function Navbar() {
                       <button
                         onClick={() => {
                           setIsMenuOpen(false);
-                          item.action && item.action();
+                          item.action?.();
                         }}
-                        className="block text-lg font-medium hover:text-gray-700"
+                        className="block text-lg font-display tracking-widest-xl text-charcoal hover:text-brand transition-colors"
                       >
                         {item.title}
                       </button>
                     )}
                     {item.submenu && (
-                      <ul className="space-y-1 pl-4 border-l border-gray-300">
+                      <ul className="mt-2 space-y-1 pl-4">
                         {item.submenu.map((subItem, subIndex) => (
                           <li key={subIndex}>
                             <a
                               href={subItem.path + `?type=${subItem.title}`}
                               onClick={() => setIsMenuOpen(false)}
-                              className="text-sm hover:text-gray-600"
+                              className="text-sm text-body-text hover:text-brand transition-colors"
                             >
                               {subItem.title}
                             </a>
@@ -329,13 +337,13 @@ export default function Navbar() {
                         ))}
                       </ul>
                     )}
-                  </div>
+                  </motion.div>
                 ))}
               </div>
-            </div>
+            </motion.div>
           </motion.div>
         )}
       </AnimatePresence>
-    </nav>
+    </>
   );
 }

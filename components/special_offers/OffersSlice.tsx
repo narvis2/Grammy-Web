@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useMemo } from "react";
 import OffersSliceIndicator from "./OffersSliceIndicator";
 import OffersImageBackground from "./OffersImageBackground";
@@ -27,22 +29,19 @@ const OffersSlice = ({
 
   return (
     <div className="relative">
-      <div className="absolute bottom-0 left-0 right-0 z-[2] mx-[15%] mb-4 flex list-none justify-center p-0">
-        {imageList.map((value, index) => {
-          return (
-            <OffersSliceIndicator
-              key={index.toString()}
-              label={index}
-              isActive={index === currentImgPosition}
-              onClick={() => {
-                setCurrentImgPosition(index);
-              }}
-            />
-          );
-        })}
+      {/* Indicators */}
+      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-[4] flex items-center gap-0">
+        {imageList.map((_, index) => (
+          <OffersSliceIndicator
+            key={index}
+            label={index}
+            isActive={index === currentImgPosition}
+            onClick={() => setCurrentImgPosition(index)}
+          />
+        ))}
       </div>
 
-      {/* 슬라이드 영역 */}
+      {/* Image */}
       <OffersImageBackground
         image={item.image}
         name={item.name}

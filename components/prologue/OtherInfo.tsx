@@ -1,5 +1,9 @@
+"use client";
+
 import { useState } from "react";
 import Image from "next/image";
+import { motion, AnimatePresence } from "framer-motion";
+import FadeIn from "@/components/common/animation/FadeIn";
 
 const Market = [
   { name: "참맛 대게 전문점", image: "/images/food1.jpg" },
@@ -26,213 +30,201 @@ const JapaneseStreet = {
   experiences: [{ name: "후루사또야", image: "/images/experience.jpg" }],
 };
 
+type PlaceCardProps = {
+  name: string;
+  image: string;
+};
+
+const PlaceCard = ({ name, image }: PlaceCardProps) => (
+  <div className="group overflow-hidden rounded-sm bg-white">
+    <div className="relative aspect-[4/3] overflow-hidden img-zoom">
+      <Image
+        src={image}
+        alt={name}
+        fill
+        sizes="(max-width: 768px) 100vw, 33vw"
+        className="object-cover"
+      />
+    </div>
+    <div className="p-4 text-center">
+      <p className="text-sm text-charcoal font-light tracking-wide">{name}</p>
+    </div>
+  </div>
+);
+
+type DialogProps = {
+  isOpen: boolean;
+  onClose: () => void;
+  children: React.ReactNode;
+  title: string;
+};
+
+const Dialog = ({ isOpen, onClose, children, title }: DialogProps) => (
+  <AnimatePresence>
+    {isOpen && (
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        className="fixed inset-0 bg-charcoal/60 backdrop-blur-sm flex justify-center items-center z-50 p-4"
+        onClick={onClose}
+      >
+        <motion.div
+          initial={{ opacity: 0, y: 20, scale: 0.98 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
+          exit={{ opacity: 0, y: 20, scale: 0.98 }}
+          transition={{ duration: 0.3 }}
+          className="relative bg-cream rounded-sm p-8 sm:p-12 max-w-4xl w-full max-h-[85vh] overflow-y-auto"
+          onClick={(e) => e.stopPropagation()}
+        >
+          <button
+            onClick={onClose}
+            className="absolute top-6 right-6 w-8 h-8 flex items-center justify-center text-body-text hover:text-charcoal transition-colors"
+          >
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+              <path strokeLinecap="round" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+          <h3 className="font-display text-2xl sm:text-3xl text-charcoal tracking-wide text-center mb-2">
+            {title}
+          </h3>
+          <div className="section-divider mt-3 mb-10" />
+          {children}
+        </motion.div>
+      </motion.div>
+    )}
+  </AnimatePresence>
+);
+
 const OtherInfo = () => {
   const [activeDialog, setActiveDialog] = useState<string | null>(null);
 
-  const handleDialogOpen = (name: string) => {
-    setActiveDialog(name);
-  };
-
-  const closeDialog = () => {
-    setActiveDialog(null);
-  };
-
   return (
-    <section className="pt-5 pb-20 px-8 md:px-16 lg:px-24 flex flex-col items-center">
-      <div className="w-full lg:w-1/2 mb-12 lg:mb-16">
-        <div className="relative bg-gray-200 rounded-lg overflow-hidden shadow-lg">
-          <Image
-            src="/images/guryongpo.jpeg"
-            alt="구룡포 시장"
-            layout="responsive"
-            width={600}
-            height={400}
-            className="w-full h-72 object-cover rounded-t-lg"
-          />
-          <div className="absolute inset-0 flex flex-col justify-center items-center p-4 md:p-8 bg-white bg-opacity-30 rounded-lg">
-            <div className="bg-black bg-opacity-50 p-4 md:p-6 rounded-lg max-w-[90%] text-center">
-              <h2 className="text-white font-bold text-shadow-md mb-3 text-[clamp(1.2rem,3vw,2rem)]">
-                구룡포 시장
-              </h2>
-              <p className="text-white text-[clamp(0.9rem,2.5vw,1.3rem)]">
-                구룡포시장은 한국의 대표적인 전통 시장으로, 다양한 해산물을
-                활용한 요리를 즉석에서 즐길 수 있는 곳입니다. 전통적인 한국
-                시장의 분위기와 지역 특산물을 경험해 보세요.
-              </p>
-            </div>
-            <button
-              onClick={() => handleDialogOpen("구룡포시장")}
-              className="bg-gray-300 text-white py-2 px-4 rounded-lg shadow hover:bg-black transition duration-300 mt-4 md:mt-5"
-            >
-              자세히 보기
-            </button>
-            {activeDialog === "구룡포시장" && (
-              <div
-                className="fixed inset-0 bg-black bg-opacity-60 flex justify-center items-center z-50"
-                onClick={closeDialog}
-              >
-                <div className="relative bg-white rounded-lg p-6 md:p-8 max-w-4xl w-full h-[80vh] max-h-[80vh] overflow-y-auto mx-14 md:mx-16">
-                  <button
-                    onClick={closeDialog}
-                    className="absolute top-4 right-4 text-gray-600 hover:text-gray-800 text-xl"
-                  >
-                    &times;
-                  </button>
-                  <h4 className="text-xl font-bold mb-6 text-center">
-                    추천 맛집
-                  </h4>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-                    {Market.map((place, index) => (
-                      <div
-                        key={index}
-                        className="border border-gray-300 rounded-lg shadow-lg overflow-hidden"
-                      >
-                        <div
-                          className="w-full h-40 bg-cover bg-center rounded-t-lg"
-                          style={{
-                            backgroundImage: `url(${place.image})`,
-                          }}
-                        ></div>
-                        <div className="p-4">
-                          <h5 className="text-lg font-semibold text-center">
-                            {place.name}
-                          </h5>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            )}
-          </div>
-        </div>
-      </div>
+    <section className="max-w-5xl mx-auto px-6 sm:px-10 py-16 sm:py-24">
+      <FadeIn className="text-center mb-16">
+        <p className="text-xs tracking-widest-2xl text-brand uppercase font-body mb-3">
+          Nearby Attractions
+        </p>
+        <h2 className="font-display text-3xl sm:text-4xl text-charcoal tracking-wide">
+          주변 관광지
+        </h2>
+        <div className="section-divider mt-5" />
+      </FadeIn>
 
-      <div className="w-full lg:w-1/2 mb-12 lg:mb-0">
-        <div className="relative bg-gray-200 rounded-lg overflow-hidden shadow-lg">
-          <Image
-            src="/images/japanstreet.jpeg"
-            alt="일본인 가옥 거리"
-            layout="responsive"
-            width={600}
-            height={400}
-            className="w-full h-72 object-cover rounded-t-lg"
-          />
-          <div className="absolute inset-0 flex flex-col justify-center items-center p-4 md:p-8 bg-white bg-opacity-30 rounded-lg">
-            <div className="bg-black bg-opacity-50 p-4 md:p-6 rounded-lg max-w-[90%] text-center">
-              <h3 className="text-white font-bold text-shadow-md mb-3 text-[clamp(1.2rem,3vw,2rem)]">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
+        {/* 구룡포 시장 */}
+        <FadeIn direction="left">
+          <div className="group relative overflow-hidden rounded-sm cursor-pointer" onClick={() => setActiveDialog("구룡포시장")}>
+            <div className="relative aspect-[4/3] overflow-hidden">
+              <Image
+                src="/images/guryongpo.jpeg"
+                alt="구룡포 시장"
+                fill
+                sizes="(max-width: 1024px) 100vw, 50vw"
+                className="object-cover transition-transform duration-700 group-hover:scale-105"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-charcoal/70 via-charcoal/20 to-transparent" />
+            </div>
+            <div className="absolute bottom-0 left-0 right-0 p-6 sm:p-8">
+              <h3 className="font-display text-2xl sm:text-3xl text-white tracking-wide mb-2">
+                구룡포 시장
+              </h3>
+              <p className="text-white/80 text-sm font-light leading-relaxed mb-4 max-w-md">
+                다양한 해산물을 활용한 요리를 즉석에서 즐길 수 있는 전통 시장
+              </p>
+              <span className="inline-block text-xs tracking-widest-xl text-white/90 uppercase border-b border-white/40 pb-1 group-hover:border-white transition-colors duration-300">
+                자세히 보기
+              </span>
+            </div>
+          </div>
+        </FadeIn>
+
+        {/* 일본인 가옥 거리 */}
+        <FadeIn direction="right" delay={0.1}>
+          <div className="group relative overflow-hidden rounded-sm cursor-pointer" onClick={() => setActiveDialog("일본인 가옥 거리")}>
+            <div className="relative aspect-[4/3] overflow-hidden">
+              <Image
+                src="/images/japanstreet.jpeg"
+                alt="일본인 가옥 거리"
+                fill
+                sizes="(max-width: 1024px) 100vw, 50vw"
+                className="object-cover transition-transform duration-700 group-hover:scale-105"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-charcoal/70 via-charcoal/20 to-transparent" />
+            </div>
+            <div className="absolute bottom-0 left-0 right-0 p-6 sm:p-8">
+              <h3 className="font-display text-2xl sm:text-3xl text-white tracking-wide mb-2">
                 일본인 가옥 거리
               </h3>
-              <p className="text-white text-[clamp(0.9rem,2.5vw,1.3rem)]">
-                일본인 가옥 거리는 일본 식민지 시대의 건축물이 잘 보존된 곳으로,
-                다양한 맛집과 카페, 일본 문화 체험을 즐길 수 있는 곳입니다.
-                <br />
-                전통적인 일본의 맛과 현대적인 감각을 함께 경험해 보세요.
+              <p className="text-white/80 text-sm font-light leading-relaxed mb-4 max-w-md">
+                일본 식민지 시대의 건축물이 보존된 거리, 맛집과 카페, 문화 체험
               </p>
+              <span className="inline-block text-xs tracking-widest-xl text-white/90 uppercase border-b border-white/40 pb-1 group-hover:border-white transition-colors duration-300">
+                자세히 보기
+              </span>
             </div>
-            <button
-              onClick={() => handleDialogOpen("일본인 가옥 거리")}
-              className="bg-gray-300 text-white py-2 px-4 rounded-lg shadow hover:bg-black transition duration-300 mt-4 md:mt-5"
-            >
-              자세히 보기
-            </button>
-            {activeDialog === "일본인 가옥 거리" && (
-              <div
-                className="fixed inset-0 bg-black bg-opacity-60 flex justify-center items-center z-50"
-                onClick={closeDialog}
-              >
-                <div className="relative bg-white rounded-lg p-6 md:p-8 max-w-4xl w-full h-[80vh] max-h-[80vh] overflow-y-auto mx-14 md:mx-16">
-                  <button
-                    onClick={closeDialog}
-                    className="absolute top-4 right-4 text-gray-600 hover:text-gray-800 text-xl"
-                  >
-                    &times;
-                  </button>
-                  <div className="space-y-6">
-                    <div>
-                      <h5 className="text-lg font-bold mb-4 text-center">
-                        추천 맛집
-                      </h5>
-                      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-                        {JapaneseStreet.restaurants.map((restaurant, index) => (
-                          <div
-                            key={index}
-                            className="border border-gray-300 rounded-lg shadow-lg overflow-hidden"
-                          >
-                            <div
-                              className="w-full h-40 bg-cover bg-center rounded-t-lg"
-                              style={{
-                                backgroundImage: `url(${restaurant.image})`,
-                              }}
-                            ></div>
-                            <div className="p-4">
-                              <h6 className="text-lg font-semibold text-center">
-                                {restaurant.name}
-                              </h6>
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
+          </div>
+        </FadeIn>
+      </div>
 
-                    <div>
-                      <h5 className="text-lg font-bold mb-4 text-center">
-                        카페
-                      </h5>
-                      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-                        {JapaneseStreet.cafes.map((cafe, index) => (
-                          <div
-                            key={index}
-                            className="border border-gray-300 rounded-lg shadow-lg overflow-hidden"
-                          >
-                            <div
-                              className="w-full h-40 bg-cover bg-center rounded-t-lg"
-                              style={{
-                                backgroundImage: `url(${cafe.image})`,
-                              }}
-                            ></div>
-                            <div className="p-4">
-                              <h6 className="text-lg font-semibold text-center">
-                                {cafe.name}
-                              </h6>
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
+      {/* 구룡포 시장 Dialog */}
+      <Dialog
+        isOpen={activeDialog === "구룡포시장"}
+        onClose={() => setActiveDialog(null)}
+        title="추천 맛집"
+      >
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {Market.map((place, index) => (
+            <PlaceCard key={index} {...place} />
+          ))}
+        </div>
+      </Dialog>
 
-                    <div>
-                      <h5 className="text-lg font-bold mb-4 text-center">
-                        일본 전통 의상 체험
-                      </h5>
-                      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-                        {JapaneseStreet.experiences.map((experience, index) => (
-                          <div
-                            key={index}
-                            className="border border-gray-300 rounded-lg shadow-lg overflow-hidden"
-                          >
-                            <div
-                              className="w-full h-40 bg-cover bg-center rounded-t-lg"
-                              style={{
-                                backgroundImage: `url(${experience.image})`,
-                              }}
-                            ></div>
-                            <div className="p-4">
-                              <h6 className="text-lg font-semibold text-center">
-                                {experience.name}
-                              </h6>
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            )}
+      {/* 일본인 가옥 거리 Dialog */}
+      <Dialog
+        isOpen={activeDialog === "일본인 가옥 거리"}
+        onClose={() => setActiveDialog(null)}
+        title="일본인 가옥 거리"
+      >
+        <div className="space-y-12">
+          <div>
+            <h4 className="text-center text-xs tracking-widest-xl uppercase text-brand font-body mb-6">
+              추천 맛집
+            </h4>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {JapaneseStreet.restaurants.map((item, index) => (
+                <PlaceCard key={index} {...item} />
+              ))}
+            </div>
+          </div>
+
+          <div className="section-divider-gold" />
+
+          <div>
+            <h4 className="text-center text-xs tracking-widest-xl uppercase text-brand font-body mb-6">
+              카페
+            </h4>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {JapaneseStreet.cafes.map((item, index) => (
+                <PlaceCard key={index} {...item} />
+              ))}
+            </div>
+          </div>
+
+          <div className="section-divider-gold" />
+
+          <div>
+            <h4 className="text-center text-xs tracking-widest-xl uppercase text-brand font-body mb-6">
+              일본 전통 의상 체험
+            </h4>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {JapaneseStreet.experiences.map((item, index) => (
+                <PlaceCard key={index} {...item} />
+              ))}
+            </div>
           </div>
         </div>
-      </div>
+      </Dialog>
     </section>
   );
 };
