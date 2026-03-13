@@ -1,4 +1,7 @@
-import React, { useRef } from "react";
+"use client";
+
+import React from "react";
+import FadeIn from "@/components/common/animation/FadeIn";
 
 type CarouselHeaderProps = {
   title: string;
@@ -6,18 +9,21 @@ type CarouselHeaderProps = {
 };
 
 const CarouselHeader = ({ title, description }: CarouselHeaderProps) => {
-  const ref = useRef<HTMLDivElement>(null);
-
   return (
-    <div
-      ref={ref}
-      className="inner-con flex items-center justify-center"
-    >
-      <div className="text-center font-semibold font-serif text-4xl">
-        <span>{title}</span>
-        <h5 className="text-lg mt-2">{description}</h5>
+    <FadeIn className="flex items-center justify-center mb-12">
+      <div className="text-center">
+        <p className="text-xs tracking-widest-2xl uppercase text-brand mb-4 font-body">
+          {title}
+        </p>
+        <h2 className="font-display text-4xl lg:text-5xl font-light text-charcoal tracking-wide mb-4">
+          {title}
+        </h2>
+        <div className="section-divider mb-4" />
+        <p className="text-sm text-body-text font-light tracking-wider">
+          {description}
+        </p>
       </div>
-    </div>
+    </FadeIn>
   );
 };
 

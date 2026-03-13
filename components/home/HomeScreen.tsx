@@ -10,10 +10,6 @@ import CarouselContainer from "./carousel/CarouselContainer";
 import RoomTypeContainer from "./roomtype/RoomTypeContainer";
 import WayToComeContainer from "./way/WayToComeContainer";
 import { useRoomTypeList, useSpecialEventList } from "@/data/hooks";
-import { staticImageUrl } from "@/data/utils/constants";
-import { Swiper, SwiperSlide } from "swiper/react";
-import CarouselHeader from "./carousel/CarouselHeader";
-import { Navigation, Autoplay, Pagination } from "swiper/modules";
 import { SpecialEventResponse } from "@/data/model/event/types";
 import HomeEventAdapter from "./event/HomeEventAdapter";
 import { findVideoUrlList } from "@/data/utils/utils";
@@ -44,12 +40,10 @@ const HomeScreen = () => {
   }, [specialEventList]);
 
   const galleryImage = useMemo<CarouselImageModel[]>(() => {
-    return offers.map((item) => {
-      return {
-        src: item.image,
-        label: item.type,
-      };
-    });
+    return offers.map((item) => ({
+      src: item.image,
+      label: item.type,
+    }));
   }, [offers]);
 
   const handleSlideButtonClick = (index: number) => {
@@ -57,11 +51,16 @@ const HomeScreen = () => {
     !showText && setShowText(true);
   };
 
+  // Auto-rotate hero images
   useEffect(() => {
-    const textTimer = setTimeout(() => {
-      setShowText(true);
-    }, 1000);
+    const interval = setInterval(() => {
+      setCurrentImageIndex((prev) => (prev + 1) % images.length);
+    }, 5000);
+    return () => clearInterval(interval);
+  }, []);
 
+  useEffect(() => {
+    const textTimer = setTimeout(() => setShowText(true), 800);
     return () => clearTimeout(textTimer);
   }, []);
 

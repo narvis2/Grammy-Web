@@ -13,11 +13,11 @@ const OffersSliceIndicator = ({
     <button
       type="button"
       aria-label={`Slice ${label}`}
-      className={`mx-[3px] box-content h-[5px] w-[30px] flex-initial cursor-pointer border-0 border-y-[10px] border-solid border-transparent bg-clip-padding p-0 transition-opacity duration-[600ms] ease-[cubic-bezier(0.25,0.1,0.25,1.0)] ${
-        isActive ? "bg-blue-600 opacity-100" : "bg-white opacity-50"
+      className={`mx-1 rounded-full transition-all duration-500 ${
+        isActive ? "w-8 h-2 bg-white" : "w-2 h-2 bg-white/40"
       }`}
       onClick={onClick}
-    ></button>
+    />
   );
 };
 

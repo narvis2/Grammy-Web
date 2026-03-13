@@ -6,9 +6,9 @@ type ConvenienceItemProps = {
 
 const ConvenienceItem = ({ title }: ConvenienceItemProps) => {
   return (
-    <p className="flex flex-row items-center justify-start space-x-2">
-      <FaCheck />
-      <span className="text-gray-500">{title}</span>
+    <p className="flex flex-row items-center justify-start space-x-2.5">
+      <FaCheck className="text-brand text-xs flex-shrink-0" />
+      <span className="text-body-text text-sm font-light">{title}</span>
     </p>
   );
 };

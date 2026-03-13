@@ -3,13 +3,17 @@ import Link from "next/link";
 
 type NavTabProps = {
   menu: MenuModel;
+  className?: string;
 };
 
-const NavTab = ({ menu }: NavTabProps) => {
+const NavTab = ({ menu, className }: NavTabProps) => {
   return (
     <Link
       href={menu.path}
-      className="md:text-xl sm:text-base hover:text-gray-300 transition-colors hover:border-b"
+      className={
+        className ??
+        "text-sm tracking-widest-xl font-light uppercase transition-colors duration-300 hover:opacity-70"
+      }
       onClick={(e) => {
         e.preventDefault();
         window.location.href = menu.path;

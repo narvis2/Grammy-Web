@@ -1,6 +1,9 @@
+"use client";
+
 import React, { useState } from "react";
 import OffersHeader from "./OffersHeader";
 import OffersSlice from "./OffersSlice";
+import FadeIn from "@/components/common/animation/FadeIn";
 
 const things = [
   {
@@ -28,14 +31,16 @@ const RoomItem = () => {
   }
 
   return (
-    <section className="max-w-6xl mx-auto px-4 py-12">
+    <section className="max-w-6xl mx-auto px-6 sm:px-10 py-16 sm:py-24">
       <OffersHeader title="객실 구비 물품" />
-      <OffersSlice
-        currentImgPosition={currentImgPosition}
-        imageList={things}
-        onSlideImage={onSlideImage}
-        setCurrentImgPosition={setCurrentImgPosition}
-      />
+      <FadeIn>
+        <OffersSlice
+          currentImgPosition={currentImgPosition}
+          imageList={things}
+          onSlideImage={onSlideImage}
+          setCurrentImgPosition={setCurrentImgPosition}
+        />
+      </FadeIn>
     </section>
   );
 };

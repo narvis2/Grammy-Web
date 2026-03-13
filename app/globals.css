@@ -1,49 +1,120 @@
-.footer {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  background-color: #ffffff; /* 배경색은 필요에 따라 조정 */
-  z-index: 1000; /* Navbar와 겹치지 않도록 적절한 z-index 설정 */
-  padding: 10px 0; /* 푸터 내용에 따라 적절한 padding 설정 */
-  text-align: center; /* 푸터 내용을 가운데 정렬 */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* =============================================
+   DESIGN SYSTEM — Warm Luxury
+   ============================================= */
+
+@layer base {
+  :root {
+    --color-cream: #FAF8F5;
+    --color-warm: #F5F0EB;
+    --color-brand: #c78390;
+    --color-brand-dark: #B06B78;
+    --color-gold: #B8967A;
+    --color-charcoal: #1A1A1A;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    background-color: var(--color-cream);
+    color: #2C2C2C;
+    font-family: var(--font-noto-sans-kr), sans-serif;
+  }
+
+  ::selection {
+    background-color: var(--color-brand);
+    color: white;
+  }
 }
 
-.navbar {
-  position: fixed; /* 혹은 필요에 따라 sticky 등으로 설정 */
-  top: 0;
-  left: 0;
-  width: 100%;
-  background-color: #ffffff; /* 배경색은 필요에 따라 조정 */
-  z-index: 1000; /* 다른 요소보다 높은 값으로 설정 */
-}
+/* =============================================
+   HERO & SLIDESHOW
+   ============================================= */
 
 .slideshow-container {
   width: 100%;
-  height: 100vh; /* 화면 전체 높이 */
+  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
   overflow: hidden;
+  position: relative;
 }
 
 .slideshow-image {
   min-width: 100%;
   min-height: 100%;
   display: flex;
-  object-fit: cover; /* 이미지의 비율을 유지하면서 화면에 맞춤 */
-  transition: opacity 1s ease-in-out; /* 부드러운 전환 효과 */
+  object-fit: cover;
+  transition: opacity 1.2s ease-in-out, transform 8s ease-out;
 }
+
+.hero-overlay {
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.1) 0%,
+    rgba(0, 0, 0, 0.05) 40%,
+    rgba(0, 0, 0, 0.4) 100%
+  );
+}
+
+/* =============================================
+   SECTION DIVIDER
+   ============================================= */
+
+.section-divider {
+  width: 60px;
+  height: 1px;
+  background-color: var(--color-brand);
+  margin: 0 auto;
+}
+
+.section-divider-gold {
+  width: 60px;
+  height: 1px;
+  background-color: var(--color-gold);
+  margin: 0 auto;
+}
+
+/* =============================================
+   NAVBAR
+   ============================================= */
+
+.navbar-transparent {
+  background-color: transparent;
+  border-bottom: none;
+  transition: all 0.4s ease;
+}
+
+.navbar-solid {
+  background-color: rgba(255, 255, 255, 0.97);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  box-shadow: 0 1px 20px rgba(0, 0, 0, 0.04);
+  transition: all 0.4s ease;
+}
+
+/* =============================================
+   REACT CALENDAR
+   ============================================= */
 
 .react-calendar {
   width: 100%;
   max-width: 100%;
   background: white;
-  border: 1px solid #68737d;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  border: 1px solid #E8E0D8;
+  font-family: var(--font-noto-sans-kr), sans-serif;
   line-height: 1.125em;
   font-size: 12px;
-  border-radius: 10px;
+  border-radius: 12px;
   padding: 20px;
 }
 
@@ -85,12 +156,14 @@
   height: 44px;
   margin-bottom: 1em;
   background-color: white;
-  border-bottom: 1px solid #68737d;
+  border-bottom: 1px solid #E8E0D8;
 }
 
 .react-calendar__navigation__label {
   font-size: 14px;
   font-weight: 500;
+  touch-action: none;
+  pointer-events: none;
 }
 
 .react-calendar__navigation__arrow {
@@ -106,8 +179,8 @@
   font-size: 12px;
   font-weight: 400;
   text-decoration: none !important;
-  color: #152348;
-  border-bottom: 1px solid #68737d;
+  color: #5A5A5A;
+  border-bottom: 1px solid #E8E0D8;
 }
 
 .react-calendar__navigation button:disabled {
@@ -116,7 +189,7 @@
 
 .react-calendar__navigation button:enabled:hover,
 .react-calendar__navigation button:enabled:focus {
-  background-color: #e6e6e6;
+  background-color: var(--color-warm);
   border-radius: 50%;
 }
 
@@ -142,11 +215,11 @@
 }
 
 .react-calendar__month-view__days__day--weekend {
-  color: #d10000;
+  color: var(--color-brand-dark);
 }
 
 .react-calendar__month-view__days__day--neighboringMonth {
-  color: #757575;
+  color: #bbb;
 }
 
 .react-calendar__year-view .react-calendar__tile,
@@ -158,6 +231,9 @@
 .react-calendar__tile {
   max-width: 100%;
   padding: 10px 6.6667px;
+  width: 44px;
+  height: 44px;
+  box-sizing: border-box;
   background: none;
   text-align: center;
   line-height: 16px;
@@ -166,108 +242,132 @@
 }
 
 .react-calendar__tile:disabled {
-  background-color: #f0f0f0;
-}
-
-.react-calendar__tile:enabled:hover,
-.react-calendar__tile:enabled:focus {
-  background-color: #e6e6e6;
-}
-
-.react-calendar__tile--now {
-  text-decoration: underline;
-  background-color: #ffce8477;
-}
-
-.react-calendar__tile--now:hover {
-  color: #c78390 !important;
-}
-
-.react-calendar__tile--now:enabled:hover,
-.react-calendar__tile--now:enabled:focus {
-  background: #c78390;
-  color: #fafafa;
-}
-
-.react-calendar__tile--hasActive {
-  background: #c78390;
-}
-
-.react-calendar__tile--hasActive:enabled:hover,
-.react-calendar__tile--hasActive:enabled:focus {
-  background: #c78390;
-}
-
-.react-calendar__tile--active {
-  background: #c78390 !important;
-  color: white;
-}
-
-.react-calendar__tile--active:active {
-  background: #c78390 !important;
-  color: white;
-}
-
-/* 각 날짜의 Size */
-.react-calendar__tile {
-  width: 44px;
-  height: 44px;
-  box-sizing: border-box; 
-}
-
-.react-calendar__tile--active:enabled:hover,
-.react-calendar__tile--active:enabled:focus {
-  background: #c78390;
-  color: white;
-}
-.react-calendar__tile:disabled {
   background-color: white;
   text-decoration: line-through;
-  color: #e6e6e6;
+  color: #ddd;
 }
 
 .react-calendar__tile:disabled:hover {
   border: none;
   background-color: transparent;
-  color: black;
+  color: #ddd;
 }
 
-.react-calendar--selectRange .react-calendar__tile--hover {
-  background-color: #ffb88c;
+.react-calendar__tile:enabled:hover,
+.react-calendar__tile:enabled:focus {
+  background-color: var(--color-warm);
 }
 
 .react-calendar__tile:hover {
-  border: 1px solid #c78390;
-  color: black !important;
+  border: 1px solid var(--color-brand);
+  color: #2C2C2C !important;
   background: white !important;
 }
 
-.react-calendar__navigation__label {
-  touch-action: none;
-  pointer-events: none;
-  font-weight: 500;
+.react-calendar__tile--now {
+  text-decoration: underline;
+  background-color: rgba(184, 150, 122, 0.15);
 }
+
+.react-calendar__tile--now:hover {
+  color: var(--color-brand) !important;
+}
+
+.react-calendar__tile--now:enabled:hover,
+.react-calendar__tile--now:enabled:focus {
+  background: var(--color-brand);
+  color: #fafafa;
+}
+
+.react-calendar__tile--hasActive {
+  background: var(--color-brand);
+}
+
+.react-calendar__tile--hasActive:enabled:hover,
+.react-calendar__tile--hasActive:enabled:focus {
+  background: var(--color-brand);
+}
+
+.react-calendar__tile--active {
+  background: var(--color-brand) !important;
+  color: white;
+}
+
+.react-calendar__tile--active:active {
+  background: var(--color-brand) !important;
+  color: white;
+}
+
+.react-calendar__tile--active:enabled:hover,
+.react-calendar__tile--active:enabled:focus {
+  background: var(--color-brand);
+  color: white;
+}
+
+.react-calendar--selectRange .react-calendar__tile--hover {
+  background-color: rgba(199, 131, 144, 0.2);
+}
+
+/* =============================================
+   SWIPER OVERRIDES
+   ============================================= */
+
+.swiper-button-prev,
+.swiper-button-next {
+  background-color: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(4px);
+  height: 48px;
+  width: 48px;
+  border-radius: 50%;
+  color: var(--color-charcoal) !important;
+  transition: all 0.3s ease;
+}
+
+.swiper-button-prev:hover,
+.swiper-button-next:hover {
+  background-color: white;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.swiper-button-prev:after,
+.swiper-button-next:after {
+  font-size: 1rem !important;
+  font-weight: 600 !important;
+}
+
+/* =============================================
+   CUSTOM OVERLAY
+   ============================================= */
 
 .custom_overlay {
   @apply bg-white rounded-full px-2 py-1 text-xs font-semibold border border-gray-300 shadow hover:shadow-lg hover:font-bold;
 }
 
-.swiper-button-prev,
-.swiper-button-next {
-  background-color: #fff;
-  opacity: 0.6;
-  height: 50px;
-  width: 50px;
-  border-radius: 25px;
-  color: black !important;
+/* =============================================
+   SCROLL INDICATOR ANIMATION
+   ============================================= */
+
+@keyframes scrollBounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(8px); }
 }
 
-.swiper-button-prev:after,
-.swiper-button-next:after {
-  font-size: 1.1rem !important;
-  font-weight: 600 !important;
+.scroll-indicator {
+  animation: scrollBounce 2s ease-in-out infinite;
 }
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+/* =============================================
+   IMAGE HOVER ZOOM
+   ============================================= */
+
+.img-zoom {
+  overflow: hidden;
+}
+
+.img-zoom img {
+  transition: transform 0.8s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+.img-zoom:hover img {
+  transform: scale(1.05);
+}

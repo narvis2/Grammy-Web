@@ -1,3 +1,8 @@
+"use client";
+
+import { useRef, useEffect, useState } from "react";
+import { motion } from "framer-motion";
+
 type TabLayoutProps = {
   title: string;
   tabList: string[];
@@ -13,40 +18,68 @@ const TabLayout = ({
   currentTab,
   onTabClick,
 }: TabLayoutProps) => {
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  useEffect(() => {
+    const idx = tabList.indexOf(currentTab);
+    if (idx >= 0) setActiveIndex(idx);
+  }, [currentTab, tabList]);
+
+  // 활성 탭이 보이도록 스크롤
+  useEffect(() => {
+    const container = scrollRef.current;
+    if (!container) return;
+    const activeEl = container.children[activeIndex] as HTMLElement;
+    if (activeEl) {
+      activeEl.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "center" });
+    }
+  }, [activeIndex]);
+
   return (
-    <div className="flex flex-col lg:flex-row justify-center lg:justify-start items-center lg:pl-20 border-b border-gray-200">
-      <a
-        href={href}
-        className="mr-0 lg:mr-8 sm:border-r sm:pr-8 sm:border-gray-200"
-      >
-        {title}
-      </a>
-      <div className="text-sm font-medium text-center text-[#939393]">
-        <ul className="flex flex-wrap -mb-px justify-center">
+    <div className="bg-cream border-b border-warm-dark/40">
+      <div className="max-w-[1400px] mx-auto px-5 sm:px-10">
+        {/* Title */}
+        <div className="pt-10 pb-6 text-center">
+          <a href={href} className="inline-block">
+            <h2 className="font-display text-3xl sm:text-4xl tracking-widest-xl text-charcoal uppercase">
+              {title}
+            </h2>
+          </a>
+          <div className="section-divider mt-4" />
+        </div>
+
+        {/* Tabs */}
+        <div
+          ref={scrollRef}
+          className="flex overflow-x-auto gap-1 sm:gap-2 pb-0 justify-start sm:justify-center scrollbar-hide"
+          style={{ scrollbarWidth: "none", WebkitOverflowScrolling: "touch" }}
+        >
           {tabList.map((item) => {
             const isFocused = currentTab === item;
             return (
-              <li className="mr-2" key={item}>
-                {!isFocused ? (
-                  <div
-                    className="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-[#d76076] hover:border-[#d76076]"
-                    onClick={() => onTabClick(item)}
-                  >
-                    {item}
-                  </div>
-                ) : (
-                  <div
-                    className="inline-block p-4 text-[#c78390] border-b-2 border-[#c78390] rounded-t-lg active "
-                    aria-current="page"
-                    onClick={() => onTabClick(item)}
-                  >
-                    {item}
-                  </div>
+              <button
+                key={item}
+                type="button"
+                onClick={() => onTabClick(item)}
+                className={`relative whitespace-nowrap px-4 sm:px-6 py-4 text-xs sm:text-sm tracking-wider font-body transition-colors duration-300 ${
+                  isFocused
+                    ? "text-brand"
+                    : "text-body-text hover:text-charcoal"
+                }`}
+              >
+                {item}
+                {isFocused && (
+                  <motion.div
+                    layoutId={`tab-underline-${title}`}
+                    className="absolute bottom-0 left-0 right-0 h-[2px] bg-brand"
+                    transition={{ type: "spring", stiffness: 400, damping: 30 }}
+                  />
                 )}
-              </li>
+              </button>
             );
           })}
-        </ul>
+        </div>
       </div>
     </div>
   );

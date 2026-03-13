@@ -1,5 +1,8 @@
+"use client";
+
 import React from "react";
 import Image from "next/image";
+import { AnimatePresence, motion } from "framer-motion";
 
 type OffersImageBackgroundProps = {
   name: string;
@@ -13,23 +16,37 @@ const OffersImageBackground = ({
   name,
 }: OffersImageBackgroundProps) => {
   return (
-    <div className="relative w-full overflow-hidden aspect-[4/3] md:aspect-auto md:h-[600px] after:clear-both after:block after:content-['']">
-      {/* 여기서 h-full을 추가하여 부모 높이를 상속 */}
-      <div
-        className="relative float-left w-full h-full"
-        style={{ backfaceVisibility: "hidden" }}
-      >
-        <div
-          className="relative w-full h-full overflow-hidden bg-cover bg-no-repeat"
-          style={{ backgroundPosition: "50%" }}
+    <div className="relative w-full overflow-hidden rounded-sm aspect-[4/3] md:aspect-auto md:h-[600px]">
+      <AnimatePresence mode="sync">
+        <motion.div
+          key={image}
+          className="absolute inset-0"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.6, ease: "easeInOut" }}
         >
-          <Image src={image} fill={true} className="object-cover" alt={name} />
-          <div className="absolute inset-0 h-full w-full overflow-hidden bg-black bg-fixed opacity-15"></div>
-        </div>
-        <div className="absolute inset-x-[15%] bottom-5 py-5 text-center text-white md:block">
-          <h5 className="text-xl">{name}</h5>
-          {!!description && <p>{description}</p>}
-        </div>
+          <Image
+            src={image}
+            fill
+            className="object-cover"
+            alt={name}
+            sizes="(max-width: 768px) 100vw, 1200px"
+          />
+        </motion.div>
+      </AnimatePresence>
+      {/* Gradient overlay */}
+      <div className="absolute inset-0 bg-gradient-to-t from-charcoal/50 via-transparent to-transparent" />
+      {/* Text content */}
+      <div className="absolute bottom-0 left-0 right-0 p-6 sm:p-10 text-center text-white">
+        <h3 className="font-display text-2xl sm:text-3xl tracking-wide mb-2">
+          {name}
+        </h3>
+        {!!description && (
+          <p className="text-sm sm:text-base font-light opacity-90 max-w-xl mx-auto">
+            {description}
+          </p>
+        )}
       </div>
     </div>
   );
