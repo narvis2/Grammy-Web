@@ -166,7 +166,7 @@ const SpecialOffers = () => {
         <div className="relative w-full h-full">
           <Image
             src={currentImageList[currentImageIndex]}
-            alt="Slideshow"
+            alt={`그라미호텔 ${selectedOffer} 시설 이미지`}
             fill
             className="slideshow-image object-cover"
           />
