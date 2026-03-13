@@ -1,7 +1,6 @@
 import { getFullAddress, phoneFormatter } from "@/data/mapper";
 import { HotelResponse } from "@/data/model/hotel";
 import WayToComeHeader from "./WayToComeHeader";
-import useMap from "@/data/hooks/map/useMap";
 import { useState } from "react";
 import { IoFootstepsOutline } from "react-icons/io5";
 import { FaAngleDown, FaAngleUp } from "react-icons/fa";
@@ -18,7 +17,6 @@ type WayToComeContainerProps = {
 };
 
 const WayToComeContainer = ({ hotelInfo }: WayToComeContainerProps) => {
-  const naverMap = useMap(hotelInfo);
   const [openSections, setOpenSections] = useState<{ [key: string]: boolean }>({
     car: false,
     bus: false,
@@ -40,10 +38,19 @@ const WayToComeContainer = ({ hotelInfo }: WayToComeContainerProps) => {
       />
 
       <div
-        id="map"
-        style={{ minHeight: "300px", maxHeight: "400px", borderRadius: 10 }}
+        style={{ minHeight: "300px", maxHeight: "400px", borderRadius: 10, overflow: "hidden" }}
         className="w-full lg:w-1/2 mb-4 lg:mb-4"
-      ></div>
+      >
+        <iframe
+          src="https://maps.google.com/maps?q=그라미호텔+포항+구룡포&t=&z=17&ie=UTF8&iwloc=&output=embed"
+          width="100%"
+          height="400"
+          style={{ border: 0 }}
+          allowFullScreen
+          loading="lazy"
+          referrerPolicy="no-referrer-when-downgrade"
+        />
+      </div>
 
       <div className="w-full lg:w-1/2">
         <p className="text-lg">{`• 주소 : ${getFullAddress(hotelInfo)}`}</p>

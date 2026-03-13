@@ -10,20 +10,11 @@ import useGetAnalyticsTag from "@/data/hooks/analytics/useGetAnalyticsTag";
 
 const NoticeScreen = () => {
   const router = useRouter();
-  const { data: notice } = useNoticeList();
+  const { data: noticeList } = useNoticeList();
 
   useGetAnalyticsTag();
 
-  const noticeList = useMemo(() => {
-    if (!notice) return [];
-
-    const list = notice.data ?? [];
-    if (notice.success && list.length > 0) {
-      return list;
-    }
-
-    return [];
-  }, [notice]);
+  const list = noticeList ?? [];
 
   const onNavigateNoticeDetails = (noticeId: number) => {
     router.push(`${RoutePath.NOTICE}/${noticeId}`);
@@ -31,7 +22,7 @@ const NoticeScreen = () => {
 
   return (
     <section className="py-20 mt-10">
-      <div className={`${noticeList.length > 0 ? `mb-14` : `mb-0`}`}>
+      <div className={`${list.length > 0 ? `mb-14` : `mb-0`}`}>
         <div className="container mx-auto">
           <h3 className="text-2xl font-normal text-center text-gray-800">
             포항 그라미 호텔 공지사항
@@ -39,9 +30,9 @@ const NoticeScreen = () => {
         </div>
       </div>
 
-      {noticeList.length > 0 ? (
+      {list.length > 0 ? (
         <NoticeAdapter
-          noticeList={noticeList}
+          noticeList={list}
           onItemClick={(notice) => onNavigateNoticeDetails(notice.id)}
         />
       ) : (

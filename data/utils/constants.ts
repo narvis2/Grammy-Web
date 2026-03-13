@@ -1,14 +1,4 @@
-export const isDev = false;
-
-export const baseUrl = isDev
-  ? "http://localhost:8080/"
-  : "https://api.gramihotel.co.kr/";
-
-export const endpoint = "api/v1";
-
-export const staticImageUrl = isDev
-  ? "http://localhost:8080/image/"
-  : "https://storage.googleapis.com/grammy_static/";
+export const staticImageUrl = "";
 
 export const roomTypeDescriptions = new Map([
   [

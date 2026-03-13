@@ -3,7 +3,6 @@
 import { useCallback, useLayoutEffect, useMemo, useState } from "react";
 import Calendar from "react-calendar";
 import dayjs from "dayjs";
-import { useRoomAvailableReservationList } from "@/data/hooks";
 import { RoomAvailableReservationResponse } from "@/data/model/room";
 import ReservationTab from "@/components/reservation/tab/ReservationTab";
 import ReservationAdapter from "@/components/reservation/adapter/ReservationAdapter";
@@ -15,18 +14,12 @@ import {
 } from "@/data/mapper/room";
 import { RiCalendarCheckFill } from "react-icons/ri";
 import { useRouter } from "next/navigation";
-import { useAccessToken, useRefreshToken } from "@/data/store/useAuthStore";
-import { useSetReservationPrepare } from "@/data/store/useReservationStore";
 import { useShowCommonModal } from "@/data/store/useCommonModalStore";
 
 const Reservation = () => {
   const router = useRouter();
 
-  const accessToken = useAccessToken();
-  const refreshToken = useRefreshToken();
-
   const showCommonModal = useShowCommonModal();
-  const setReservationPrepare = useSetReservationPrepare();
 
   const [tabIndex, setTabIndex] = useState(0);
   const [startValue, onStartChange] = useState<any>(null);
@@ -35,17 +28,6 @@ const Reservation = () => {
     RoomAvailableReservationResponse[]
   >([]);
   const [roomTypeList, setRoomTypeList] = useState<string[]>([]);
-
-  const { mutateAsync: requestReservationList } =
-    useRoomAvailableReservationList({
-      onSuccess(data, variables, context) {
-        const list = data.data ?? [];
-        if (data.success && list.length > 0) {
-          setReservationList(list);
-        }
-      },
-      onError(error, variables, context) {},
-    });
 
   const onReservationClick = useCallback(
     (item: RoomAvailableReservationResponse) => {
@@ -60,31 +42,8 @@ const Reservation = () => {
           );
         },
       });
-      // if (!startValue || !isArray(startValue)) {
-      //   showCommonModal({
-      //     title: "알림",
-      //     contents: "체크인 및 체크아웃 날짜 범위를 선택해 주세요.",
-      //   });
-      //   return;
-      // }
-
-      // const startDate = startValue[0] as Date;
-      // const endDate = startValue[1] as Date;
-
-      // if (!accessToken || !refreshToken) {
-      //   router.push("/login");
-      //   return;
-      // }
-
-      // setReservationPrepare({
-      //   checkInDate: startDate,
-      //   checkOutDate: endDate,
-      //   totalPrice: item.totalPrice,
-      //   guestNumber: item.guestCount,
-      // });
-      // router.push(`/reservation/${item.id}`);
     },
-    [accessToken, refreshToken, router, startValue]
+    [router, startValue]
   );
 
   const resultList = useMemo(() => {
@@ -98,33 +57,6 @@ const Reservation = () => {
   useLayoutEffect(() => {
     const now = new Date();
     onStartChange([now, dayjs(now).add(1, "day").toDate()]);
-
-    requestReservationList(
-      {
-        checkInDateTime: dayjs(now).format("YYYY-MM-DD"),
-        duration: 1,
-      },
-      {
-        onSuccess(data, variables, context) {
-          const list = data.data ?? [];
-          if (data.success) {
-            if (list.length === 0) {
-              setRoomTypeList([]);
-              return;
-            }
-
-            // const roomTypeList = list.reduce<string[]>((acc, item, index) => {
-            //   if (!acc.includes(item.roomType)) {
-            //     return [...acc, item.roomType];
-            //   }
-            //   return acc;
-            // }, [] as string[]);
-
-            setRoomTypeList([]);
-          }
-        },
-      }
-    );
   }, []);
 
   return (
@@ -132,12 +64,12 @@ const Reservation = () => {
       <div className="mx-10 lg:mx-20 mt-10 mb-10">
         <Calendar
           locale="ko"
-          minDetail="month" // 상단 네비게이션에서 '월' 단위만 보이게 설정
-          maxDetail="month" // 상단 네비게이션에서 '월' 단위만 보이게 설정
+          minDetail="month"
+          maxDetail="month"
           allowPartialRange={true}
           selectRange={true}
-          next2Label={null} // 년도 네비게이션 제거
-          prev2Label={null} // 년도 네비게이션 제거
+          next2Label={null}
+          prev2Label={null}
           formatDay={(locale, date) => dayjs(date).format("DD")}
           goToRangeStartOnSelect={true}
           onClickDay={(value) => {
@@ -159,11 +91,6 @@ const Reservation = () => {
             }
 
             onStartChange(value);
-
-            await requestReservationList({
-              checkInDateTime: dayjs(startDate).format("YYYY-MM-DD"),
-              duration: calculateDateDifference(startDate, endDate),
-            });
           }}
           value={startValue}
           className="mx-auto w-full text-sm border-b"

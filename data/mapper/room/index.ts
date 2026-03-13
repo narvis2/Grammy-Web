@@ -1,6 +1,5 @@
 import { CheckDateInfoModel } from "@/data/model/reservation/types";
 import { RoomTypeResponse } from "@/data/model/room";
-import { staticImageUrl } from "@/data/utils/constants";
 
 import dayjs from "dayjs";
 import "dayjs/locale/ko";
@@ -19,7 +18,7 @@ export const roomTypeToRoomTypeImageList = (
 
       const imageUrl =
         rooms.length > 0 && roomsImage.length > 0
-          ? staticImageUrl + roomsImage[0].imageUrl
+          ? roomsImage[0].imageUrl
           : null;
       return imageUrl
         ? {
