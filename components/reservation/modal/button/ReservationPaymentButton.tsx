@@ -13,7 +13,7 @@ const ReservationPaymentButton = ({
     <button
       type="submit"
       className={`text-white inline-flex items-center ${
-        isEnable ? "bg-[#c78390]" : "bg-[#b7abab]"
+        isEnable ? "bg-[#3f3025]" : "bg-[#b7abab]"
       } focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center`}
       onClick={onClick}
     >

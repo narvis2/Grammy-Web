@@ -37,17 +37,17 @@ const ProductAdapter = ({ roomTypeInfo, currentTab }: ProductAdapterProps) => {
         <FadeIn direction="right" delay={0.15}>
           <section>
             {/* Room Title */}
-            <p className="text-xs tracking-widest-2xl text-brand uppercase font-body mb-3">
+            <p className="text-xs tracking-widest-2xl text-stay-400 uppercase font-body mb-3">
               {viewTypeConvert(roomType)}
             </p>
-            <h2 className="font-display text-3xl sm:text-4xl text-charcoal tracking-wide mb-4">
+            <h2 className="font-display text-3xl sm:text-4xl text-stay-950 tracking-wide mb-4">
               {roomType}
             </h2>
-            <div className="w-10 h-px bg-brand mb-6" />
+            <div className="w-10 h-px bg-stay-300 mb-6" />
 
             {/* Description */}
             <p
-              className="text-body-text text-sm sm:text-base font-light leading-relaxed"
+              className="text-stay-600 text-sm sm:text-base font-light leading-relaxed"
               style={{ whiteSpace: "pre-line" }}
             >
               {viewTypeDescription(roomType)}
@@ -55,7 +55,7 @@ const ProductAdapter = ({ roomTypeInfo, currentTab }: ProductAdapterProps) => {
 
             {/* Capacity */}
             <div className="mt-6 flex items-center gap-3">
-              <span className="bg-warm text-charcoal text-xs tracking-wider px-4 py-2 rounded-full">
+              <span className="bg-stay-100 text-stay-950 text-xs tracking-wider px-4 py-2 rounded-full">
                 최대 {roomTypeInfo.maxCount}명
               </span>
             </div>
@@ -92,21 +92,21 @@ const ProductAdapter = ({ roomTypeInfo, currentTab }: ProductAdapterProps) => {
             {/* Description HTML */}
             {!!description && (
               <p
-                className="mt-8 text-sm text-body-text font-light leading-relaxed"
+                className="mt-8 text-sm text-stay-600 font-light leading-relaxed"
                 dangerouslySetInnerHTML={{ __html: description }}
               />
             )}
 
             {/* 객실 이용 안내 */}
-            <div className="mt-10 pt-8 border-t border-warm-dark/60">
-              <h3 className="text-center font-display text-lg text-charcoal tracking-wider mb-6">
+            <div className="mt-10 pt-8 border-t border-stay-300/60">
+              <h3 className="text-center font-display text-lg text-stay-950 tracking-wider mb-6">
                 객실 이용 안내
               </h3>
-              <div className="space-y-3 text-sm text-body-text font-light leading-relaxed">
+              <div className="space-y-3 text-sm text-stay-600 font-light leading-relaxed">
                 {roomTypeInfo.maxCount > 2 && (
                   <p>
                     · 2인 기준 금액으로{" "}
-                    <span className="text-brand-dark font-normal">
+                    <span className="text-stay-400-dark font-normal">
                       기준 인원 초과 시 1인 20,000원의 추가 비용
                     </span>
                     이 발생합니다.
@@ -114,23 +114,23 @@ const ProductAdapter = ({ roomTypeInfo, currentTab }: ProductAdapterProps) => {
                 )}
                 <p>
                   · 객실 및 호텔 내부 전체{" "}
-                  <span className="text-brand-dark font-normal">금연</span>
+                  <span className="text-stay-400-dark font-normal">금연</span>
                   입니다.
                   <br />
-                  <span className="text-brand-dark text-xs ml-3">
+                  <span className="text-stay-400-dark text-xs ml-3">
                     (흡연 시 객실 재정비 비용 10만원이 부과됩니다.)
                   </span>
                 </p>
                 <p>
                   · 반려동물은 객실 내 출입 불가입니다.
                   <br />
-                  <span className="text-brand-dark text-xs ml-3">
+                  <span className="text-stay-400-dark text-xs ml-3">
                     (위반 시 환불불가, 퇴실조치)
                   </span>
                 </p>
                 <p>
                   · 객실{" "}
-                  <span className="text-brand-dark font-normal">
+                  <span className="text-stay-400-dark font-normal">
                     카드 키 분실 시 20,000원
                   </span>
                   이 청구됩니다.
@@ -138,18 +138,18 @@ const ProductAdapter = ({ roomTypeInfo, currentTab }: ProductAdapterProps) => {
                 <p>· 미성년자는 법적 동의 없이 입실 및 혼숙이 불가합니다.</p>
                 <p>
                   · 객실 내{" "}
-                  <span className="text-brand-dark font-normal">
+                  <span className="text-stay-400-dark font-normal">
                     대게 및 홍게 반입
                   </span>
                   , 취사, 풍선부착, 촛불 이벤트를 금지합니다.
                   <br />
-                  <span className="text-brand-dark text-xs ml-3">
+                  <span className="text-stay-400-dark text-xs ml-3">
                     (위반 시 퇴실 조치 및 객실 재정비 비용 10만원이 부과됩니다.)
                   </span>
                 </p>
                 <p>
                   · 사전 문의 없이 예약인원 초과 또는 무단 출입 시{" "}
-                  <span className="text-brand-dark font-normal">
+                  <span className="text-stay-400-dark font-normal">
                     환불 없이 퇴실조치
                   </span>
                   됩니다.
@@ -161,7 +161,7 @@ const ProductAdapter = ({ roomTypeInfo, currentTab }: ProductAdapterProps) => {
             {/* Booking Button */}
             <button
               type="button"
-              className="w-full mt-10 py-4 bg-charcoal text-white text-sm tracking-widest-xl uppercase rounded-sm hover:bg-brand-dark transition-colors duration-300"
+              className="w-full mt-10 py-4 bg-stay-950 text-white text-sm tracking-widest-xl uppercase rounded-sm hover:bg-stay-300-dark transition-colors duration-300"
               onClick={() => {
                 if (typeof window !== "undefined" && window.gtag) {
                   window.gtag("event", "click", {

@@ -10,14 +10,14 @@ const Introduction = () => {
     <div className="max-w-6xl mx-auto px-6 sm:px-10 py-16 sm:py-24">
       {/* 제목 영역 */}
       <FadeIn className="mb-20 text-center">
-        <p className="text-xs tracking-widest-2xl text-brand uppercase font-body mb-4">
+        <p className="text-xs tracking-widest-2xl text-stay-400 uppercase font-body font-serif italic mb-4">
           About Grami Hotel
         </p>
-        <h1 className="font-display text-3xl sm:text-4xl lg:text-5xl text-charcoal tracking-wide leading-snug mb-6">
+        <h1 className="font-display text-3xl sm:text-4xl lg:text-5xl text-stay-950 tracking-wide leading-snug mb-6">
           차원이 다른 휴식과 여유를<br className="hidden sm:block" /> 선사하는 그라미 호텔
         </h1>
         <div className="section-divider mt-6 mb-6" />
-        <p className="text-body-text text-sm sm:text-base font-light leading-relaxed max-w-xl mx-auto">
+        <p className="text-stay-600 text-sm sm:text-base font-light leading-relaxed max-w-xl mx-auto">
           환상적인 뷰 속에서 시간이 천천히 흐르는 곳,<br />
           당신만의 힐링을 만끽하세요.
         </p>

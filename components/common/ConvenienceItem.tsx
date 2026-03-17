@@ -7,8 +7,8 @@ type ConvenienceItemProps = {
 const ConvenienceItem = ({ title }: ConvenienceItemProps) => {
   return (
     <p className="flex flex-row items-center justify-start space-x-2.5">
-      <FaCheck className="text-brand text-xs flex-shrink-0" />
-      <span className="text-body-text text-sm font-light">{title}</span>
+      <FaCheck className="text-stay-400 text-xs flex-shrink-0" />
+      <span className="text-stay-600 text-sm font-light">{title}</span>
     </p>
   );
 };

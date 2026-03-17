@@ -28,7 +28,7 @@ const Terrace = () => {
     <section className="max-w-6xl mx-auto px-6 sm:px-10 py-16 sm:py-24">
       <OffersHeader title="테라스" />
       <FadeIn>
-        <p className="text-sm sm:text-base text-body-text font-light leading-[1.9] text-center mb-14 sm:mb-20 max-w-2xl mx-auto">
+        <p className="text-sm sm:text-base text-stay-600 font-light leading-[1.9] text-center mb-14 sm:mb-20 max-w-2xl mx-auto">
           &ldquo;낮에는 햇살 아래 여유롭게, 밤에는 불멍과 함께 낭만적으로&rdquo;
           <br /><br />
           포항 그라미 호텔의 야외 테라스에서

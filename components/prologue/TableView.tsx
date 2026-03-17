@@ -27,10 +27,10 @@ const TableView = () => {
       {/* 층별 안내 */}
       <FadeIn className="mb-20">
         <div className="text-center mb-12">
-          <p className="text-xs tracking-widest-2xl text-brand uppercase font-body mb-3">
+          <p className="text-xs tracking-widest-2xl text-stay-400 uppercase font-body mb-3">
             Floor Guide
           </p>
-          <h2 className="font-display text-3xl sm:text-4xl text-charcoal tracking-wide">
+          <h2 className="font-display text-3xl sm:text-4xl text-stay-950 tracking-wide">
             층별 안내
           </h2>
           <div className="section-divider mt-5" />
@@ -38,11 +38,11 @@ const TableView = () => {
 
         <div className="space-y-0">
           {/* Header */}
-          <div className="grid grid-cols-[100px_1fr] sm:grid-cols-[140px_1fr] border-b-2 border-charcoal/20">
-            <div className="py-4 text-center text-xs tracking-widest uppercase text-body-text font-medium">
+          <div className="grid grid-cols-[100px_1fr] sm:grid-cols-[140px_1fr] border-b-2 border-stay-950/20">
+            <div className="py-4 text-center text-xs tracking-widest uppercase text-stay-600 font-medium">
               층수
             </div>
-            <div className="py-4 text-center text-xs tracking-widest uppercase text-body-text font-medium">
+            <div className="py-4 text-center text-xs tracking-widest uppercase text-stay-600 font-medium">
               시설 안내
             </div>
           </div>
@@ -50,12 +50,12 @@ const TableView = () => {
           {floors.map((item) => (
             <div
               key={item.floor}
-              className="grid grid-cols-[100px_1fr] sm:grid-cols-[140px_1fr] border-b border-warm-dark/60 hover:bg-warm/50 transition-colors duration-300"
+              className="grid grid-cols-[100px_1fr] sm:grid-cols-[140px_1fr] border-b border-stay-300/60 hover:bg-stay-100/50 transition-colors duration-300"
             >
-              <div className="py-5 text-center font-display text-xl sm:text-2xl text-charcoal tracking-wider">
+              <div className="py-5 text-center font-display text-xl sm:text-2xl text-stay-950 tracking-wider">
                 {item.floor}
               </div>
-              <div className="py-5 text-center text-sm sm:text-base text-body-text font-light">
+              <div className="py-5 text-center text-sm sm:text-base text-stay-600 font-light">
                 {item.info}
               </div>
             </div>
@@ -66,10 +66,10 @@ const TableView = () => {
       {/* 객실 정보 */}
       <FadeIn>
         <div className="text-center mb-12">
-          <p className="text-xs tracking-widest-2xl text-brand uppercase font-body mb-3">
+          <p className="text-xs tracking-widest-2xl text-stay-400 uppercase font-body mb-3">
             Room Information
           </p>
-          <h2 className="font-display text-3xl sm:text-4xl text-charcoal tracking-wide">
+          <h2 className="font-display text-3xl sm:text-4xl text-stay-950 tracking-wide">
             객실 정보
           </h2>
           <div className="section-divider mt-5" />
@@ -77,11 +77,11 @@ const TableView = () => {
 
         <div className="space-y-0">
           {/* Header */}
-          <div className="grid grid-cols-2 border-b-2 border-charcoal/20">
-            <div className="py-4 text-center text-xs tracking-widest uppercase text-body-text font-medium">
+          <div className="grid grid-cols-2 border-b-2 border-stay-950/20">
+            <div className="py-4 text-center text-xs tracking-widest uppercase text-stay-600 font-medium">
               객실 유형
             </div>
-            <div className="py-4 text-center text-xs tracking-widest uppercase text-body-text font-medium">
+            <div className="py-4 text-center text-xs tracking-widest uppercase text-stay-600 font-medium">
               최대 수용 인원
             </div>
           </div>
@@ -89,13 +89,13 @@ const TableView = () => {
           {roomTypes.map((item) => (
             <div
               key={item.name}
-              className="grid grid-cols-2 border-b border-warm-dark/60 hover:bg-warm/50 transition-colors duration-300"
+              className="grid grid-cols-2 border-b border-stay-300/60 hover:bg-stay-100/50 transition-colors duration-300"
             >
-              <div className="py-5 text-center text-sm sm:text-base text-charcoal font-light">
+              <div className="py-5 text-center text-sm sm:text-base text-stay-950 font-light">
                 {item.name}
               </div>
               <div className="py-5 text-center">
-                <span className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-warm text-sm text-charcoal font-display">
+                <span className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-stay-100 text-sm text-stay-950 font-display">
                   {item.capacity}
                 </span>
               </div>

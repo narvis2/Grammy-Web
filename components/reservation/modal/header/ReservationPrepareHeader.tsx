@@ -16,7 +16,7 @@ const ReservationPrepareHeader = ({
       </h3>
       <button
         type="button"
-        className="text-gray-400 bg-transparent hover:bg-[#d76076] hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-[#d76076] dark:hover:text-white"
+        className="text-gray-400 bg-transparent hover:bg-[#bfae94] hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-[#bfae94] dark:hover:text-white"
         onClick={() => onClose()}
       >
         <svg

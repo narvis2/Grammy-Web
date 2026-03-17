@@ -74,7 +74,15 @@ export default function Navbar() {
     },
   ];
 
-  const isHome = pathname === "/";
+  // 히어로 섹션이 있는 페이지 목록
+  const pagesWithHero = [
+    "/",
+    RoutePath.PROLOGUE,
+    RoutePath.ROOMS,
+    RoutePath.SPECIAL_OFFERS,
+    RoutePath.NOTICE,
+  ];
+  const hasHero = pagesWithHero.includes(pathname);
 
   const handleScroll = useCallback(() => {
     setIsScrolled(window.scrollY > 80);
@@ -110,8 +118,8 @@ export default function Navbar() {
 
   if (pathname === RoutePath.LOGIN) return null;
 
-  const showTransparent = isHome && !isScrolled && !isMenuOpen;
-  const textColor = showTransparent ? "text-white" : "text-charcoal";
+  const showTransparent = hasHero && !isScrolled && !isMenuOpen;
+  const textColor = "text-white";
 
   return (
     <>
@@ -135,9 +143,7 @@ export default function Navbar() {
               alt="그라미호텔 로고"
               width={150}
               height={10}
-              className={`transition-all duration-300 ${
-                showTransparent ? "brightness-0 invert" : ""
-              }`}
+              className="transition-all duration-300"
             />
           </div>
 
@@ -238,7 +244,7 @@ export default function Navbar() {
                     animate={{ opacity: 1, rotate: 0 }}
                     exit={{ opacity: 0, rotate: 90 }}
                     transition={{ duration: 0.3 }}
-                    className={`w-6 h-6 ${showTransparent ? "text-white" : "text-charcoal"}`}
+                    className="w-6 h-6 text-white"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -257,7 +263,7 @@ export default function Navbar() {
                     animate={{ opacity: 1, rotate: 0 }}
                     exit={{ opacity: 0, rotate: -90 }}
                     transition={{ duration: 0.3 }}
-                    className={`w-6 h-6 ${showTransparent ? "text-white" : "text-charcoal"}`}
+                    className="w-6 h-6 text-white"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -292,7 +298,7 @@ export default function Navbar() {
               animate={{ y: 0, opacity: 1 }}
               exit={{ y: -20, opacity: 0 }}
               transition={{ duration: 0.3, delay: 0.05 }}
-              className="absolute inset-0 bg-cream overflow-y-auto p-8 min-h-full"
+              className="absolute inset-0 bg-stay-50 overflow-y-auto p-8 min-h-full"
             >
               <div className="max-w-md mx-auto space-y-6">
                 {mainMenu.map((item, index) => (
@@ -301,13 +307,13 @@ export default function Navbar() {
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: 0.1 + index * 0.05 }}
-                    className="border-b border-warm-dark pb-4"
+                    className="border-b border-stay-200 pb-4"
                   >
                     {item.path ? (
                       <a
                         href={item.path}
                         onClick={() => setIsMenuOpen(false)}
-                        className="block text-lg font-display tracking-widest-xl text-charcoal hover:text-brand transition-colors"
+                        className="block text-lg font-display tracking-widest-xl text-stay-950 hover:text-stay-500 transition-colors"
                       >
                         {item.title}
                       </a>
@@ -317,7 +323,7 @@ export default function Navbar() {
                           setIsMenuOpen(false);
                           item.action?.();
                         }}
-                        className="block text-lg font-display tracking-widest-xl text-charcoal hover:text-brand transition-colors"
+                        className="block text-lg font-display tracking-widest-xl text-stay-950 hover:text-stay-500 transition-colors"
                       >
                         {item.title}
                       </button>
@@ -329,7 +335,7 @@ export default function Navbar() {
                             <a
                               href={subItem.path + `?type=${subItem.title}`}
                               onClick={() => setIsMenuOpen(false)}
-                              className="text-sm text-body-text hover:text-brand transition-colors"
+                              className="text-sm text-stay-600 hover:text-stay-400 transition-colors"
                             >
                               {subItem.title}
                             </a>

@@ -8,12 +8,24 @@
 
 @layer base {
   :root {
-    --color-cream: #FAF8F5;
-    --color-warm: #F5F0EB;
-    --color-brand: #c78390;
-    --color-brand-dark: #B06B78;
-    --color-gold: #B8967A;
-    --color-charcoal: #1A1A1A;
+    --color-stay-50: #faf9f7;
+    --color-stay-100: #f2efe9;
+    --color-stay-200: #e6dfd3;
+    --color-stay-300: #d5c8b5;
+    --color-stay-400: #bfae94;
+    --color-stay-500: #a6956f;
+    --color-stay-600: #8c7356;
+    --color-stay-700: #735c45;
+    --color-stay-800: #5a4636;
+    --color-stay-900: #3f3025;
+    --color-stay-950: #2a221a;
+    /* 하위 호환 */
+    --color-cream: #faf9f7;
+    --color-warm: #f2efe9;
+    --color-brand: #3f3025;
+    --color-brand-dark: #5a4636;
+    --color-gold: #bfae94;
+    --color-charcoal: #2a221a;
   }
 
   html {
@@ -23,14 +35,14 @@
   }
 
   body {
-    background-color: var(--color-cream);
-    color: #2C2C2C;
+    background-color: var(--color-stay-50);
+    color: var(--color-stay-950);
     font-family: var(--font-noto-sans-kr), sans-serif;
   }
 
   ::selection {
-    background-color: var(--color-brand);
-    color: white;
+    background-color: var(--color-stay-300);
+    color: var(--color-stay-950);
   }
 }
 
@@ -72,14 +84,14 @@
 .section-divider {
   width: 60px;
   height: 1px;
-  background-color: var(--color-brand);
+  background-color: var(--color-stay-300);
   margin: 0 auto;
 }
 
 .section-divider-gold {
   width: 60px;
   height: 1px;
-  background-color: var(--color-gold);
+  background-color: var(--color-stay-400);
   margin: 0 auto;
 }
 
@@ -90,16 +102,16 @@
 .navbar-transparent {
   background-color: transparent;
   border-bottom: none;
-  transition: all 0.4s ease;
+  transition: all 0.7s ease;
 }
 
 .navbar-solid {
-  background-color: rgba(255, 255, 255, 0.97);
+  background-color: rgba(42, 34, 26, 0.97);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
-  box-shadow: 0 1px 20px rgba(0, 0, 0, 0.04);
-  transition: all 0.4s ease;
+  border-bottom: none;
+  box-shadow: 0 1px 10px rgba(0, 0, 0, 0.15);
+  transition: all 0.7s ease;
 }
 
 /* =============================================
@@ -110,7 +122,7 @@
   width: 100%;
   max-width: 100%;
   background: white;
-  border: 1px solid #E8E0D8;
+  border: 1px solid var(--color-stay-200);
   font-family: var(--font-noto-sans-kr), sans-serif;
   line-height: 1.125em;
   font-size: 12px;
@@ -156,7 +168,7 @@
   height: 44px;
   margin-bottom: 1em;
   background-color: white;
-  border-bottom: 1px solid #E8E0D8;
+  border-bottom: 1px solid var(--color-stay-200);
 }
 
 .react-calendar__navigation__label {
@@ -179,8 +191,8 @@
   font-size: 12px;
   font-weight: 400;
   text-decoration: none !important;
-  color: #5A5A5A;
-  border-bottom: 1px solid #E8E0D8;
+  color: var(--color-stay-600);
+  border-bottom: 1px solid var(--color-stay-200);
 }
 
 .react-calendar__navigation button:disabled {
@@ -215,7 +227,7 @@
 }
 
 .react-calendar__month-view__days__day--weekend {
-  color: var(--color-brand-dark);
+  color: var(--color-stay-700);
 }
 
 .react-calendar__month-view__days__day--neighboringMonth {
@@ -259,53 +271,53 @@
 }
 
 .react-calendar__tile:hover {
-  border: 1px solid var(--color-brand);
-  color: #2C2C2C !important;
+  border: 1px solid var(--color-stay-400);
+  color: var(--color-stay-950) !important;
   background: white !important;
 }
 
 .react-calendar__tile--now {
   text-decoration: underline;
-  background-color: rgba(184, 150, 122, 0.15);
+  background-color: rgba(191, 174, 148, 0.15);
 }
 
 .react-calendar__tile--now:hover {
-  color: var(--color-brand) !important;
+  color: var(--color-stay-900) !important;
 }
 
 .react-calendar__tile--now:enabled:hover,
 .react-calendar__tile--now:enabled:focus {
-  background: var(--color-brand);
+  background: var(--color-stay-900);
   color: #fafafa;
 }
 
 .react-calendar__tile--hasActive {
-  background: var(--color-brand);
+  background: var(--color-stay-900);
 }
 
 .react-calendar__tile--hasActive:enabled:hover,
 .react-calendar__tile--hasActive:enabled:focus {
-  background: var(--color-brand);
+  background: var(--color-stay-900);
 }
 
 .react-calendar__tile--active {
-  background: var(--color-brand) !important;
+  background: var(--color-stay-900) !important;
   color: white;
 }
 
 .react-calendar__tile--active:active {
-  background: var(--color-brand) !important;
+  background: var(--color-stay-900) !important;
   color: white;
 }
 
 .react-calendar__tile--active:enabled:hover,
 .react-calendar__tile--active:enabled:focus {
-  background: var(--color-brand);
+  background: var(--color-stay-900);
   color: white;
 }
 
 .react-calendar--selectRange .react-calendar__tile--hover {
-  background-color: rgba(199, 131, 144, 0.2);
+  background-color: rgba(191, 174, 148, 0.2);
 }
 
 /* =============================================

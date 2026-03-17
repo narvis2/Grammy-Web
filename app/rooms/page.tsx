@@ -75,17 +75,17 @@ const Room = () => {
       )}
 
       {/* All Rooms Grid */}
-      <section className="bg-warm/50 pt-16 sm:pt-24 pb-20 sm:pb-28">
+      <section className="bg-stay-100/50 pt-16 sm:pt-24 pb-20 sm:pb-28">
         <FadeIn className="max-w-[1400px] mx-auto px-5 sm:px-10">
           <div className="text-center mb-14">
-            <p className="text-xs tracking-widest-2xl text-brand uppercase font-body mb-3">
+            <p className="text-xs tracking-widest-2xl text-stay-400 uppercase font-body font-serif italic mb-3">
               All Room Types
             </p>
-            <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl text-charcoal tracking-wide">
+            <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl text-stay-950 tracking-wide">
               객실 유형
             </h2>
             <div className="section-divider mt-5 mb-6" />
-            <p className="text-body-text text-sm sm:text-base font-light">
+            <p className="text-stay-600 text-sm sm:text-base font-light">
               포항 그라미 호텔의 특별한 객실을 누려보세요.
             </p>
           </div>

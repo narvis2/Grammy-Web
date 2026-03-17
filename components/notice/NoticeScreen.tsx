@@ -7,6 +7,11 @@ import { useMemo } from "react";
 import NoticeAdapter from "./NoticeAdapter";
 import EmptyAdapter from "../empty/EmptyAdapter";
 import useGetAnalyticsTag from "@/data/hooks/analytics/useGetAnalyticsTag";
+import PageHero from "@/components/common/hero/PageHero";
+
+const noticeHeroImages = [
+  { src: "/images/lobby_a.jpg", alt: "그라미호텔 로비" },
+];
 
 const NoticeScreen = () => {
   const router = useRouter();
@@ -21,14 +26,15 @@ const NoticeScreen = () => {
   };
 
   return (
-    <section className="py-20 mt-10">
-      <div className={`${list.length > 0 ? `mb-14` : `mb-0`}`}>
-        <div className="container mx-auto">
-          <h3 className="text-2xl font-normal text-center text-gray-800">
-            포항 그라미 호텔 공지사항
-          </h3>
-        </div>
-      </div>
+    <div className="relative">
+      <PageHero
+        images={noticeHeroImages}
+        subtitle="Grami Hotel · Notice"
+        title="NOTICE"
+        description="포항 그라미 호텔 공지사항"
+      />
+
+      <section className="py-20">
 
       {list.length > 0 ? (
         <NoticeAdapter
@@ -43,7 +49,8 @@ const NoticeScreen = () => {
           }}
         />
       )}
-    </section>
+      </section>
+    </div>
   );
 };
 

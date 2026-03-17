@@ -11,14 +11,14 @@ type WayToComeHeaderProps = {
 const WayToComeHeader = ({ title, description }: WayToComeHeaderProps) => {
   return (
     <FadeIn className="text-center mb-12">
-      <p className="text-xs tracking-widest-2xl uppercase text-brand mb-4 font-body">
+      <p className="text-xs tracking-widest-2xl uppercase text-stay-400 mb-4 font-body font-serif italic">
         Location
       </p>
-      <h2 className="font-display text-4xl lg:text-5xl font-light text-charcoal tracking-wide mb-4">
+      <h2 className="font-display text-4xl lg:text-5xl font-light text-stay-950 tracking-wide mb-4">
         {title}
       </h2>
       <div className="section-divider mb-4" />
-      <p className="text-sm text-body-text font-light tracking-wider">
+      <p className="text-sm text-stay-600 font-light tracking-wider">
         {description}
       </p>
     </FadeIn>

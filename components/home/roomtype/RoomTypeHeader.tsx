@@ -12,14 +12,14 @@ const RoomTypeHeader = ({ title, description }: RoomTypeHeaderProps) => {
   return (
     <FadeIn className="flex items-center justify-center mb-12">
       <div className="text-center">
-        <p className="text-xs tracking-widest-2xl uppercase text-gold mb-4 font-body">
+        <p className="text-xs tracking-widest-2xl uppercase text-stay-400 mb-4 font-body font-serif italic">
           Rooms
         </p>
-        <h2 className="font-display text-4xl lg:text-5xl font-light text-charcoal tracking-wide mb-4">
+        <h2 className="font-display text-4xl lg:text-5xl font-light text-stay-950 tracking-wide mb-4">
           {title}
         </h2>
-        <div className="section-divider-gold mb-4" />
-        <p className="text-sm text-body-text font-light tracking-wider">
+        <div className="section-divider mb-4" />
+        <p className="text-sm text-stay-600 font-light tracking-wider">
           {description}
         </p>
       </div>
