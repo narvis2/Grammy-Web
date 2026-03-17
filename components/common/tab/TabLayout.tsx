@@ -37,7 +37,7 @@ const TabLayout = ({
   }, [activeIndex]);
 
   return (
-    <div className="bg-stay-50 border-b border-stay-300/40">
+    <div className="bg-stay-50 border-b border-stay-300/40 sticky top-20 z-20">
       <div className="max-w-[1400px] mx-auto px-5 sm:px-10">
         {/* Title */}
         <div className="pt-10 pb-6 text-center">
