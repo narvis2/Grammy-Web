@@ -23,9 +23,9 @@ const ProductSmallImageAdapter = ({
             <Image
               src={item}
               alt={`product${index}`}
-              layout="fill"
-              objectFit="cover"
-              className="rounded-[5px]"
+              fill
+              sizes="(max-width: 768px) 25vw, 20vw"
+              className="rounded-[5px] object-cover"
             />
           </div>
         );

@@ -56,7 +56,7 @@ const RoomTypeItem = ({ roomType }: RoomTypeItemProps) => {
         >
           <svg width="8" height="14" viewBox="0 0 6 10" fill="none">
             <path
-              stroke="#1A1A1A"
+              stroke="#2a221a"
               strokeLinecap="round"
               strokeLinejoin="round"
               strokeWidth="1.5"
@@ -72,7 +72,7 @@ const RoomTypeItem = ({ roomType }: RoomTypeItemProps) => {
         >
           <svg width="8" height="14" viewBox="0 0 6 10" fill="none">
             <path
-              stroke="#1A1A1A"
+              stroke="#2a221a"
               strokeLinecap="round"
               strokeLinejoin="round"
               strokeWidth="1.5"
@@ -90,27 +90,27 @@ const RoomTypeItem = ({ roomType }: RoomTypeItemProps) => {
       {/* Content */}
       <div className="p-6">
         <div className="flex justify-between items-center mb-3">
-          <h3 className="font-display text-2xl text-charcoal tracking-wide">
+          <h3 className="font-display text-2xl text-stay-950 tracking-wide">
             {roomType.roomTypeName}
           </h3>
           <Link
             href={RoutePath.ROOMS + `?type=${roomType.roomTypeName}`}
-            className="text-xs tracking-wider text-body-text border border-warm-dark rounded-full px-4 py-1.5 hover:bg-charcoal hover:text-white hover:border-charcoal transition-all duration-300"
+            className="text-xs tracking-wider text-stay-600 border border-stay-300 rounded-full px-4 py-1.5 hover:bg-stay-950 hover:text-white hover:border-stay-950 transition-all duration-300"
           >
             더보기
           </Link>
         </div>
 
-        <p className="text-sm text-body-text leading-relaxed mb-4 font-light">
+        <p className="text-sm text-stay-600 leading-relaxed mb-4 font-light">
           {description ?? ""}
         </p>
 
-        <div className="flex items-center gap-3 text-xs text-body-text mb-4">
-          <span className="bg-warm px-3 py-1 rounded-full">
+        <div className="flex items-center gap-3 text-xs text-stay-600 mb-4">
+          <span className="bg-stay-100 px-3 py-1 rounded-full">
             최대 {roomType.maxCount}명
           </span>
           {room.beds.map((item, index) => (
-            <span key={item.type} className="bg-warm px-3 py-1 rounded-full">
+            <span key={item.type} className="bg-stay-100 px-3 py-1 rounded-full">
               {`${bedTypeConvert(item.type)} ${item.count}개`}
             </span>
           ))}
@@ -118,7 +118,7 @@ const RoomTypeItem = ({ roomType }: RoomTypeItemProps) => {
 
         <button
           type="button"
-          className="w-full py-3 bg-charcoal text-white text-sm tracking-widest-xl uppercase rounded hover:bg-brand-dark transition-colors duration-300"
+          className="w-full py-3 bg-stay-950 text-white text-sm tracking-widest-xl uppercase rounded hover:bg-stay-800 transition-colors duration-300"
           onClick={() => {
             if (typeof window !== "undefined" && window.gtag) {
               window.gtag("event", "click", {

@@ -103,7 +103,7 @@ const PromotionModal = () => {
                 </button>
                 <button
                   type="button"
-                  className="text-sm font-semibold text-[#c78390] hover:text-[#a5636f] transition"
+                  className="text-sm font-semibold text-[#3f3025] hover:text-[#5a4636] transition"
                   onClick={() => setVisible(false)}
                 >
                   닫기

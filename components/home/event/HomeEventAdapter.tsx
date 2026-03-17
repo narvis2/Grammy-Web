@@ -30,9 +30,9 @@ const HomeEventAdapter = ({specialEventList}: HomeEventAdapterProps) => {
         }}>
             {specialEventList.map((video, idx) => (
                 <SwiperSlide key={`event carousel${idx}`}>
-                    <div className="bg-white shadow rounded-lg overflow-hidden">
+                    <div className="bg-white border border-stay-200 rounded-lg overflow-hidden hover:border-stay-400 transition-colors">
                         {/* 4:3 비율 비디오 컨테이너 */}
-                        <div className="relative w-full aspect-[4/3] bg-black">
+                        <div className="relative w-full aspect-[4/3] bg-stay-950">
                             <video
                                 src={staticImageUrl + video.contents[0].contentUrl}
                                 controls
@@ -40,8 +40,8 @@ const HomeEventAdapter = ({specialEventList}: HomeEventAdapterProps) => {
                             />
                         </div>
                         <div className="p-4">
-                            <h3 className="text-base font-semibold mb-2">{video.title}</h3>
-                            <p className="text-sm text-gray-500">{`이벤트 기간 : ${video.startDate} ~ ${video.endDate}`}</p>
+                            <h3 className="text-base font-medium text-stay-950 mb-2">{video.title}</h3>
+                            <p className="text-sm text-stay-500">{`이벤트 기간 : ${video.startDate} ~ ${video.endDate}`}</p>
                         </div>
                     </div>
                 </SwiperSlide>

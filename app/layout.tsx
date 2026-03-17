@@ -126,7 +126,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="ko" className={`${cormorant.variable} ${notoSansKr.variable}`}>
-      <body className="font-body">
+      <body className="font-body bg-stay-50 text-stay-950 selection:bg-stay-300 selection:text-stay-950">
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}

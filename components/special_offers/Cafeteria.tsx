@@ -30,7 +30,7 @@ const Cafeteria = () => {
     <section className="max-w-6xl mx-auto px-6 sm:px-10 py-16 sm:py-24">
       <OffersHeader title="카페테리아" />
       <FadeIn>
-        <p className="text-sm sm:text-base text-body-text font-light leading-[1.9] text-center mb-14 sm:mb-20 max-w-2xl mx-auto">
+        <p className="text-sm sm:text-base text-stay-600 font-light leading-[1.9] text-center mb-14 sm:mb-20 max-w-2xl mx-auto">
           7층 카페테리아에서는 언제나 신선한 물과 향긋한 원두 커피,
           편리한 전자레인지 등을 구비하여 여행자님께서 잠시 여유를 즐기실 수
           있도록 최선을 다하고 있습니다.

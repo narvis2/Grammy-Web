@@ -24,14 +24,14 @@ const RoomTabV1 = ({ tabIndex, roomTypeList, onTabClick }: RoomTabV1Props) => {
               >
                 {!isFocused ? (
                   <div
-                    className="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-[#d76076] hover:border-[#d76076]"
+                    className="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-[#bfae94] hover:border-[#bfae94]"
                     onClick={() => onTabClick(index)}
                   >
                     {item.roomTypeName}
                   </div>
                 ) : (
                   <div
-                    className="inline-block p-4 text-[#c78390] border-b-2 border-[#c78390] rounded-t-lg active "
+                    className="inline-block p-4 text-[#3f3025] border-b-2 border-[#3f3025] rounded-t-lg active "
                     aria-current="page"
                     onClick={() => onTabClick(index)}
                   >
