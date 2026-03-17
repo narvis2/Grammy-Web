@@ -31,7 +31,7 @@ const CommonModal = ({}: ModalProps) => {
 
   if (modal === null || typeof window === "undefined" || !isCSR) return null;
 
-  const confirmBtnColor = !modal.onCancel ? "#c78390" : "#152348";
+  const confirmBtnColor = !modal.onCancel ? "#3f3025" : "#152348";
 
   return ReactDOM.createPortal(
     <>
@@ -72,7 +72,7 @@ const CommonModal = ({}: ModalProps) => {
                 {!!modal.onCancel && (
                   <button
                     type="button"
-                    className="py-2 px-4  bg-white hover:bg-gray-100 focus:ring-[#c78390] text-[#c78390] w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg"
+                    className="py-2 px-4  bg-white hover:bg-gray-100 focus:ring-[#3f3025] text-[#3f3025] w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg"
                     onClick={() => {
                       modal.onCancel!();
                       clearModal();

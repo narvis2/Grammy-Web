@@ -31,16 +31,16 @@ const IntroductionReverseItem = ({
       </FadeIn>
 
       {/* 구분선 */}
-      <div className="hidden md:block w-px h-64 bg-warm-dark/60" />
+      <div className="hidden md:block w-px h-64 bg-stay-300/60" />
 
       {/* 설명 영역 (왼쪽) */}
       <FadeIn direction="left" delay={0.15} className="w-full md:w-1/2">
-        <h3 className="font-display text-2xl sm:text-3xl text-charcoal tracking-wide mb-4">
+        <h3 className="font-display text-2xl sm:text-3xl text-stay-950 tracking-wide mb-4">
           {title}
         </h3>
-        <div className="w-10 h-px bg-brand mb-6" />
+        <div className="w-10 h-px bg-stay-300 mb-6" />
         <p
-          className="text-body-text leading-[1.9] text-sm sm:text-base font-light"
+          className="text-stay-600 leading-[1.9] text-sm sm:text-base font-light"
           dangerouslySetInnerHTML={{ __html: description }}
         />
       </FadeIn>

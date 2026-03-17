@@ -54,7 +54,7 @@ const WayToComeContainer = ({ hotelInfo }: WayToComeContainerProps) => {
   ];
 
   return (
-    <section className="py-24 px-6 lg:px-12 bg-cream flex flex-col items-center">
+    <section className="py-24 px-6 lg:px-12 bg-stay-100 flex flex-col items-center">
       <WayToComeHeader
         title="오시는 길"
         description="포항 그라미 호텔에 오시는 길을 안내해드립니다."
@@ -76,7 +76,7 @@ const WayToComeContainer = ({ hotelInfo }: WayToComeContainerProps) => {
           />
         </div>
 
-        <div className="mb-8 space-y-2 text-sm text-body-text">
+        <div className="mb-8 space-y-2 text-sm text-stay-600">
           <p>{`주소 : ${getFullAddress(hotelInfo)}`}</p>
           <p>연락처 : 054-727-0600</p>
         </div>
@@ -85,19 +85,19 @@ const WayToComeContainer = ({ hotelInfo }: WayToComeContainerProps) => {
           {transportConfig.map(({ key, icon, label }) => (
             <div
               key={key}
-              className="bg-white rounded-lg overflow-hidden border border-warm-dark/30"
+              className="bg-white rounded-lg overflow-hidden border border-stay-200"
             >
               <button
                 onClick={() => toggleSection(key)}
-                className="w-full flex items-center justify-between p-4 text-charcoal hover:bg-warm/50 transition-colors"
+                className="w-full flex items-center justify-between p-4 text-stay-950 hover:bg-stay-100/50 transition-colors"
               >
                 <div className="flex items-center gap-3">
-                  <span className="text-brand">{icon}</span>
+                  <span className="text-stay-400">{icon}</span>
                   <span className="text-sm font-medium tracking-wider">
                     {label}
                   </span>
                 </div>
-                <span className="text-body-text">
+                <span className="text-stay-500">
                   {openSections[key] ? (
                     <FaAngleUp className="text-xs" />
                   ) : (
@@ -107,41 +107,41 @@ const WayToComeContainer = ({ hotelInfo }: WayToComeContainerProps) => {
               </button>
 
               {openSections[key] && (
-                <div className="px-6 pb-5 bg-cream/50">
-                  <ul className="space-y-3 text-sm text-body-text">
+                <div className="px-6 pb-5 bg-stay-50/50">
+                  <ul className="space-y-3 text-sm text-stay-600">
                     {key === "car" && (
                       <>
-                        <li className="border-l-2 pl-4 border-brand/30">
+                        <li className="border-l-2 pl-4 border-stay-300">
                           <div>포항톨게이트</div>
                           <div className="flex items-center pt-2">
                             포항IC (김포, 구룡포, 울산·포항고속도로 방면)
-                            <TbArrowRampRight2 className="ml-2 text-brand/60" />
+                            <TbArrowRampRight2 className="ml-2 text-stay-400" />
                           </div>
                           <div className="flex items-center pt-2">
                             동해교차로 (구룡포 방면 오른쪽)
-                            <TbArrowBearRight className="ml-2 text-brand/60" />
+                            <TbArrowBearRight className="ml-2 text-stay-400" />
                           </div>
                           <div className="flex items-center pt-2">
                             병포교차로 (구룡포 방면 오른쪽)
-                            <TbArrowBearRight className="ml-2 text-brand/60" />
+                            <TbArrowBearRight className="ml-2 text-stay-400" />
                           </div>
                           <div className="flex items-center pt-2">
                             병포교차로 (호미곶, 구룡포 방면 왼쪽)
-                            <TbArrowBearLeft className="ml-2 text-brand/60" />
+                            <TbArrowBearLeft className="ml-2 text-stay-400" />
                           </div>
                           <div className="flex items-center pt-2">
                             호미곶해맞이광장 방면 우회전
-                            <TbCornerUpRight className="ml-2 text-brand/60" />
+                            <TbCornerUpRight className="ml-2 text-stay-400" />
                           </div>
                           <div className="flex items-center pt-2">
                             수협교차로 좌회전
-                            <TbCornerUpLeft className="ml-2 text-brand/60" />
+                            <TbCornerUpLeft className="ml-2 text-stay-400" />
                           </div>
-                          <div className="pt-2 font-medium text-charcoal">
+                          <div className="pt-2 font-medium text-stay-950">
                             그라미 호텔 도착 (25분 소요)
                           </div>
                         </li>
-                        <li className="text-xs text-body-text/60 pt-2">
+                        <li className="text-xs text-stay-500/60 pt-2">
                           교통상황에 따라 달라질 수 있습니다.
                         </li>
                       </>
@@ -157,12 +157,12 @@ const WayToComeContainer = ({ hotelInfo }: WayToComeContainerProps) => {
                         ].map((route, i) => (
                           <li
                             key={i}
-                            className="border-l-2 border-brand/30 pl-4"
+                            className="border-l-2 border-stay-300 pl-4"
                           >
                             {route}
                           </li>
                         ))}
-                        <li className="text-xs text-body-text/60 pt-2">
+                        <li className="text-xs text-stay-500/60 pt-2">
                           대중교통상황에 따라 달라질 수 있습니다.
                         </li>
                       </>
@@ -177,7 +177,7 @@ const WayToComeContainer = ({ hotelInfo }: WayToComeContainerProps) => {
                         ].map((route, i) => (
                           <li
                             key={i}
-                            className="border-l-2 border-brand/30 pl-4"
+                            className="border-l-2 border-stay-300 pl-4"
                           >
                             {route}
                           </li>

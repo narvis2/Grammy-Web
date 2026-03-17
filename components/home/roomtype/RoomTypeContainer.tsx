@@ -11,7 +11,7 @@ type RoomTypeContainerProps = {
 
 const RoomTypeContainer = ({ roomTypeList }: RoomTypeContainerProps) => {
   return (
-    <section className="py-24 bg-warm">
+    <section className="py-24 bg-stay-50">
       <RoomTypeHeader
         title="객실 유형"
         description="포항 그라미 호텔의 특별한 객실을 누려보세요."

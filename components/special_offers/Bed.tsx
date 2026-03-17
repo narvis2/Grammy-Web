@@ -11,7 +11,7 @@ const Bed = () => {
       <OffersHeader title="침구류" />
 
       <FadeIn>
-        <p className="text-sm sm:text-base text-body-text font-light leading-[1.9] text-center mb-14 sm:mb-20 max-w-2xl mx-auto">
+        <p className="text-sm sm:text-base text-stay-600 font-light leading-[1.9] text-center mb-14 sm:mb-20 max-w-2xl mx-auto">
           편안함을 최우선으로 고려하여 국내에서 전문 제작된 주식회사
           '누우니'의 싱글 및 더블 사이즈 고품질 매트리스를 제공합니다.
           <br />

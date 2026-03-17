@@ -8,7 +8,7 @@ export default function Footer() {
   const { hotelInfo } = useHotelInfo();
 
   return (
-    <footer className="bg-charcoal text-white/80 pt-20 pb-10" role="contentinfo">
+    <footer className="bg-stay-950 text-white/80 pt-20 pb-10" role="contentinfo">
       <div className="max-w-[1200px] mx-auto px-8">
         <FadeIn>
           {/* Top Section */}
@@ -52,7 +52,7 @@ export default function Footer() {
                     href="https://booking.naver.com/booking/3/bizes/1227540?area=pll"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-sm text-brand-light hover:text-brand transition-colors duration-300"
+                    className="text-sm text-stay-400 hover:text-white transition-colors duration-300"
                   >
                     예약하기
                   </a>

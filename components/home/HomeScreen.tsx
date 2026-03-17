@@ -14,6 +14,8 @@ import { SpecialEventResponse } from "@/data/model/event/types";
 import HomeEventAdapter from "./event/HomeEventAdapter";
 import { findVideoUrlList } from "@/data/utils/utils";
 import PromotionModal from "@/components/common/modal/PromotionModal";
+import HomePrologueSection from "./prologue/HomePrologueSection";
+import HomeSpecialSection from "./special/HomeSpecialSection";
 
 const images = [
   { src: "/images/terrace_b_sunrise.jpg", label: "GRAMI HOTEL" },
@@ -76,6 +78,10 @@ const HomeScreen = () => {
       />
       {/* Gallery */}
       <CarouselContainer images={galleryImage} />
+      {/* Prologue */}
+      <HomePrologueSection />
+      {/* Special — 호텔 핵심 시설 하이라이트 */}
+      <HomeSpecialSection />
       {/* Special Event */}
       {filteredSpecialEventList.length > 0 && (
         <HomeEventAdapter specialEventList={filteredSpecialEventList} />

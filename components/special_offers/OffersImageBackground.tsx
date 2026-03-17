@@ -36,7 +36,7 @@ const OffersImageBackground = ({
         </motion.div>
       </AnimatePresence>
       {/* Gradient overlay */}
-      <div className="absolute inset-0 bg-gradient-to-t from-charcoal/50 via-transparent to-transparent" />
+      <div className="absolute inset-0 bg-gradient-to-t from-stay-950/50 via-transparent to-transparent" />
       {/* Text content */}
       <div className="absolute bottom-0 left-0 right-0 p-6 sm:p-10 text-center text-white">
         <h3 className="font-display text-2xl sm:text-3xl tracking-wide mb-2">

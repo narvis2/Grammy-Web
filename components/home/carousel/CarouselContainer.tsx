@@ -10,7 +10,7 @@ type CarouselContainerProps = {
 
 const CarouselContainer = ({ images }: CarouselContainerProps) => {
   return (
-    <section className="py-24 bg-cream">
+    <section className="py-24 bg-white">
       <CarouselHeader
         title="Gallery"
         description="포항 그라미 호텔에서만 느낄 수 있는 특별한 감성"

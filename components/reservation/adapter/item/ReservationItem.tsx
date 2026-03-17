@@ -128,7 +128,7 @@ const ReservationItem = ({ item, onItemClick }: ReservationItemProps) => {
 
         <button
           type="submit"
-          className="text-white inline-flex items-center bg-[#d76076] font-medium rounded-lg text-sm px-5 py-2.5 text-center w-3/5 justify-center"
+          className="text-white inline-flex items-center bg-[#3f3025] font-medium rounded-lg text-sm px-5 py-2.5 text-center w-3/5 justify-center"
           onClick={() => onItemClick(item)}
         >
           예약 및 결제

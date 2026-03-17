@@ -47,7 +47,7 @@ const PlaceCard = ({ name, image }: PlaceCardProps) => (
       />
     </div>
     <div className="p-4 text-center">
-      <p className="text-sm text-charcoal font-light tracking-wide">{name}</p>
+      <p className="text-sm text-stay-950 font-light tracking-wide">{name}</p>
     </div>
   </div>
 );
@@ -66,7 +66,7 @@ const Dialog = ({ isOpen, onClose, children, title }: DialogProps) => (
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
-        className="fixed inset-0 bg-charcoal/60 backdrop-blur-sm flex justify-center items-center z-50 p-4"
+        className="fixed inset-0 bg-stay-950/60 backdrop-blur-sm flex justify-center items-center z-50 p-4"
         onClick={onClose}
       >
         <motion.div
@@ -74,18 +74,18 @@ const Dialog = ({ isOpen, onClose, children, title }: DialogProps) => (
           animate={{ opacity: 1, y: 0, scale: 1 }}
           exit={{ opacity: 0, y: 20, scale: 0.98 }}
           transition={{ duration: 0.3 }}
-          className="relative bg-cream rounded-sm p-8 sm:p-12 max-w-4xl w-full max-h-[85vh] overflow-y-auto"
+          className="relative bg-stay-50 rounded-sm p-8 sm:p-12 max-w-4xl w-full max-h-[85vh] overflow-y-auto"
           onClick={(e) => e.stopPropagation()}
         >
           <button
             onClick={onClose}
-            className="absolute top-6 right-6 w-8 h-8 flex items-center justify-center text-body-text hover:text-charcoal transition-colors"
+            className="absolute top-6 right-6 w-8 h-8 flex items-center justify-center text-stay-600 hover:text-stay-950 transition-colors"
           >
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
               <path strokeLinecap="round" d="M6 18L18 6M6 6l12 12" />
             </svg>
           </button>
-          <h3 className="font-display text-2xl sm:text-3xl text-charcoal tracking-wide text-center mb-2">
+          <h3 className="font-display text-2xl sm:text-3xl text-stay-950 tracking-wide text-center mb-2">
             {title}
           </h3>
           <div className="section-divider mt-3 mb-10" />
@@ -102,10 +102,10 @@ const OtherInfo = () => {
   return (
     <section className="max-w-5xl mx-auto px-6 sm:px-10 py-16 sm:py-24">
       <FadeIn className="text-center mb-16">
-        <p className="text-xs tracking-widest-2xl text-brand uppercase font-body mb-3">
+        <p className="text-xs tracking-widest-2xl text-stay-400 uppercase font-body mb-3">
           Nearby Attractions
         </p>
-        <h2 className="font-display text-3xl sm:text-4xl text-charcoal tracking-wide">
+        <h2 className="font-display text-3xl sm:text-4xl text-stay-950 tracking-wide">
           주변 관광지
         </h2>
         <div className="section-divider mt-5" />
@@ -188,7 +188,7 @@ const OtherInfo = () => {
       >
         <div className="space-y-12">
           <div>
-            <h4 className="text-center text-xs tracking-widest-xl uppercase text-brand font-body mb-6">
+            <h4 className="text-center text-xs tracking-widest-xl uppercase text-stay-400 font-body mb-6">
               추천 맛집
             </h4>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -201,7 +201,7 @@ const OtherInfo = () => {
           <div className="section-divider-gold" />
 
           <div>
-            <h4 className="text-center text-xs tracking-widest-xl uppercase text-brand font-body mb-6">
+            <h4 className="text-center text-xs tracking-widest-xl uppercase text-stay-400 font-body mb-6">
               카페
             </h4>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -214,7 +214,7 @@ const OtherInfo = () => {
           <div className="section-divider-gold" />
 
           <div>
-            <h4 className="text-center text-xs tracking-widest-xl uppercase text-brand font-body mb-6">
+            <h4 className="text-center text-xs tracking-widest-xl uppercase text-stay-400 font-body mb-6">
               일본 전통 의상 체험
             </h4>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
