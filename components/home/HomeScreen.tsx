@@ -13,6 +13,7 @@ import { useRoomTypeList, useSpecialEventList } from "@/data/hooks";
 import { SpecialEventResponse } from "@/data/model/event/types";
 import HomeEventAdapter from "./event/HomeEventAdapter";
 import { findVideoUrlList } from "@/data/utils/utils";
+import PromotionModal from "@/components/common/modal/PromotionModal";
 
 const images = [
   { src: "/images/terrace_b_sunrise.jpg", label: "GRAMI HOTEL" },
@@ -66,6 +67,7 @@ const HomeScreen = () => {
 
   return (
     <div className="relative">
+      <PromotionModal />
       <HomeImageBgContainer
         showText={showText}
         currentImageIndex={currentImageIndex}
